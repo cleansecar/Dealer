@@ -29,6 +29,7 @@ public class DealerHomeController {
 		 dealerhomeservice.createnewdealar(dto);		
 		 Map<String, String> map = new HashMap<>();
 	        map.put("message", "Assigned successfully.");
+			System.out.print("yes");
 
 		return com.autobrixusedcar.dealer.utils.Response.success(map);
 		}
