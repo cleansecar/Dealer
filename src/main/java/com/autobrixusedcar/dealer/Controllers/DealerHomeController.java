@@ -8,13 +8,16 @@ import javax.xml.ws.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.autobrixusedcar.dealer.dtos.DealerHomeRequestDTO;
 import com.autobrixusedcar.dealer.services.DealerHomeService;
 import com.autobrixusedcar.dealer.services.*;
+import com.autobrixusedcar.dealer.utils.*;
 
 @Controller
 @RequestMapping("/dealerHomeservices")
@@ -47,6 +50,12 @@ public class DealerHomeController {
 	
 	
 	
+	
+	@GetMapping("/getsaleemployeelist")
+	public ResponseEntity<Object> getsalesemployeelist(@RequestParam("phoneNo") String phoneNo, @RequestParam("typeofAcc") String typeofAcc){		
+		Map<String,Object> details = dealerhomeservice.getsaleemployeelist(phoneNo, typeofAcc);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	  }
 	
 	
 }
