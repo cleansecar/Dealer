@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -51,11 +52,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	
 	
 	
-	
-	
-	
-	
-	 
+
 	 @Query(value = "call used_car_home_page_sales_amount(:mobileno,:type,:fromdate,:todate,:duration)" , nativeQuery = true)
 	 Map<String, Object> used_car_home_page_sales_amount(@Param("mobileno")String mobileno,@Param("type")String type,@Param("fromdate")String fromdate,@Param("todate")String todate,@Param("duration") String duration);
 
@@ -66,5 +63,37 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 	
 	 @Query(value = "call used_car_employee_wise_sale(:mobileno,:type)" , nativeQuery = true)
 	 List<Map<String, Object>> used_car_employee_wise_sale(@Param("mobileno")String mobileno,@Param("type")String type);
+	 
+	 @Modifying(flushAutomatically = true)
+	 @Transactional
+	 @Query(value ="insert into used_car_add_vehicle (vehicle_make,vehicle_model,fuel_type,vehicle_no,manfufacturing_year,odometer,vin_number,vendor_id) values (?,?,?,?,?,?,?,?) ; ",nativeQuery =true)
+	 void insert_used_car_add_vehicle(
+			 @Param("vehicle_make")String vehicle_make,
+			 @Param("vehicle_model")String vehicle_model,
+			 @Param("fuel_type")String fuel_type,
+			 @Param("vehicle_no")String vehicle_no,
+			 @Param("manfufacturing_year")String manfufacturing_year,
+			 @Param("odometer")String odometer,
+			 @Param("vin_number")String vin_number,
+			 @Param("vendor_id")String vendor_id
+			 );
+	 
+	 @Query(value="call dashboard_vehicles_list(:searchtext)",nativeQuery = true)
+	 List<Map<String, Object>> search_vehicl(@Param("searchtext")String searchtext);
+	 
+	 @Query(value="call  used_car_vehilce_list_for_dealer(:dealerId)",nativeQuery = true)
+	 List<Map<String, Object>> used_car_vehicle_list(@Param("dealerId")String dealerId);
+	 
+	 
+	 @Modifying(flushAutomatically = true)
+	 @Transactional
+	 @Query(value="insert into used_car_add_employee_tbl (employee_name,phone_no,employee_image,vendor_id) values (?,?,?,?) ;",nativeQuery = true)
+	 void insert_used_car_add_employee_tbl(
+			 @Param("employee_name")String employee_name,
+			 @Param("phone_no")String phone_no,
+			 @Param("employee_image")String employee_image,
+			 @Param("vendor_id")String vendor_id
+			 );
+	 
 
 }
