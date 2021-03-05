@@ -12,5 +12,6 @@ public interface DealerHomeService {
 
 	Map<String,Object> getdealerHomepagedetails(DealerHomeRequestDTO dto);
 	
-	
+	Map<String,Object> getsaleemployeelist(String phoneNo,String typeofacc);
+
 }

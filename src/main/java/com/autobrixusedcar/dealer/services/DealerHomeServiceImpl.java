@@ -2,6 +2,7 @@ package com.autobrixusedcar.dealer.services;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.autobrixusedcar.dealer.dtos.DealerHomeRequestDTO;
 import com.autobrixusedcar.dealer.repositories.DealerHomeRepository;
 import com.autobrixusedcar.dealer.utils.Util;
+
 
 @Service
 public class DealerHomeServiceImpl implements DealerHomeService {
@@ -41,13 +43,21 @@ public class DealerHomeServiceImpl implements DealerHomeService {
 	        
 	        startDate = dto.getFromDate();
             endDate = dto.getToDate();
+            String startDateStr  = "";
+	        String endDateStr = "";
         
-		
+	        
+	        String finalstr = startDate.toString();
+	        
+    		if (startDate == null || finalstr.equalsIgnoreCase("")) {
+    		
+    		}else{
+    			   startDateStr = Util.formatDateToString(startDate, "yyyy-MM-dd");
+    		         endDateStr = Util.formatDateToString(endDate, "yyyy-MM-dd");
+    		}
         
         
-        String startDateStr = Util.formatDateToString(startDate, "yyyy-MM-dd");
-        String endDateStr = Util.formatDateToString(endDate, "yyyy-MM-dd");
-        
+      
 		
 		Map<String,Object> data = dealerhomerepository.used_car_home_page_sales_amount(dto.getMobileno(), dto.getTypeofacc(), startDateStr, endDateStr, dto.getDuration());
 		
@@ -58,6 +68,18 @@ public class DealerHomeServiceImpl implements DealerHomeService {
 		map.put("details", details);
 		map.put("data", data);
 		return map;
+	}
+
+
+
+	@Override
+	public Map<String, Object> getsaleemployeelist(String phoneNo, String typeofacc) {
+
+		 List<Map<String,Object>> datalist = dealerhomerepository.used_car_employee_wise_sale(phoneNo, typeofacc);
+		 
+			Map<String, Object> map = new HashMap<>();
+			map.put("salesEmployeeList", datalist);
+			return map;
 	}
 	
 	
