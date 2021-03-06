@@ -75,11 +75,10 @@ public class DealerHomeController {
 		return com.autobrixusedcar.dealer.utils.Response.success(details);
 		
 	}
-	
-	@GetMapping("/getvehiclelist")
-	public ResponseEntity<Object>getvehiclelist(@RequestParam("dealerId")String dealerId){
+		@GetMapping("/getvehiclelist")
+	public ResponseEntity<Object>getvehiclelist(@RequestParam("dealerId")String dealerId,@RequestParam("searchtext")String searchtext){
 		
-		Map<String, Object>details=dealerhomeservice.getvehiclelist(dealerId);
+		Map<String, Object>details=dealerhomeservice.getvehiclelist(dealerId, searchtext);
 		return com.autobrixusedcar.dealer.utils.Response.success(details);
 	}
 	

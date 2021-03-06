@@ -39,28 +39,10 @@ public class DealerHomeServiceImpl implements DealerHomeService {
 	public Map<String, Object> getdealerHomepagedetails(DealerHomeRequestDTO dto) {
 		// TODO Auto-generated method stub
 		
-		 Date startDate;
-	        Date endDate;
-	        
-	        startDate = dto.getFromDate();
-            endDate = dto.getToDate();
-            String startDateStr  = "";
-	        String endDateStr = "";
-        
-	        
-	        String finalstr = startDate.toString();
-	        
-    		if (startDate == null || finalstr.equalsIgnoreCase("")) {
-    		
-    		}else{
-    			   startDateStr = Util.formatDateToString(startDate, "yyyy-MM-dd");
-    		         endDateStr = Util.formatDateToString(endDate, "yyyy-MM-dd");
-    		}
-        
-        
+		 
       
 	
-		Map<String,Object> data = dealerhomerepository.used_car_home_page_sales_amount(dto.getMobileno(), dto.getTypeofacc(), startDateStr, endDateStr, dto.getDuration());
+		Map<String,Object> data = dealerhomerepository.used_car_home_page_sales_amount(dto.getMobileno(), dto.getTypeofacc(), dto.getFromDate(), dto.getToDate(), dto.getDuration());
 		
 		
 		Map<String,Object> details = dealerhomerepository.used_car_home_page_vendor_details(dto.getMobileno(), dto.getTypeofacc());
@@ -104,9 +86,9 @@ public class DealerHomeServiceImpl implements DealerHomeService {
 
 
 	@Override
-	public Map<String, Object> getvehiclelist(String dealerId) {
+	public Map<String, Object> getvehiclelist(String dealerId,String searchtext) {
 	
-		List<Map<String,Object>>vehiclelist=dealerhomerepository.used_car_vehicle_list(dealerId);
+		List<Map<String,Object>>vehiclelist=dealerhomerepository.used_car_vehicle_list(dealerId,searchtext);
 		Map<String,Object>map=new HashMap<>();
 		map.put("vehiclelist", vehiclelist);
 		return map;
