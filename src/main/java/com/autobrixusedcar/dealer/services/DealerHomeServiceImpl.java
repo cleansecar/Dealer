@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.autobrixusedcar.dealer.dtos.DealerAddVehicleRequestDTO;
 import com.autobrixusedcar.dealer.dtos.DealerHomeRequestDTO;
 import com.autobrixusedcar.dealer.repositories.DealerHomeRepository;
 import com.autobrixusedcar.dealer.utils.Util;
@@ -81,7 +82,44 @@ public class DealerHomeServiceImpl implements DealerHomeService {
 			map.put("salesEmployeeList", datalist);
 			return map;
 	}
+
+
+
+	@Override
+	public void addcar(DealerAddVehicleRequestDTO dto) throws JPAException {
+		dealerhomerepository.insert_used_car_add_vehicle(dto.getVehicle_make(), dto.getVehicle_model(),dto.getFuel_type(),dto.getVehicle_no(),dto.getManfufacturing_year(),dto.getOdometer(),dto.getVin_number(),dto.getVendor_id());
+		return;
+	}
+
+
+
+	@Override
+	public Map<String, Object> getsearchlist(String searchtext) {
+		List<Map<String,Object>>searchlist=dealerhomerepository.search_vehicl(searchtext);
+		Map<String,Object>map=new HashMap<>();
+		map.put("SearchList", searchlist);
+		return map;
+	}
+
+
+
+	@Override
+	public Map<String, Object> getvehiclelist(String dealerId) {
 	
+		List<Map<String,Object>>vehiclelist=dealerhomerepository.used_car_vehicle_list(dealerId);
+		Map<String,Object>map=new HashMap<>();
+		map.put("vehiclelist", vehiclelist);
+		return map;
+	}
+
+
+
+	@Override
+	public void addemployee(DealerAddVehicleRequestDTO dto) throws JPAException {
+		dealerhomerepository.insert_used_car_add_employee_tbl(dto.getEmployee_name(), dto.getPhone_no(), dto.getEmployee_image(), dto.getVendor_id());
+		return;
+	}
+ 
 	
 
 }

@@ -30,17 +30,12 @@ public class DealerHomeRequestDTO {
 	private String bankname;
 	private String dealer_code;
 	private String acc_is_verified;
-	
-	
-	
-	
-	
-	
 	private Date fromDate;
 	private Date toDate;
 	private String duration;
 	private String mobileno;
 	private String typeofacc;
+	
 
 	
 	
