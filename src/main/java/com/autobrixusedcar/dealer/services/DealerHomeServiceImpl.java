@@ -69,7 +69,7 @@ public class DealerHomeServiceImpl implements DealerHomeService {
 
 	@Override
 	public void addcar(DealerAddVehicleRequestDTO dto) throws JPAException {
-		dealerhomerepository.insert_used_car_add_vehicle(dto.getVehicle_make(), dto.getVehicle_model(),dto.getFuel_type(),dto.getVehicle_no(),dto.getManfufacturing_year(),dto.getOdometer(),dto.getVin_number(),dto.getVendor_id());
+		dealerhomerepository.insert_used_car_add_vehicle(dto.getVehicle_make(), dto.getVehicle_model(),dto.getFuel_type(),dto.getVehicle_no(),dto.getManfufacturing_year(),dto.getOdometer(),dto.getVin_number(),dto.getVendor_id(),dto.getCar_type());
 		return;
 	}
 

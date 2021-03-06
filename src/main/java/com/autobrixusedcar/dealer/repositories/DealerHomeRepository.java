@@ -66,7 +66,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 
 	 @Modifying(flushAutomatically = true)
 	 @Transactional
-	 @Query(value ="insert into used_car_add_vehicle (vehicle_make,vehicle_model,fuel_type,vehicle_no,manfufacturing_year,odometer,vin_number,vendor_id) values (?,?,?,?,?,?,?,?) ; ",nativeQuery =true)
+	 @Query(value ="insert into used_car_add_vehicle (vehicle_make,vehicle_model,fuel_type,vehicle_no,manfufacturing_year,odometer,vin_number,vendor_id,car_type) values (?,?,?,?,?,?,?,?,?) ; ",nativeQuery =true)
 	 void insert_used_car_add_vehicle(
 			 @Param("vehicle_make")String vehicle_make,
 			 @Param("vehicle_model")String vehicle_model,
@@ -75,7 +75,8 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			 @Param("manfufacturing_year")String manfufacturing_year,
 			 @Param("odometer")String odometer,
 			 @Param("vin_number")String vin_number,
-			 @Param("vendor_id")String vendor_id
+			 @Param("vendor_id")String vendor_id,
+			 @Param("car_type")String car_type
 			 );
 	 
 	 @Query(value="call dashboard_vehicles_list(:searchtext)",nativeQuery = true)
