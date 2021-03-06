@@ -27,9 +27,9 @@ public class DealerHomeServiceImpl implements DealerHomeService {
 		
 		
 		dealerhomerepository.insert_car_vendor_admin_master_tbl(dto.getDealername(), dto.getDealername(), dto.getDealermobileno(), dto.getAltermobileno(), dto.getLocation(), 
-				dto.getLandmark(), dto.getCreatedby(), dto.getCity(), dto.getLatitude(), dto.getLongitude(), dto.getAdharimage(), dto.getAdharno(), dto.getPancardimage(), dto.getPancardno(), 
+				dto.getLandmark(), dto.getCreatedby(), dto.getCity(), dto.getState() , dto.getLatitude(), dto.getLongitude(), dto.getAdharimage(), dto.getAdharno(), dto.getPancardimage(), dto.getPancardno(), 
 				dto.getLicenceimage(), dto.getLicenceno(), dto.getSuvcommistion(), dto.getHatchbackcommistion(), dto.getSedancommistion(), dto.getAccountholdername(), dto.getBankname(),
-				dto.getAccountno(), dto.getIfsccode(), dto.getAcc_is_verified(), dto.getDealer_code(), dto.getPincode(), dto.getState());		
+				dto.getAccountno(), dto.getIfsccode(), dto.getAcc_is_verified(), dto.getPincode());		
 	return;
 	}
 
@@ -119,6 +119,16 @@ public class DealerHomeServiceImpl implements DealerHomeService {
 		dealerhomerepository.insert_used_car_add_employee_tbl(dto.getEmployee_name(), dto.getPhone_no(), dto.getEmployee_image(), dto.getVendor_id());
 		return;
 	}
+	
+	
+	@Override
+	public Map<String, Object> getdealersemployeelist(String employeeId) {
+
+		List<Map<String,Object>> datalist = dealerhomerepository.dealerslist(employeeId);
+		Map<String, Object> map = new HashMap<>();
+		map.put("salesEmployeeList", datalist);
+		return map;
+		}
  
 	
 

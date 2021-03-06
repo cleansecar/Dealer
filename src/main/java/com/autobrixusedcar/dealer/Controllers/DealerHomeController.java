@@ -92,6 +92,15 @@ public class DealerHomeController {
 		return com.autobrixusedcar.dealer.utils.Response.success(map);
 		
 	}
+	
+	
+	
+	@GetMapping("/getdealersemployeelist")
+	public ResponseEntity<Object> getdealersemployeelist(@RequestParam("employeeId") String employeeId){		
+		Map<String,Object> details = dealerhomeservice.getdealersemployeelist(employeeId);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	 }
+	
 		
 }
 
