@@ -8,6 +8,17 @@ public class DealerAddVehicleRequestDTO {
 	private String fuel_type;
 	private String vehicle_no;
 	private String manfufacturing_year;
+	
+	private String car_type;
+	
+	
+	
+	public String getCar_type() {
+		return car_type;
+	}
+	public void setCar_type(String car_type) {
+		this.car_type = car_type;
+	}
 	public String getVehicle_make() {
 		return vehicle_make;
 	}
