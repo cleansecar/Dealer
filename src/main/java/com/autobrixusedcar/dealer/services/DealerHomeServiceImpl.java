@@ -59,7 +59,7 @@ public class DealerHomeServiceImpl implements DealerHomeService {
         
         
       
-		
+	
 		Map<String,Object> data = dealerhomerepository.used_car_home_page_sales_amount(dto.getMobileno(), dto.getTypeofacc(), startDateStr, endDateStr, dto.getDuration());
 		
 		
