@@ -30,8 +30,8 @@ public class DealerHomeRequestDTO {
 	private String bankname;
 	private String dealer_code;
 	private String acc_is_verified;
-	private Date fromDate;
-	private Date toDate;
+	private String fromDate;
+	private String toDate;
 	private String duration;
 	private String mobileno;
 	private String typeofacc;
@@ -41,16 +41,16 @@ public class DealerHomeRequestDTO {
 	
 	
 	
-	public Date getFromDate() {
+	public String getFromDate() {
 		return fromDate;
 	}
-	public void setFromDate(Date fromDate) {
+	public void setFromDate(String fromDate) {
 		this.fromDate = fromDate;
 	}
-	public Date getToDate() {
+	public String getToDate() {
 		return toDate;
 	}
-	public void setToDate(Date toDate) {
+	public void setToDate(String toDate) {
 		this.toDate = toDate;
 	}
 	public String getDuration() {

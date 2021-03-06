@@ -81,8 +81,8 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 @Query(value="call dashboard_vehicles_list(:searchtext)",nativeQuery = true)
 	 List<Map<String, Object>> search_vehicl(@Param("searchtext")String searchtext);
 	 
-	 @Query(value="call  used_car_vehilce_list_for_dealer(:dealerId)",nativeQuery = true)
-	 List<Map<String, Object>> used_car_vehicle_list(@Param("dealerId")String dealerId);
+	 @Query(value="call  used_car_vehilce_list_for_dealer(:dealerId,:searchtext)",nativeQuery = true)
+	 List<Map<String, Object>> used_car_vehicle_list(@Param("dealerId")String dealerId,@Param ("searchtext")String searchtext);
 	 
 	 
 	 @Modifying(flushAutomatically = true)
