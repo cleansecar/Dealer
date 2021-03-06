@@ -19,7 +19,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	@Transactional
 	@Query(value = "insert into car_vendor_admin_master_tbl (vendor_name,owner_name,phone_no,alternative_no,location,landmark,created_by,city,state,latitude,longitude,\n" + 
 			"			adhar_card_image,adhar_card_number,pan_card_image,pan_card_number,driving_licence_image,driving_licence_number,suv_commission,hatchback_commission,sedan_commission,\n" + 
-			"			acc_holder_name,bank_name,bank_account_no,ifsc_code,is_acc_verified,dealer_code,pincode) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ;",nativeQuery = true)
+			"			acc_holder_name,bank_name,bank_account_no,ifsc_code,is_acc_verified,pincode) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ;",nativeQuery = true)
 	void insert_car_vendor_admin_master_tbl(
 			@Param("vendor_name") String vendor_name,
 			@Param("owner_name") String owner_name,
@@ -29,6 +29,8 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			@Param("landmark") String landmark,
 			@Param("created_by") String created_by,
 			@Param("city") String city,
+			@Param("state") String state,
+
 			@Param("latitude") String latitude,
 			@Param("longitude") String longitude,
 			@Param("adhar_card_image") String adhar_card_image,
@@ -45,9 +47,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			@Param("bank_account_no") String bank_account_no,
 			@Param("ifsc_code") String ifsc_code,
 			@Param("is_acc_verified") String is_acc_verified,
-			@Param("dealer_code") String dealer_code,
-			@Param("pincode") String pincode,
-			@Param("state") String state
+			@Param("pincode") String pincode
 			);
 	
 	
@@ -94,6 +94,29 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			 @Param("employee_image")String employee_image,
 			 @Param("vendor_id")String vendor_id
 			 );
+	 
+	 
+	 
+	 @Query(value = "SELECT \n" + 
+		 		"    vendor_admin_id,\n" + 
+		 		"    owner_name,\n" + 
+		 		"    phone_no,\n" + 
+		 		"    alternative_no,\n" + 
+		 		"    location,\n" + 
+		 		"    IFNULL(landmark, '') landmark,\n" + 
+		 		"    city,\n" + 
+		 		"    state,\n" + 
+		 		"    pincode,\n" + 
+		 		"    dealer_code\n" + 
+		 		"FROM\n" + 
+		 		"    car_vendor_admin_master_tbl\n" + 
+		 		"WHERE\n" + 
+		 		"    is_active = 'Y' \n" + 
+		 		"    and created_by = :employeeId ;", nativeQuery = true)
+		 List<Map<String,Object>> dealerslist(@Param("employeeId")String employeeId);
+		 
+		 
+		 
 	 
 
 }
