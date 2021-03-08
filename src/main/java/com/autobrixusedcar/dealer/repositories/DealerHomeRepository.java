@@ -15,7 +15,7 @@ import com.autobrixusedcar.dealer.entities.BaseEntity;
 public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	
 	
-	
+	 @Modifying(flushAutomatically = true)
 	@Transactional
 	@Query(value = "insert into car_vendor_admin_master_tbl (vendor_name,owner_name,phone_no,alternative_no,location,landmark,created_by,city,state,latitude,longitude,\n" + 
 			"			adhar_card_image,adhar_card_number,pan_card_image,pan_card_number,driving_licence_image,driving_licence_number,suv_commission,hatchback_commission,sedan_commission,\n" + 
@@ -30,7 +30,6 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			@Param("created_by") String created_by,
 			@Param("city") String city,
 			@Param("state") String state,
-
 			@Param("latitude") String latitude,
 			@Param("longitude") String longitude,
 			@Param("adhar_card_image") String adhar_card_image,
