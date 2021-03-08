@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -14,11 +15,11 @@ import com.autobrixusedcar.dealer.entities.BaseEntity;
 public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	
 	
-	
+	 @Modifying(flushAutomatically = true)
 	@Transactional
 	@Query(value = "insert into car_vendor_admin_master_tbl (vendor_name,owner_name,phone_no,alternative_no,location,landmark,created_by,city,state,latitude,longitude,\n" + 
 			"			adhar_card_image,adhar_card_number,pan_card_image,pan_card_number,driving_licence_image,driving_licence_number,suv_commission,hatchback_commission,sedan_commission,\n" + 
-			"			acc_holder_name,bank_name,bank_account_no,ifsc_code,is_acc_verified,dealer_code,pincode) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ;",nativeQuery = true)
+			"			acc_holder_name,bank_name,bank_account_no,ifsc_code,is_acc_verified,pincode) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ;",nativeQuery = true)
 	void insert_car_vendor_admin_master_tbl(
 			@Param("vendor_name") String vendor_name,
 			@Param("owner_name") String owner_name,
@@ -28,6 +29,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			@Param("landmark") String landmark,
 			@Param("created_by") String created_by,
 			@Param("city") String city,
+			@Param("state") String state,
 			@Param("latitude") String latitude,
 			@Param("longitude") String longitude,
 			@Param("adhar_card_image") String adhar_card_image,
@@ -44,18 +46,12 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			@Param("bank_account_no") String bank_account_no,
 			@Param("ifsc_code") String ifsc_code,
 			@Param("is_acc_verified") String is_acc_verified,
-			@Param("dealer_code") String dealer_code,
-			@Param("pincode") String pincode,
-			@Param("state") String state
+			@Param("pincode") String pincode
 			);
 	
 	
 	
-	
-	
-	
-	
-	 
+
 	 @Query(value = "call used_car_home_page_sales_amount(:mobileno,:type,:fromdate,:todate,:duration)" , nativeQuery = true)
 	 Map<String, Object> used_car_home_page_sales_amount(@Param("mobileno")String mobileno,@Param("type")String type,@Param("fromdate")String fromdate,@Param("todate")String todate,@Param("duration") String duration);
 
@@ -66,5 +62,61 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 	
 	 @Query(value = "call used_car_employee_wise_sale(:mobileno,:type)" , nativeQuery = true)
 	 List<Map<String, Object>> used_car_employee_wise_sale(@Param("mobileno")String mobileno,@Param("type")String type);
+	 
+	 @Modifying(flushAutomatically = true)
+	 @Transactional
+	 @Query(value ="insert into used_car_add_vehicle (vehicle_make,vehicle_model,fuel_type,vehicle_no,manfufacturing_year,odometer,vin_number,vendor_id,car_type) values (?,?,?,?,?,?,?,?,?) ; ",nativeQuery =true)
+	 void insert_used_car_add_vehicle(
+			 @Param("vehicle_make")String vehicle_make,
+			 @Param("vehicle_model")String vehicle_model,
+			 @Param("fuel_type")String fuel_type,
+			 @Param("vehicle_no")String vehicle_no,
+			 @Param("manfufacturing_year")String manfufacturing_year,
+			 @Param("odometer")String odometer,
+			 @Param("vin_number")String vin_number,
+			 @Param("vendor_id")String vendor_id,
+			 @Param("car_type")String car_type
+			 );
+	 
+	 @Query(value="call dashboard_vehicles_list(:searchtext)",nativeQuery = true)
+	 List<Map<String, Object>> search_vehicl(@Param("searchtext")String searchtext);
+	 
+	 @Query(value="call  used_car_vehilce_list_for_dealer(:dealerId,:searchtext)",nativeQuery = true)
+	 List<Map<String, Object>> used_car_vehicle_list(@Param("dealerId")String dealerId,@Param ("searchtext")String searchtext);
+	 
+	 
+	 @Modifying(flushAutomatically = true)
+	 @Transactional
+	 @Query(value="insert into used_car_add_employee_tbl (employee_name,phone_no,employee_image,vendor_id) values (?,?,?,?) ;",nativeQuery = true)
+	 void insert_used_car_add_employee_tbl(
+			 @Param("employee_name")String employee_name,
+			 @Param("phone_no")String phone_no,
+			 @Param("employee_image")String employee_image,
+			 @Param("vendor_id")String vendor_id
+			 );
+	 
+	 
+	 
+	 @Query(value = "SELECT \n" + 
+		 		"    vendor_admin_id,\n" + 
+		 		"    owner_name,\n" + 
+		 		"    phone_no,\n" + 
+		 		"    alternative_no,\n" + 
+		 		"    location,\n" + 
+		 		"    IFNULL(landmark, '') landmark,\n" + 
+		 		"    city,\n" + 
+		 		"    state,\n" + 
+		 		"    pincode,\n" + 
+		 		"    dealer_code\n" + 
+		 		"FROM\n" + 
+		 		"    car_vendor_admin_master_tbl\n" + 
+		 		"WHERE\n" + 
+		 		"    is_active = 'Y' \n" + 
+		 		"    and created_by = :employeeId ;", nativeQuery = true)
+		 List<Map<String,Object>> dealerslist(@Param("employeeId")String employeeId);
+		 
+		 
+		 
+	 
 
 }
