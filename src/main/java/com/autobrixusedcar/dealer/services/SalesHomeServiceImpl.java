@@ -106,4 +106,29 @@ public class SalesHomeServiceImpl implements SalesHomeService {
 		
 	}
 
+	@Override
+	public Map<String, Object> getfollowupvehiclelist(String employeeid, String searchtext) {
+		List<Map<String,Object>>vehiclelist=saleshomerepository.used_car_followup_list_sale(employeeid, searchtext);
+		Map<String,Object>map=new HashMap<>();
+		map.put("salesfollowupvehiclelist", vehiclelist);
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> getfollowuphistory(String vehicleId) {
+		List<Map<String,Object>>historylist=saleshomerepository.usedcar_followup_history(vehicleId);
+		Map<String,Object>map=new HashMap<>();
+		map.put("salesfollowuphistory", historylist);
+		return map;
+		
+	}
+
+	@Override
+	public Map<String, Object> getsoldvehiclelist(String employeeId) {
+		List<Map<String,Object>>soldvehiclelist=saleshomerepository.usedcar_sales_sold_vehicle_list(employeeId);
+		Map<String,Object>map=new HashMap<>();
+		map.put("salessoldvehiclelist", soldvehiclelist);
+      return map;
+	}
+
 }

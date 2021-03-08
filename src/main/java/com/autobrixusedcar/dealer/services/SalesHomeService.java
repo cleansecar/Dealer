@@ -17,6 +17,8 @@ public interface SalesHomeService {
 
 	Map<String,Object> getpackageslistdropdown(String cartpe);
 	Map<String,Object> getpackagesstartdates();
-
+	Map<String,Object> getfollowupvehiclelist(String employeeId,String searchtext);
+	Map<String,Object> getfollowuphistory(String vehicleId);
+	Map<String,Object> getsoldvehiclelist(String employeeId);
 	
 }
