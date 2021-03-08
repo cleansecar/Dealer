@@ -17,6 +17,7 @@ import com.autobrixusedcar.dealer.dtos.SalesHomeRequestDTO;
 import com.autobrixusedcar.dealer.services.DealerHomeService;
 import com.autobrixusedcar.dealer.services.JPAException;
 import com.autobrixusedcar.dealer.services.SalesHomeService;
+import com.autobrixusedcar.dealer.utils.Response;
 
 @Controller
 @RequestMapping("/salesHomeservices")
@@ -42,5 +43,31 @@ public class SalesHomeController {
 
 		return com.autobrixusedcar.dealer.utils.Response.success(map);
 		}
+	
+	
+	
+	@PostMapping("/insertsoldDetails")
+	public ResponseEntity<Object> insertsoldDetails(@RequestBody SalesHomeRequestDTO dto)  throws JPAException{
+		saleshomeservice.insertflowupDetails(dto);		
+		 Map<String, String> map = new HashMap<>();
+	        map.put("message", "Created successfully.");
+			System.out.print("yes");
 
+		return com.autobrixusedcar.dealer.utils.Response.success(map);
+		}
+	
+	
+	@GetMapping("/getpackageslistdropdown")
+	public ResponseEntity<Object> getpackageslistdropdown(@RequestParam("cartype")String cartype) {
+		Map<String,Object>deatails = saleshomeservice.getpackageslistdropdown(cartype);
+		return Response.success(deatails);
+		
+	}
+	
+	@GetMapping("/getpackagesstartdates")
+	public ResponseEntity<Object> getpackagesstartdates() {
+		Map<String,Object>deatails = saleshomeservice.getpackagesstartdates();
+		return Response.success(deatails);
+		
+	}
 }

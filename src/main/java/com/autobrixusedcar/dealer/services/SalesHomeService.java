@@ -11,5 +11,12 @@ public interface SalesHomeService {
 	
 	
 	void insertflowupDetails(SalesHomeRequestDTO dto) throws JPAException;
+	
+	
+	void insertsoldDetails(SalesHomeRequestDTO dto) throws JPAException;
 
+	Map<String,Object> getpackageslistdropdown(String cartpe);
+	Map<String,Object> getpackagesstartdates();
+
+	
 }
