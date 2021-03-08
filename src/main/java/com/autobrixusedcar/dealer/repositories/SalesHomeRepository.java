@@ -101,6 +101,14 @@ public interface SalesHomeRepository  extends JpaRepository<BaseEntity, Long> {
 	 @Query(value="call  used_car_dates_30_days(:currentdate)",nativeQuery = true)
 	 List<Map<String, Object>> used_car_dates_30_days(@Param("currentdate")String currentdate);
 	 
+	 @Query(value = "call used_car_vehilce_followup_list(:employeeid,:searchtext)" , nativeQuery = true)
+	 List<Map<String, Object>> used_car_followup_list_sale(@Param("employeeid")String employeeid,@Param("searchtext")String searchtext);
 	 
+	 
+	 @Query(value = "call used_car_vehicle_followup_history(:vehicleId)" , nativeQuery = true)
+	 List<Map<String, Object>> usedcar_followup_history(@Param("vehicleId")String vehicleId);
+	 
+	 @Query(value = "call used_car_sold_vehilces_sales(:employeeId)" ,nativeQuery = true)
+	 List<Map<String, Object>> usedcar_sales_sold_vehicle_list(@Param("employeeId")String employeeId);
 	 
 }

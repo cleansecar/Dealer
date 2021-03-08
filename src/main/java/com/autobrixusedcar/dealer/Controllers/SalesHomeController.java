@@ -70,4 +70,28 @@ public class SalesHomeController {
 		return Response.success(deatails);
 		
 	}
+	@GetMapping("/getfollowupvehiclelist")
+	public ResponseEntity<Object>getfollowupvehiclelist(@RequestParam("employeeId")String employeeId,@RequestParam("searchtext")String searchtext){
+		
+		Map<String, Object>details=saleshomeservice.getfollowupvehiclelist(employeeId, searchtext);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+		
+	}
+	
+	@GetMapping("/getfollowuphistory")
+	public ResponseEntity<Object>getfollowuphistory(@RequestParam("vehicleId")String vehicleId){
+		
+		Map<String, Object>details=saleshomeservice.getfollowuphistory(vehicleId);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+		
+	}
+	
+	
+	@GetMapping("/getsoldvehiclelist")
+	public ResponseEntity<Object>getsoldvehiclelist(@RequestParam("employeeId")String employeeId){
+		Map<String, Object>details=saleshomeservice.getsoldvehiclelist(employeeId);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+		
+	}
+	
 }
