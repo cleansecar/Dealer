@@ -111,6 +111,54 @@ public class DealerHomeServiceImpl implements DealerHomeService {
 		map.put("salesEmployeeList", datalist);
 		return map;
 		}
+
+
+
+	@Override
+	public Map<String, Object> getdealersapprovalsList(String employeeId) {
+
+		List<Map<String,Object>> datalist = dealerhomerepository.used_car_vehilce_list_for_my_approvels_dealer(employeeId);
+		Map<String, Object> map = new HashMap<>();
+		map.put("getdealersapprovalsList", datalist);
+		return map;
+	}
+
+
+
+	@Override
+	public Map<String, Object> getdealersCheckoutPage(String saleId) {
+
+		Map<String,Object> datalist = dealerhomerepository.used_car_check_out(saleId);
+		List<Map<String,Object>> priceList = dealerhomerepository.used_car_check_out_amount(saleId);
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("getdealersCheckoutPageDetails", datalist);
+		map.put("pricelist", priceList);
+
+		return map;
+	}
+
+
+
+	@Override
+	public void updatedealerapprove(String vehicleId) throws JPAException {
+
+		dealerhomerepository.updateapprovestatus(vehicleId);
+		dealerhomerepository.updateapprovestatusused_car_employee_sales_tbl(vehicleId);
+		return;
+		
+	}
+
+
+
+	@Override
+	public Map<String, Object> getdealerallsaleslist(String employeeid) {
+
+		List<Map<String,Object>> datalist = dealerhomerepository.used_car_sold_vehilces_vendor(employeeid);
+		Map<String, Object> map = new HashMap<>();
+		map.put("dealersmysales", datalist);
+		return map;
+	}
  
 	
 

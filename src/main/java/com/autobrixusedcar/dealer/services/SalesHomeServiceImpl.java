@@ -34,8 +34,9 @@ public class SalesHomeServiceImpl implements SalesHomeService {
 		
 		saleshomerepository.updateintoused_car_add_vehicle(dto.getCustomerName(), dto.getCustomermobileno(), dto.getPackageId(), dto.getVehicleId(), dto.getServicepackageId(),dto.getEmployeeId());
 		
-		saleshomerepository.insertintoused_car_customer_vehicle_follow_up(dto.getCustomerName(), dto.getCustomermobileno(), dto.getFollowupdate(), dto.getFollowuptime(), dto.getVehicleId(), dto.getEmployeeId(), dto.getDealerId(), dto.getServicepackageId(), dto.getPackageId(), dto.getComment());
+		saleshomerepository.insertintoused_car_customer_vehicle_follow_up(dto.getCustomerName(), dto.getCustomermobileno(), dto.getFollowupdate(), dto.getFollowuptime(), dto.getVehicleId(), dto.getEmployeeId(), dto.getDealerId(), "Follow Up" ,dto.getServicepackageId(), dto.getPackageId(), dto.getComment());
 				
+		
 		return;
 		
 	}
@@ -100,7 +101,7 @@ public class SalesHomeServiceImpl implements SalesHomeService {
 		
 		saleshomerepository.soldupdateintoused_car_add_vehicle(dto.getCustomerName(), dto.getCustomermobileno(), dto.getPackageId(), dto.getVehicleId(), dto.getServicepackageId(),dto.getServicedate(),dto.getEmployeeId());
 		
-		saleshomerepository.soldInsertused_car_employee_sales_tbl(dto.getVehicleId(), dto.getEmployeeId(), dto.getPackageId(), dto.getActual_package_amount(), dto.getDiscount_amount(), dto.getFinal_price(), dto.getDealerId(), dto.getServicedate(), endDateStr);
+		saleshomerepository.soldInsertused_car_employee_sales_tbl(dto.getVehicleId(), "Sold" , "S" , dto.getEmployeeId(), dto.getPackageId(), dto.getActual_package_amount(), dto.getDiscount_amount(), dto.getFinal_price(), dto.getDealerId(), dto.getServicedate(), endDateStr);
 				
 		return;
 		
