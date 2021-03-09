@@ -132,5 +132,14 @@ public class DealerHomeController {
 		Map<String,Object> details = dealerhomeservice.getdealerallsaleslist(employeeid);
 		return com.autobrixusedcar.dealer.utils.Response.success(details);
 	 }	
+	
+	
+	
+	@GetMapping("/getcommisionlist")
+	public ResponseEntity<Object> getcommisionlist(@RequestParam("employeeid") String employeeid) {		
+		Map<String,Object> details = dealerhomeservice.getcommisionlist(employeeid);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	 }	
+	
 }
 

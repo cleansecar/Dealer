@@ -29,5 +29,9 @@ public interface DealerHomeService {
 	Map<String, Object> getdealersCheckoutPage(String saleId);
 	Map<String, Object> getdealerallsaleslist(String employeeid);
 
+	
+	Map<String, Object> getcommisionlist(String employeeid);
+
+	
 	void updatedealerapprove(String vehicleId) throws JPAException;
 }

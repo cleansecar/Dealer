@@ -159,6 +159,17 @@ public class DealerHomeServiceImpl implements DealerHomeService {
 		map.put("dealersmysales", datalist);
 		return map;
 	}
+
+
+
+	@Override
+	public Map<String, Object> getcommisionlist(String employeeid) {
+
+		List<Map<String,Object>> datalist = dealerhomerepository.used_car_commision_vendor_wise(employeeid);
+		Map<String, Object> map = new HashMap<>();
+		map.put("getcommisionlist", datalist);
+		return map;
+	}
  
 	
 

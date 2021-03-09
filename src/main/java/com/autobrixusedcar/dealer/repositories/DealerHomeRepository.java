@@ -154,5 +154,11 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 List<Map<String,Object>> used_car_sold_vehilces_vendor(@Param("employeeid")String employeeid);
 	 
 	 
+	 
+	 
+	 @Query(value = " call used_car_commision_vendor_wise(:employeeId);", nativeQuery = true)
+	 List<Map<String,Object>> used_car_commision_vendor_wise(@Param("employeeId")String employeeId);
+	 
+	 
 
 }
