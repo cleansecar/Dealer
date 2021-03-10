@@ -145,7 +145,7 @@ public class DealerHomeController {
 	
 	@PostMapping("/paymentupdate")
 	public ResponseEntity<Object>paymentupdate(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException{
-		dealerhomeservice.addcar(dto);	
+		dealerhomeservice.paymentupdate(dto);	
 		
 		Map<String, String> map = new HashMap<>();
 	        map.put("message", "Added successfully.");
