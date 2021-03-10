@@ -170,6 +170,21 @@ public class DealerHomeServiceImpl implements DealerHomeService {
 		map.put("getcommisionlist", datalist);
 		return map;
 	}
+
+
+
+	@Override
+	public void paymentupdate(DealerAddVehicleRequestDTO dto) throws JPAException {
+		
+		dealerhomerepository.insertintopaymnets(dto.getSaleid(), dto.getActualamount(), dto.getDiscountamount(), dto.getFinalamount(), dto.getRazorpayid(), dto.getPaymentstatus(), dto.getIspaid());
+		
+		dealerhomerepository.updateapprovestatuspay(dto.getVehicleid());
+		dealerhomerepository.updateapprovestatusused_car_employee_sales_tblpay(dto.getVehicleid());
+		dealerhomerepository.createuser(dto.getCustomername(), dto.getCustomerno(), dto.getSaleid());
+
+		
+
+	}
  
 	
 

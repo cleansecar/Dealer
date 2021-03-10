@@ -141,5 +141,20 @@ public class DealerHomeController {
 		return com.autobrixusedcar.dealer.utils.Response.success(details);
 	 }	
 	
+	
+	
+	@PostMapping("/paymentupdate")
+	public ResponseEntity<Object>paymentupdate(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException{
+		dealerhomeservice.addcar(dto);	
+		
+		Map<String, String> map = new HashMap<>();
+	        map.put("message", "Added successfully.");
+			System.out.print("yes");
+		
+		return com.autobrixusedcar.dealer.utils.Response.success(map);
+		
+	}
+	
+	
 }
 

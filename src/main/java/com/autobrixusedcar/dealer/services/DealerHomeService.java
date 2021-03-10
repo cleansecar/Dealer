@@ -18,6 +18,7 @@ public interface DealerHomeService {
 	
 	void addcar(DealerAddVehicleRequestDTO dto) throws JPAException;
 	
+	
 	Map<String,Object> getsearchlist(String searchtext);
 	Map<String,Object> getvehiclelist(String dealerId,String searchtext);
 	
@@ -34,4 +35,6 @@ public interface DealerHomeService {
 
 	
 	void updatedealerapprove(String vehicleId) throws JPAException;
+	void paymentupdate(DealerAddVehicleRequestDTO dto) throws JPAException;
+
 }
