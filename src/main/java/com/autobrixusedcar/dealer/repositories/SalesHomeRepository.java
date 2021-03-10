@@ -39,7 +39,7 @@ public interface SalesHomeRepository  extends JpaRepository<BaseEntity, Long> {
 	 @Modifying(flushAutomatically = true)
 	 @Transactional
 	 @Query(value="insert into used_car_customer_vehicle_follow_up (customer_name,customer_number,select_date,select_time,add_vehicle_id,employee_id,vendor_id,follow_up_status,service_package_id,package_id,sales_comment) \n" + 
-	 		"values (?,?,?,?,?,?,?,'Follow Up',?,?,?) ;",nativeQuery = true)
+	 		"values (:customer_name,:customer_number,:select_date,:select_time,:add_vehicle_id,:employee_id,:vendor_id,:Follow_Up,:service_package_id,:package_id,:sales_comment) ;",nativeQuery = true)
 	 void insertintoused_car_customer_vehicle_follow_up(
 			 @Param("customer_name")String customer_name,
 			 @Param("customer_number")String customer_number,
@@ -48,6 +48,7 @@ public interface SalesHomeRepository  extends JpaRepository<BaseEntity, Long> {
 			 @Param("add_vehicle_id")String add_vehicle_id,
 			 @Param("employee_id")String employee_id,
 			 @Param("vendor_id")String vendor_id,
+			 @Param("Follow_Up") String Follow_Up,
 			 @Param("service_package_id")String service_package_id,
 			 @Param("package_id")String package_id,
 			 @Param("sales_comment")String sales_comment
@@ -78,9 +79,11 @@ public interface SalesHomeRepository  extends JpaRepository<BaseEntity, Long> {
 	 @Transactional
 	 @Query(value="insert into used_car_employee_sales_tbl(user_vehicle_id,current_status,is_approve_pay,sold_by,package_id,actual_package_amount,\n" + 
 	 		"discount_amount,final_price,vendor_id,user_added_date,service_date) \n" + 
-	 		"values (?,'Sold','S',?,?,?,?,?,?,?,?);",nativeQuery = true)
+	 		"values (?,?,?,?,?,?,?,?,?,?,?);",nativeQuery = true)
 	 void soldInsertused_car_employee_sales_tbl(
 			 @Param("vehicleId")String vehicleId,
+			 @Param("Sold") String Sold,
+			 @Param("StatusS")String StatusS,
 			 @Param("employeeId")String employeeId,
 			 @Param("packageId")String packageId,
 			 @Param("actual_package_amount")String actual_package_amount,

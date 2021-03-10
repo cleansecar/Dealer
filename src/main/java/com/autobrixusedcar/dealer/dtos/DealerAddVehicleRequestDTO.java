@@ -13,6 +13,80 @@ public class DealerAddVehicleRequestDTO {
 	
 	
 	
+	
+	private String saleid;
+	private String actualamount;
+	private String discountamount;
+	private String finalamount;
+	private String razorpayid;
+	private String paymentstatus;
+	private String ispaid;
+	private String vehicleid;
+	private String customername;
+	private String customerno;
+	
+	
+	
+	public String getCustomername() {
+		return customername;
+	}
+	public void setCustomername(String customername) {
+		this.customername = customername;
+	}
+	public String getCustomerno() {
+		return customerno;
+	}
+	public void setCustomerno(String customerno) {
+		this.customerno = customerno;
+	}
+	public String getSaleid() {
+		return saleid;
+	}
+	public void setSaleid(String saleid) {
+		this.saleid = saleid;
+	}
+	public String getActualamount() {
+		return actualamount;
+	}
+	public void setActualamount(String actualamount) {
+		this.actualamount = actualamount;
+	}
+	public String getDiscountamount() {
+		return discountamount;
+	}
+	public void setDiscountamount(String discountamount) {
+		this.discountamount = discountamount;
+	}
+	public String getFinalamount() {
+		return finalamount;
+	}
+	public void setFinalamount(String finalamount) {
+		this.finalamount = finalamount;
+	}
+	public String getRazorpayid() {
+		return razorpayid;
+	}
+	public void setRazorpayid(String razorpayid) {
+		this.razorpayid = razorpayid;
+	}
+	public String getPaymentstatus() {
+		return paymentstatus;
+	}
+	public void setPaymentstatus(String paymentstatus) {
+		this.paymentstatus = paymentstatus;
+	}
+	public String getIspaid() {
+		return ispaid;
+	}
+	public void setIspaid(String ispaid) {
+		this.ispaid = ispaid;
+	}
+	public String getVehicleid() {
+		return vehicleid;
+	}
+	public void setVehicleid(String vehicleid) {
+		this.vehicleid = vehicleid;
+	}
 	public String getCar_type() {
 		return car_type;
 	}

@@ -58,7 +58,7 @@ public class loginController {
 		
 		Map<String, Object> details = lr.getEmployeeDetails(phoneNo);
 		
-		if (details == null) {
+		if (details == null || details.isEmpty()) {
 			
 			Map<String, Object> mapObj = new HashMap<String, Object>();
 			mapObj.put("message", "Employee Not Available");

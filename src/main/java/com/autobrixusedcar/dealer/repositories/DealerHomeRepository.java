@@ -115,8 +115,92 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 		 		"    and created_by = :employeeId ;", nativeQuery = true)
 		 List<Map<String,Object>> dealerslist(@Param("employeeId")String employeeId);
 		 
-		 
+	 @Query(value = " call used_car_vehilce_list_for_my_approvels_dealer(:employeeId);", nativeQuery = true)
+		 List<Map<String,Object>> used_car_vehilce_list_for_my_approvels_dealer(@Param("employeeId")String employeeId);
 		 
 	 
+	 
+	 @Query(value = " call used_car_check_out_amount(:salesid);", nativeQuery = true)
+	 List<Map<String,Object>> used_car_check_out_amount(@Param("salesid")String salesid);
+	 
+	 @Query(value = " call used_car_check_out(:salesid);", nativeQuery = true)
+	 Map<String,Object> used_car_check_out(@Param("salesid")String salesid);
+	 
+//	 update used_car_add_vehicle set current_status='Approve' where add_vehicle_id = 1;
+//
+//
+//	 update used_car_employee_sales_tbl set current_status='Approve' ,is_approve_pay='A' where user_vehicle_id = 1
+	 
+	 
+	 @Modifying(flushAutomatically = true)
+	 @Transactional
+	 @Query(value="update used_car_add_vehicle set current_status='Approve' where add_vehicle_id = :vehicleId ;",nativeQuery = true)
+	 void updateapprovestatus(
+			 @Param("vehicleId")String vehicleId
+
+			 );
+	 
+	 @Modifying(flushAutomatically = true)
+	 @Transactional
+	 @Query(value="update used_car_employee_sales_tbl set current_status='Approve' ,is_approve_pay='A' where user_vehicle_id = :vehicleId ;",nativeQuery = true)
+	 void updateapprovestatusused_car_employee_sales_tbl(
+			 @Param("vehicleId")String vehicleId
+			 );
+	 
+	 
+	 
+	 
+	 @Query(value = " call used_car_sold_vehilces_vendor(:employeeid);", nativeQuery = true)
+	 List<Map<String,Object>> used_car_sold_vehilces_vendor(@Param("employeeid")String employeeid);
+	 
+	 
+	 
+	 
+	 @Query(value = " call used_car_commision_vendor_wise(:employeeId);", nativeQuery = true)
+	 List<Map<String,Object>> used_car_commision_vendor_wise(@Param("employeeId")String employeeId);
+	 
+	 
+	 
+	 
+	 
+	 @Modifying(flushAutomatically = true)
+	 @Transactional
+	 @Query(value = "insert into used_car_payment_tbl (sale_id,actual_amount,discount_amount,final_amount,razor_pay_id,payment_status,is_paid)values (?,?,?,?,?,?,?);", nativeQuery = true )
+	 void insertintopaymnets(@Param("sale_id")String sale_id,
+			 @Param("actual_amount")String actual_amount,
+			 @Param("discount_amount")String discount_amount,
+			 @Param("final_amount")String final_amount,
+			 @Param("razor_pay_id")String razor_pay_id,
+			 @Param("payment_status")String payment_status,
+			 @Param("is_paid")String is_paid);
+	 
+	 
+	 
+	 
+	 @Modifying(flushAutomatically = true)
+	 @Transactional
+	 @Query(value="update used_car_add_vehicle set current_status='Approve & Pay' where add_vehicle_id = :vehicleId ;",nativeQuery = true)
+	 void updateapprovestatuspay(
+			 @Param("vehicleId")String vehicleId
+			 );
+	 
+	 @Modifying(flushAutomatically = true)
+	 @Transactional
+	 @Query(value="update used_car_employee_sales_tbl set current_status='Approve & Pay' ,is_approve_pay='P' where user_vehicle_id = :vehicleId ;",nativeQuery = true)
+	 void updateapprovestatusused_car_employee_sales_tblpay(
+			 @Param("vehicleId")String vehicleId
+			 );
+	 
+	 
+	 @Modifying(flushAutomatically = true)
+	 @Transactional
+	 @Query(value="call user_creation_used_car(:customername,:customerno,:saleid);",nativeQuery = true)
+	 void createuser(
+			 @Param("customername")String customername,
+			 @Param("customerno")String customerno,
+			 @Param("saleid")String saleid
+
+
+			 );
 
 }
