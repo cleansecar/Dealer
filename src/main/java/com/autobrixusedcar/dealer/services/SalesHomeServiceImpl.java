@@ -32,9 +32,9 @@ public class SalesHomeServiceImpl implements SalesHomeService {
 	public void insertflowupDetails(SalesHomeRequestDTO dto) throws JPAException {
 		// TODO Auto-generated method stub
 		
-		saleshomerepository.updateintoused_car_add_vehicle(dto.getCustomerName(), dto.getCustomermobileno(), dto.getPackageId(), dto.getVehicleId(), dto.getServicepackageId(),dto.getEmployeeId());
+		saleshomerepository.updateintoused_car_add_vehicle(dto.getCustomerName(), dto.getCustomermobileno(), dto.getPackageId(), dto.getVehicleId(), dto.getServicepackageId());
 		
-		saleshomerepository.insertintoused_car_customer_vehicle_follow_up(dto.getCustomerName(), dto.getCustomermobileno(), dto.getFollowupdate(), dto.getFollowuptime(), dto.getVehicleId(), dto.getEmployeeId(), dto.getDealerId(), "Follow Up" ,dto.getServicepackageId(), dto.getPackageId(), dto.getComment());
+		saleshomerepository.insertintoused_car_customer_vehicle_follow_up(dto.getCustomerName(), dto.getCustomermobileno(), dto.getFollowupdate(), dto.getFollowuptime(), dto.getVehicleId(), dto.getDealerId(), "Follow Up" ,dto.getServicepackageId(), dto.getPackageId(), dto.getComment());
 				
 		
 		return;
@@ -70,7 +70,7 @@ public class SalesHomeServiceImpl implements SalesHomeService {
 	 
 	
 	@Override
-	public void insertsoldDetails(SalesHomeRequestDTO dto) throws JPAException {
+	public Map<String, Object> insertsoldDetails(SalesHomeRequestDTO dto) throws JPAException {
 		// TODO Auto-generated method stub
 				
 		
@@ -99,11 +99,19 @@ public class SalesHomeServiceImpl implements SalesHomeService {
 
 		
 		
-		saleshomerepository.soldupdateintoused_car_add_vehicle(dto.getCustomerName(), dto.getCustomermobileno(), dto.getPackageId(), dto.getVehicleId(), dto.getServicepackageId(),dto.getServicedate(),dto.getEmployeeId());
-		
-		saleshomerepository.soldInsertused_car_employee_sales_tbl(dto.getVehicleId(), "Sold" , "S" , dto.getEmployeeId(), dto.getPackageId(), dto.getActual_package_amount(), dto.getDiscount_amount(), dto.getFinal_price(), dto.getDealerId(), dto.getServicedate(), endDateStr);
+//		saleshomerepository.soldupdateintoused_car_add_vehicle(dto.getCustomerName(), dto.getCustomermobileno(), dto.getPackageId(), dto.getVehicleId(), dto.getServicepackageId(),dto.getServicedate());
+//		
+//		saleshomerepository.soldInsertused_car_employee_sales_tbl(dto.getVehicleId(), dto.getPackageId(), dto.getActual_package_amount(), dto.getDiscount_amount(), dto.getFinal_price(), dto.getDealerId(), dto.getServicedate(), endDateStr);
 				
-		return;
+		
+		Integer datasaleid = saleshomerepository.used_car_vehilce_customer_insert(dto.getVehicleId(), dto.getPackageId(), dto.getActual_package_amount(), dto.getDiscount_amount() , dto.getFinal_price(), dto.getDealerId(), dto.getServicedate(), dto.getCustomerName(), dto.getCustomermobileno(), dto.getServicepackageId(), endDateStr);
+		
+		Map<String,Object> map1 = new HashMap<>();
+		map1.put("saleId", datasaleid);
+		
+		Map<String,Object>map=new HashMap<>();
+		map.put("datasaleid", map1);
+		return map;
 		
 	}
 

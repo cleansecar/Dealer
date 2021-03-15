@@ -114,6 +114,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 		 		"    is_active = 'Y' \n" + 
 		 		"    and created_by = :employeeId ;", nativeQuery = true)
 		 List<Map<String,Object>> dealerslist(@Param("employeeId")String employeeId);
+	 
 		 
 	 @Query(value = " call used_car_vehilce_list_for_my_approvels_dealer(:employeeId);", nativeQuery = true)
 		 List<Map<String,Object>> used_car_vehilce_list_for_my_approvels_dealer(@Param("employeeId")String employeeId);
@@ -126,11 +127,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 @Query(value = " call used_car_check_out(:salesid);", nativeQuery = true)
 	 Map<String,Object> used_car_check_out(@Param("salesid")String salesid);
 	 
-//	 update used_car_add_vehicle set current_status='Approve' where add_vehicle_id = 1;
-//
-//
-//	 update used_car_employee_sales_tbl set current_status='Approve' ,is_approve_pay='A' where user_vehicle_id = 1
-	 
+
 	 
 	 @Modifying(flushAutomatically = true)
 	 @Transactional
@@ -139,6 +136,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			 @Param("vehicleId")String vehicleId
 
 			 );
+	 
 	 
 	 @Modifying(flushAutomatically = true)
 	 @Transactional
@@ -158,8 +156,6 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 
 	 @Query(value = " call used_car_commision_vendor_wise(:employeeId);", nativeQuery = true)
 	 List<Map<String,Object>> used_car_commision_vendor_wise(@Param("employeeId")String employeeId);
-	 
-	 
 	 
 	 
 	 
@@ -199,8 +195,6 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			 @Param("customername")String customername,
 			 @Param("customerno")String customerno,
 			 @Param("saleid")String saleid
-
-
 			 );
 
 }
