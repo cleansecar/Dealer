@@ -102,10 +102,12 @@ public class SalesHomeServiceImpl implements SalesHomeService {
 //		saleshomerepository.soldupdateintoused_car_add_vehicle(dto.getCustomerName(), dto.getCustomermobileno(), dto.getPackageId(), dto.getVehicleId(), dto.getServicepackageId(),dto.getServicedate());
 //		
 //		saleshomerepository.soldInsertused_car_employee_sales_tbl(dto.getVehicleId(), dto.getPackageId(), dto.getActual_package_amount(), dto.getDiscount_amount(), dto.getFinal_price(), dto.getDealerId(), dto.getServicedate(), endDateStr);
-				
+ 		System.out.print("dto Data : "+dto.getVehicleId()+", "+ dto.getPackageId() +", "+ dto.getActual_package_amount()+", "+ dto.getDiscount_amount() +", "+ dto.getFinal_price()+", "+ dto.getDealerId()+", "+ dto.getServicedate()+", "+ dto.getCustomerName()+", "+ dto.getCustomermobileno()+", "+ dto.getServicepackageId()+", "+ endDateStr);
+
 		
 		Integer datasaleid = saleshomerepository.used_car_vehilce_customer_insert(dto.getVehicleId(), dto.getPackageId(), dto.getActual_package_amount(), dto.getDiscount_amount() , dto.getFinal_price(), dto.getDealerId(), dto.getServicedate(), dto.getCustomerName(), dto.getCustomermobileno(), dto.getServicepackageId(), endDateStr);
 		
+		System.out.print(datasaleid);
 		Map<String,Object> map1 = new HashMap<>();
 		map1.put("saleId", datasaleid);
 		
