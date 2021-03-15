@@ -104,12 +104,13 @@ public class SalesHomeServiceImpl implements SalesHomeService {
 //		saleshomerepository.soldInsertused_car_employee_sales_tbl(dto.getVehicleId(), dto.getPackageId(), dto.getActual_package_amount(), dto.getDiscount_amount(), dto.getFinal_price(), dto.getDealerId(), dto.getServicedate(), endDateStr);
 				
 		
-		Map<String,Object> datasaleid = saleshomerepository.used_car_vehilce_customer_insert(dto.getVehicleId(), dto.getPackageId(), dto.getActual_package_amount(), dto.getDiscount_amount() , dto.getFinal_price(), dto.getDealerId(), dto.getServicedate(), dto.getCustomerName(), dto.getCustomermobileno(), dto.getServicepackageId(), endDateStr);
+		Integer datasaleid = saleshomerepository.used_car_vehilce_customer_insert(dto.getVehicleId(), dto.getPackageId(), dto.getActual_package_amount(), dto.getDiscount_amount() , dto.getFinal_price(), dto.getDealerId(), dto.getServicedate(), dto.getCustomerName(), dto.getCustomermobileno(), dto.getServicepackageId(), endDateStr);
 		
-		
+		Map<String,Object> map1 = new HashMap<>();
+		map1.put("saleId", datasaleid);
 		
 		Map<String,Object>map=new HashMap<>();
-		map.put("datasaleid", datasaleid);
+		map.put("datasaleid", map1);
 		return map;
 		
 	}

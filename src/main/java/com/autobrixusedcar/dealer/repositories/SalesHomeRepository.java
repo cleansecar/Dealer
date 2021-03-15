@@ -91,20 +91,10 @@ public interface SalesHomeRepository  extends JpaRepository<BaseEntity, Long> {
 	 
 	 
 	 
-	 
-	 
-	 
-//	 (in vehicleid int,in customername varchar(25),in customerNo varchar(10),in packageid int,in servicepackageId int,in servicedate varchar(25),in serviceenddate varchar(25),
-//			 in actual_package_amount int,in discount_amount int,in final_price int,in dealerId int
-//			 )
-	 
-	 
-	 
-	 
 	 @Modifying(flushAutomatically = true)
 	 @Transactional
 	 @Query(value="call used_car_vehilce_customer_insert(:vehicleId,:customerName,:phone_no,:packageId,:package_service_id,:ServiceStartDate,:ServiceEndDate,:actual_package_amount,:discount_amount,:final_price,:vendor_id);",nativeQuery = true)
-	 Map<String,Object> used_car_vehilce_customer_insert(
+	 Integer used_car_vehilce_customer_insert(
 			 @Param("vehicleId")String vehicleId,
 			 @Param("packageId")String packageId,
 			 @Param("actual_package_amount")String actual_package_amount,
