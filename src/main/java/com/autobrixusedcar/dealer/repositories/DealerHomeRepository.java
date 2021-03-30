@@ -134,7 +134,6 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 @Query(value="update used_car_add_vehicle set current_status='Approve' where add_vehicle_id = :vehicleId ;",nativeQuery = true)
 	 void updateapprovestatus(
 			 @Param("vehicleId")String vehicleId
-
 			 );
 	 
 	 
@@ -196,5 +195,18 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			 @Param("customerno")String customerno,
 			 @Param("saleid")String saleid
 			 );
-
+	 
+	 
+	 
+//	 call used_car_cs_ondemand_lead_insert(saleId)
+	 
+	 @Modifying(flushAutomatically = true)
+	 @Transactional
+	 @Query(value="call used_car_cs_ondemand_lead_insert(:saleid);",nativeQuery = true)
+	 void used_car_cs_ondemand_lead_insert(
+			 @Param("saleid")String saleid
+			 );
+	  
+	 
+	 
 }
