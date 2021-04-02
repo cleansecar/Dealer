@@ -181,6 +181,10 @@ public class DealerHomeServiceImpl implements DealerHomeService {
 		dealerhomerepository.updateapprovestatuspay(dto.getVehicleid());
 		dealerhomerepository.updateapprovestatusused_car_employee_sales_tblpay(dto.getVehicleid());
 		dealerhomerepository.createuser(dto.getCustomername(), dto.getCustomerno(), dto.getSaleid());
+		dealerhomerepository.used_car_cs_ondemand_lead_insert(dto.getSaleid());
+
+
+
 
 		
 

@@ -196,5 +196,14 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			 @Param("customerno")String customerno,
 			 @Param("saleid")String saleid
 			 );
+	 
+	 
+	 
+	 @Modifying(flushAutomatically = true)
+	 @Transactional
+	 @Query(value="call used_car_cs_ondemand_lead_insert(:saleid);",nativeQuery = true)
+	 void used_car_cs_ondemand_lead_insert(
+	 @Param("saleid")String saleid
+	 );
 
 }
