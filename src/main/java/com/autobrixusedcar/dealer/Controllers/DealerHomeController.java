@@ -142,6 +142,13 @@ public class DealerHomeController {
 	
 	
 	
+	@GetMapping("/getimagelist")
+	public ResponseEntity<Object> getimagelist() {		
+		Map<String,Object> details = dealerhomeservice.getimagelist();
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	 }	
+	
+	
 	@PostMapping("/paymentupdate")
 	public ResponseEntity<Object>paymentupdate(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException{
 		dealerhomeservice.paymentupdate(dto);	
@@ -154,6 +161,103 @@ public class DealerHomeController {
 		
 	}
 	
+	@PostMapping("/adducinewcar")
+	public ResponseEntity<Object>adducicar(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException{
+		Map<String,Object> details = dealerhomeservice.adducicars(dto);
+		if(details==null) {
+			 Map<String, String> map = new HashMap<>();
+		        map.put("message", "Vehicle No Already Exists");
+				System.out.print("yes");
+			
+			return com.autobrixusedcar.dealer.utils.Response.failure("300", map);
+			
+		}else {
+			
+			 Map<String, String> map = new HashMap<>();
+		        map.put("message", "Added successfully.");
+				System.out.print("yes");
+			
+			return com.autobrixusedcar.dealer.utils.Response.success(map);
+		}
+	
+		
+	}
+	
+	@GetMapping("/getownershiplist")
+	public ResponseEntity<Object> getownershiplist() {		
+		Map<String,Object> details = dealerhomeservice.getownershiplist();
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	 }	
+	
+	@GetMapping("/getvehicleststuslist")
+	public ResponseEntity<Object> getvehiclestatuslist() {		
+		Map<String,Object> details = dealerhomeservice.getvehiclstatuslist();
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	 }	
+	
+	
+	@PostMapping("/gethomepagecarlist")
+	public ResponseEntity<Object> gethomepagecarlist(@RequestBody DealerAddVehicleRequestDTO dto) {
+		
+		Map<String,Object> details = dealerhomeservice.gethomepagecarlist(dto);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+
+		
+	}
+	
+	@GetMapping("/getenquirieslist")
+	public ResponseEntity<Object> getenquirieslist(@RequestParam("dealerid") String dealerid , @RequestParam("vehicleid") String vehicleid) {		
+		Map<String,Object> details = dealerhomeservice.getenquirylist(dealerid,vehicleid);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	 }	
+	
+	
+	@PostMapping("/addnewenquiry")
+	public ResponseEntity<Object>addnewenquiry(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException{
+		dealerhomeservice.addnewenquiry(dto);	
+		 Map<String, String> map = new HashMap<>();
+	        map.put("message", "Added successfully.");		
+		return com.autobrixusedcar.dealer.utils.Response.success(map);
+		
+	}
+	
+	@PostMapping("/updateinspectionrequest")
+	public ResponseEntity<Object>updateinspection(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException{
+		dealerhomeservice.updateinspectionrequest(dto);	
+		 Map<String, String> map = new HashMap<>();
+	        map.put("message", "Added successfully.");		
+		return com.autobrixusedcar.dealer.utils.Response.success(map);
+		
+	}
+	
+	@GetMapping("/getvehicleimagelist")
+	public ResponseEntity<Object> getvehicleimagelist(@RequestParam("dealerid") String dealerid , @RequestParam("vehicleid") String vehicleid) {		
+		Map<String,Object> details = dealerhomeservice.getvehicleimagelist(dealerid,vehicleid);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	 }
+	
+	@GetMapping("/getpackagelist")
+	public ResponseEntity<Object> getpacakgelist(@RequestParam("dealerid") String dealerid , @RequestParam("categoryid") String categoryid) {		
+		Map<String,Object> details = dealerhomeservice.getpackagelist(dealerid, categoryid);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	 }
+	
+	
+	@GetMapping("/getaddonlist")
+	public ResponseEntity<Object> getvehicleaddonlist(@RequestParam("dealerid") String dealerid,@RequestParam("categoryid") String categoryid) {		
+		Map<String,Object> details = dealerhomeservice.getaddonslist(dealerid,categoryid);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	 }
+	
+	
+	@PostMapping("/updatesalesdetails")
+	public ResponseEntity<Object>updatesalesdetails(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException{
+		dealerhomeservice.addsalesdetails(dto);	
+		 Map<String, String> map = new HashMap<>();
+	        map.put("message", "Updated successfully.");		
+		return com.autobrixusedcar.dealer.utils.Response.success(map);
+		
+	}
 	
 }
 

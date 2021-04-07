@@ -1,8 +1,12 @@
 package com.autobrixusedcar.dealer.dtos;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.data.repository.query.Param;
 
 public class DealerAddVehicleRequestDTO {
+
 	private String vehicle_make;
 	private String vehicle_model;
 	private String fuel_type;
@@ -10,10 +14,6 @@ public class DealerAddVehicleRequestDTO {
 	private String manfufacturing_year;
 	
 	private String car_type;
-	
-	
-	
-	
 	private String saleid;
 	private String actualamount;
 	private String discountamount;
@@ -25,6 +25,192 @@ public class DealerAddVehicleRequestDTO {
 	private String customername;
 	private String customerno;
 	
+	private String model_id;
+
+	private String ownership_id;
+	private String insurance_validity;
+	private String about_car;
+	private String status_id;
+	private String insurance_type;
+	private String searchtext;
+	private String odometer;
+	private String vin_number;
+	private String vendor_id;
+	private String employee_name;
+	private String phone_no;
+	private String employee_image;
+	private String category_id;
+	private String d_package_id;
+	private String is_warranty;
+	private String user_id;
+	private String add_on_id;
+	private String final_discount;
+	private String after_discount;
+	private String tax_amount;
+	private String payment_option;
+	private String follow_up_on;
+	private String payment_mode_id;
+
+	public List<Map<String, String>> getAddonid() {
+		return addonid;
+	}
+	public void setAddonid(List<Map<String, String>> addonid) {
+		this.addonid = addonid;
+	}
+	private String status;
+	private String order_id;
+	private String payment_link;
+	private String reference_id;
+	private List<Map<String,String>>addonid;
+	
+	public String getFinal_discount() {
+		return final_discount;
+	}
+	public void setFinal_discount(String final_discount) {
+		this.final_discount = final_discount;
+	}
+	public String getAfter_discount() {
+		return after_discount;
+	}
+	public void setAfter_discount(String after_discount) {
+		this.after_discount = after_discount;
+	}
+	public String getTax_amount() {
+		return tax_amount;
+	}
+	public void setTax_amount(String tax_amount) {
+		this.tax_amount = tax_amount;
+	}
+	public String getPayment_option() {
+		return payment_option;
+	}
+	public void setPayment_option(String payment_option) {
+		this.payment_option = payment_option;
+	}
+	public String getFollow_up_on() {
+		return follow_up_on;
+	}
+	public void setFollow_up_on(String follow_up_on) {
+		this.follow_up_on = follow_up_on;
+	}
+	public String getPayment_mode_id() {
+		return payment_mode_id;
+	}
+	public void setPayment_mode_id(String payment_mode_id) {
+		this.payment_mode_id = payment_mode_id;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getOrder_id() {
+		return order_id;
+	}
+	public void setOrder_id(String order_id) {
+		this.order_id = order_id;
+	}
+	public String getPayment_link() {
+		return payment_link;
+	}
+	public void setPayment_link(String payment_link) {
+		this.payment_link = payment_link;
+	}
+	public String getReference_id() {
+		return reference_id;
+	}
+	public void setReference_id(String reference_id) {
+		this.reference_id = reference_id;
+	}
+	public String getIs_warranty() {
+		return is_warranty;
+	}
+	public void setIs_warranty(String is_warranty) {
+		this.is_warranty = is_warranty;
+	}
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	public String getAdd_on_id() {
+		return add_on_id;
+	}
+	public void setAdd_on_id(String add_on_id) {
+		this.add_on_id = add_on_id;
+	}
+	public String getCategory_id() {
+		return category_id;
+	}
+	public void setCategory_id(String category_id) {
+		this.category_id = category_id;
+	}
+	public String getD_package_id() {
+		return d_package_id;
+	}
+	public void setD_package_id(String d_package_id) {
+		this.d_package_id = d_package_id;
+	}
+	public String getSearchtext() {
+		return searchtext;
+	}
+	public void setSearchtext(String searchtext) {
+		this.searchtext = searchtext;
+	}
+	public String getInsurance_type() {
+		return insurance_type;
+	}
+	public void setInsurance_type(String insurance_type) {
+		this.insurance_type = insurance_type;
+	}
+	private List<Map<String, Object>> imagesArr;
+	
+	private String dealer_id;
+	
+	public String getDealer_id() {
+		return dealer_id;
+	}
+	public void setDealer_id(String dealer_id) {
+		this.dealer_id = dealer_id;
+	}
+	public List<Map<String, Object>> getImagesArr() {
+		return imagesArr;
+	}
+	public void setImagesArr(List<Map<String, Object>> imagesArr) {
+		this.imagesArr = imagesArr;
+	}
+	public String getStatus_id() {
+		return status_id;
+	}
+	public void setStatus_id(String status_id) {
+		this.status_id = status_id;
+	}
+	public String getModel_id() {
+		return model_id;
+	}
+	public void setModel_id(String model_id) {
+		this.model_id = model_id;
+	}
+	public String getOwnership_id() {
+		return ownership_id;
+	}
+	public void setOwnership_id(String ownership_id) {
+		this.ownership_id = ownership_id;
+	}
+	public String getInsurance_validity() {
+		return insurance_validity;
+	}
+	public void setInsurance_validity(String insurance_validity) {
+		this.insurance_validity = insurance_validity;
+	}
+	public String getAbout_car() {
+		return about_car;
+	}
+	public void setAbout_car(String about_car) {
+		this.about_car = about_car;
+	}
 	
 	
 	public String getCustomername() {
@@ -141,12 +327,7 @@ public class DealerAddVehicleRequestDTO {
 	public void setVendor_id(String vendor_id) {
 		this.vendor_id = vendor_id;
 	}
-	private String odometer;
-	private String vin_number;
-	private String vendor_id;
-	private String employee_name;
-	private String phone_no;
-	private String employee_image;
+
 	public String getEmployee_name() {
 		return employee_name;
 	}
@@ -165,9 +346,6 @@ public class DealerAddVehicleRequestDTO {
 	public void setEmployee_image(String employee_image) {
 		this.employee_image = employee_image;
 	}
-
-	
-	
 
 }
 
