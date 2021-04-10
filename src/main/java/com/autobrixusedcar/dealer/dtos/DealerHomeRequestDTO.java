@@ -1,6 +1,8 @@
 package com.autobrixusedcar.dealer.dtos;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 public class DealerHomeRequestDTO {	
 	
@@ -37,10 +39,6 @@ public class DealerHomeRequestDTO {
 	private String typeofacc;
 	
 
-	
-	
-	
-	
 	public String getFromDate() {
 		return fromDate;
 	}
