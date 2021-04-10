@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.autobrixusedcar.dealer.dtos.soldData;
 import com.autobrixusedcar.dealer.entities.BaseEntity;
 
 public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
@@ -474,6 +475,142 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 				 @Param("reference_id")String reference_id
 				
 			 );
+	     
+	     @Query(value = "select id,title,description1,description2,coupon_code,coupon_image,\n" + 
+	     		"	offer_category,offer_value,offer_validation,offer_validation_description \n" + 
+	     		"from uci_dealer_wise_offer_tbl\n" + 
+	     		"where dealer_id=:dealerid and is_active='Y'\n" + 
+	     		"and Date(now()) between Date(valid_from) and Date(valid_to);\n" + 
+	     		"", nativeQuery = true)
+	      List<Map<String,Object>> offer_list(@Param("dealerid")Integer dealerid);
+	     
+	     
+	     @Query(value = "select ucav.customer_name,ucav.phone_no,uvomt.name as ownership \n" + 
+	     		"	from used_car_add_vehicle ucav\n" + 
+	     		"	Inner Join uci_vehicle_ownership_master_tbl uvomt on uvomt.id=ucav.ownership_id\n" + 
+	     		"	where ucav.vehicle_id=:vehicle_id and ucav.is_active='Y'\n" + 
+	     		";\n" + 
+		     		"", nativeQuery = true)
+		      Map<String,Object> checkout_customerdetails(@Param("vehicle_id")Integer vehicle_id);
+	     
+	     
+	     @Query(value = "select umpmt.name as main_package_name,date_format(ucpmt.valid_from, \"%d/%m/%y\") as valid_from,\n" + 
+	     		"        date_format(ucpmt.valid_to, \"%d/%m/%y\") as valid_to,\n" + 
+	     		"        udmpmt.actual_price,\n" + 
+	     		"        udmpmt.final_discount,udmpmt.after_discount,udmpmt.tax_amount,udmpmt.final_amount\n" + 
+	     		"		from uci_customer_package_mapping_tbl ucpmt\n" + 
+	     		"		Inner Join uci_dealer_main_package_mapping_tbl udmpmt on udmpmt.d_package_id=ucpmt.d_package_id\n" + 
+	     		"			and udmpmt.is_active='Y'\n" + 
+	     		"		Inner Join uci_main_package_master_tbl umpmt on umpmt.main_package_id=udmpmt.main_package_id\n" + 
+	     		"		Where ucpmt.vehicle_id=:vehicle_id and ucpmt.is_active='Y'\n" + 
+	     		"		group by ucpmt.vehicle_id ;\n" + 
+		     		"", nativeQuery = true)
+		      Map<String,Object> checkout_packdetails(@Param("vehicle_id")Integer vehicle_id);
+	     
+	     
+	     @Query(value = "Select uvaot.id,uaomt.name,uvaot.actual_price,uvaot.final_discount,uvaot.after_discount,\n" + 
+	     		"		uvaot.tax_amount,uvaot.final_amount,'N' as is_warranty,\n" + 
+	     		"        date_format(uvaot.valid_from, \"%d/%m/%y\") as valid_from,\n" + 
+	     		"        date_format(uvaot.valid_to, \"%d/%m/%y\") as valid_to\n" + 
+	     		"		From uci_vehicle_add_ons_tbl uvaot\n" + 
+	     		"		Inner Join uci_add_ons_package_price_mapping_tbl uaoppmt on uaoppmt.id=uvaot.add_on_price_id\n" + 
+	     		"		Inner Join uci_add_ons_master_tbl uaomt on uaomt.id=uaoppmt.add_on_id\n" + 
+	     		"		Where uvaot.is_active='Y'\n" + 
+	     		"		and Date(now()) between Date(uvaot.valid_from) and Date(uvaot.valid_to)\n" + 
+	     		"		and uvaot.vehicle_id=:vehicle_id\n" + 
+	     		"		UNION ALL\n" + 
+	     		"		select ucwpmt.id,uwpmt.name,udwpmt.actual_price,udwpmt.final_discount,udwpmt.after_discount,\n" + 
+	     		"		udwpmt.tax_amount,udwpmt.final_amount,'Y' as is_warranty,\n" + 
+	     		"        date_format(ucwpmt.valid_from, \"%d/%m/%y\") as valid_from,\n" + 
+	     		"        date_format(ucwpmt.valid_to, \"%d/%m/%y\") as valid_to\n" + 
+	     		"		From uci_customer_warranty_package_mapping_tbl ucwpmt\n" + 
+	     		"		Inner Join uci_dealer_warranty_package_mapping_tbl udwpmt on udwpmt.dealer_id=ucwpmt.dealer_id\n" + 
+	     		"			and udwpmt.id=ucwpmt.dwp_package_id and udwpmt.is_active='Y'\n" + 
+	     		"		Inner Join uci_warranty_package_price_mapping_tbl uwppmt on uwppmt.id=udwpmt.wp_package_id\n" + 
+	     		"		Inner Join uci_warranty_package_master_tbl uwpmt on uwpmt.id=uwppmt.w_package_id\n" + 
+	     		"		Where ucwpmt.is_active='Y'\n" + 
+	     		"		and Date(now()) between Date(ucwpmt.valid_from) and Date(ucwpmt.valid_to)\n" + 
+	     		"		and ucwpmt.vehicle_id=:vehicle_id ;\n" + 
+		     		"", nativeQuery = true)
+		      List<Map<String,Object>> checkout_addon_list(@Param("vehicle_id")Integer vehicle_id);
+	     
+	     
+	     @Query(value = "select count(udwot.id) as no_of_offers_available\n" + 
+	     		"		from uci_dealer_wise_offer_tbl udwot\n" + 
+	     		"        where udwot.is_active='Y'\n" + 
+	     		"        and Date(udwot.created_on) between Date(udwot.valid_from) and Date(udwot.valid_to)\n" + 
+	     		"        and udwot.dealer_id=:dealerid ;", nativeQuery = true)
+			      Map<String,Object> checkout_couponcount(@Param("dealerid")Integer dealerid);
+	     
+	     
+	     @Query(value = "call uci_get_vehicle_prices(:vehicle_id,:coupon_id,:couponcode);\n" + 
+		     		"", nativeQuery = true)
+		      List<Map<String,Object>> checkout_price_list(@Param("vehicle_id")Integer vehicle_id,@Param("coupon_id")Integer coupon_id,@Param("couponcode")String couponcode);
+	     
+	     @Query(value = "call uci_get_vehicle_prices_for_payment_link(:vehicle_id,:coupon_id,:couponcode);\n" + 
+		     		"", nativeQuery = true)
+		      Map<String,Object> checkout_payment_object(@Param("vehicle_id")Integer vehicle_id,@Param("coupon_id")Integer coupon_id,@Param("couponcode")String couponcode);
+	     
+	     @Modifying(flushAutomatically = true)
+	  	 @Transactional
+	  	 @Query(value = "call uci_complete_payment(:vehicle_id,:coupon_id,:couponcode);\n" + 
+		     		"", nativeQuery = true)
+	  	 void complete_payment_couponupdate(@Param("vehicle_id")Integer vehicle_id,
+	  			@Param("coupon_id")Integer coupon_id,
+	  			@Param("couponcode")String couponcode);
+	     
+	     
+	     @Modifying(flushAutomatically = true)
+	  	 @Transactional
+		 @Query(value="call uci_insert_payment_details(:user_id,:uci_vehicle_id,:actual_amount,:final_discount,:after_discount,:tax_amount,:final_amount,:payment_option,:follow_up_on,:payment_mode_id,:status,:order_id,:payment_link,:reference_id);",nativeQuery = true)
+	    Integer complete_payment_status(
+	  			 @Param("user_id")Integer user_id,
+	  			 @Param("uci_vehicle_id")Integer uci_vehicle_id,
+	  			 @Param("actual_amount")Double actual_amount,
+	  			 @Param("final_discount")Double final_discount,
+	  			 @Param("after_discount")Double after_discount,
+	  			 @Param("tax_amount")Double tax_amount,
+	  			 @Param("final_amount")Double final_amount,
+	  			 @Param("payment_option")String payment_option,
+	  			 @Param("follow_up_on")String follow_up_on,
+	  			 @Param("payment_mode_id")String payment_mode_id,
+	  			@Param("status")String status,
+	  			@Param("order_id")String order_id,
+	  			@Param("payment_link")String payment_link,
+	  			@Param("reference_id")String reference_id
+	  			 
+	  			     );
 		 
 
+	     
+	     @Query(value = "select vendor_name,owner_name,phone_no,alternative_no,email_id,\n" + 
+	     		"	location,landmark,city,state,pincode,latitude,longitude,dealer_logo \n" + 
+	     		"from car_vendor_admin_master_tbl\n" + 
+	     		"Where is_active='Y' and vendor_admin_id=:dealerid\n" + 
+	     		" ;", nativeQuery = true)
+		      Map<String,Object> profile_details(@Param("dealerid")Integer dealerid);
+	     
+	     
+	     @Query(value = "select email_id,phone_no \n" + 
+	     		"from uci_support_master_tbl\n" + 
+	     		"where is_active='Y' limit 1\n" +
+		     		" ;", nativeQuery = true)
+			      Map<String,Object> help_support_details();
+	     
+	     
+	     
+	     @Query(value = "call uci_get_sold_vehicles(:dealerid,:month,:year);\n" + 
+		     		"", nativeQuery = true)
+	     List<soldData> sold_vehicle_list(@Param("dealerid")Integer dealerid,@Param("month")String month,@Param("year")String year);
+	     
+	     @Query(value = "call uci_get_vehicle_package_and_add_ons(:vehicle_id);\n" + 
+		     		"", nativeQuery = true)
+	     List<soldData> sold_vehicle_packaddonlist(@Param("vehicle_id")Integer vehicle_id);
+	     
+	     @Query(value = "call uci_get_package_and_add_ons_activities(:vehicle_id,:id,:item_type);\n" + 
+		     		"", nativeQuery = true)
+	     List<soldData> sold_vehicle_includes(@Param("vehicle_id")Integer vehicle_id,@Param("id")Integer id,@Param("item_type")String item_type);
+	     
+     
+	     
 }

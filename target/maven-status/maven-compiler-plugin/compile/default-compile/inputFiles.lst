@@ -15,6 +15,7 @@
 /Users/apple/Documents/Java_project/DealerProject/Dealer/src/main/java/com/autobrixusedcar/dealer/repositories/DealerHomeRepository.java
 /Users/apple/Documents/Java_project/DealerProject/Dealer/src/main/java/com/autobrixusedcar/dealer/DealerApplication.java
 /Users/apple/Documents/Java_project/DealerProject/Dealer/src/main/java/com/autobrixusedcar/dealer/Controllers/loginController.java
+/Users/apple/Documents/Java_project/DealerProject/Dealer/src/main/java/com/autobrixusedcar/dealer/dtos/soldData.java
 /Users/apple/Documents/Java_project/DealerProject/Dealer/src/main/java/com/autobrixusedcar/dealer/repositories/OtpRepository.java
 /Users/apple/Documents/Java_project/DealerProject/Dealer/src/main/java/com/autobrixusedcar/dealer/services/SalesHomeServiceImpl.java
 /Users/apple/Documents/Java_project/DealerProject/Dealer/src/main/java/com/autobrixusedcar/dealer/services/JPAException.java

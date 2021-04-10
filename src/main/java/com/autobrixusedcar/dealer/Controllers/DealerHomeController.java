@@ -259,5 +259,50 @@ public class DealerHomeController {
 		
 	}
 	
+	
+	
+	@GetMapping("/getcheckoutdetails")
+	public ResponseEntity<Object> getcheckoutdetails(@RequestParam("dealerid") String dealerid,@RequestParam("vehicle_id") String vehicle_id,@RequestParam("coupon_id") String coupon_id,@RequestParam("couponcode") String couponcode) {		
+		Map<String,Object> details = dealerhomeservice.getcheckoutdetails(dealerid, vehicle_id, coupon_id, couponcode);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	 }
+	
+	@PostMapping("/completepayment")
+	public ResponseEntity<Object>completepayment(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException{
+	
+		Map<String,Object> details = dealerhomeservice.completepayment(dto);
+
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+
+		
+	}
+	
+	@GetMapping("/getofferlist")
+	public ResponseEntity<Object> getvofferlist(@RequestParam("dealerid") String dealerid) {		
+		Map<String,Object> details = dealerhomeservice.getofferlist(dealerid);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	 }
+	
+	
+	@GetMapping("/getprofiledata")
+	public ResponseEntity<Object> getprofiledata(@RequestParam("dealerid") String dealerid) {		
+		Map<String,Object> details = dealerhomeservice.getprofiledata(dealerid);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	 }
+	
+	
+	@GetMapping("/gethelpsupportdata")
+	public ResponseEntity<Object> gethelpsupportdata() {		
+		Map<String,Object> details = dealerhomeservice.gethelpsupportdata();
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	 }
+	
+	@GetMapping("/getsoldvehiclelist")
+	public ResponseEntity<Object> getsoldvehiclelist(@RequestParam("dealerid") String dealerid,@RequestParam("month") String month,@RequestParam("year") String year) {		
+		Map<String,Object> details = dealerhomeservice.getsoldvehicllist(dealerid, month, year);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	 }
+	
 }
+
 

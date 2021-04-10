@@ -84,7 +84,7 @@ public class loginController {
 
 	otpr.save(otp);
 		
-	String msg = "Your OTP is "+Otp+". OTP is confidential for security reasons. Please don't share this OTP with anyone.";
+	String msg = "Your OTP is "+Otp+". OTP is confidential for security reasons. Please don't share this OTP with anyone. Team AutoBrix.";
 	
 	System.out.print(msg);
 

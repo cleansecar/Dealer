@@ -26,7 +26,21 @@ public class DealerAddVehicleRequestDTO {
 	private String customerno;
 	
 	private String model_id;
+	private String couponid;
+	private String couponcode;
 
+	public String getCouponid() {
+		return couponid;
+	}
+	public void setCouponid(String couponid) {
+		this.couponid = couponid;
+	}
+	public String getCouponcode() {
+		return couponcode;
+	}
+	public void setCouponcode(String couponcode) {
+		this.couponcode = couponcode;
+	}
 	private String ownership_id;
 	private String insurance_validity;
 	private String about_car;

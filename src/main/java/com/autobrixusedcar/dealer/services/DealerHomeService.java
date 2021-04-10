@@ -34,7 +34,8 @@ public interface DealerHomeService {
 	Map<String, Object> getdealerallsaleslist(String employeeid);
 	
 	Map<String, Object> getenquirylist(String dealerid, String vehicleid);
-
+	
+	Map<String, Object> getofferlist(String dealerid);
 	
 	Map<String, Object> getvehicleimagelist(String dealerid, String vehicleid);
 	
@@ -43,7 +44,9 @@ public interface DealerHomeService {
 	Map<String, Object> getaddonslist(String dealerid,String categoryid);
 	
 	Map<String, Object> getcommisionlist(String employeeid);
-	
+	Map<String, Object> getcheckoutdetails(String dealerid, String vehicle_id, String coupon_id, String couponcode);
+	Map<String, Object> getprofiledata(String dealerid);
+	Map<String, Object> gethelpsupportdata();
 
 	Map<String, Object> getimagelist();
 	
@@ -54,8 +57,11 @@ public interface DealerHomeService {
 	Map<String, Object> getvehiclstatuslist();
 	
 	void addsalesdetails(DealerAddVehicleRequestDTO dto) throws JPAException;
+	
+	Map<String, Object>completepayment(DealerAddVehicleRequestDTO dto) throws JPAException;
 
-	
-	
+	Map<String, Object> getsoldvehicllist(String dealerid, String month, String year);
+
+
 
 }
