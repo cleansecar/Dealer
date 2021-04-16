@@ -298,10 +298,19 @@ public class DealerHomeController {
 	 }
 	
 	@GetMapping("/getsoldvehiclelist")
-	public ResponseEntity<Object> getsoldvehiclelist(@RequestParam("dealerid") String dealerid,@RequestParam("month") String month,@RequestParam("year") String year) {		
-		Map<String,Object> details = dealerhomeservice.getsoldvehicllist(dealerid, month, year);
+	public ResponseEntity<Object> getsoldvehiclelist(@RequestParam("dealerid") String dealerid,@RequestParam("month") String month,@RequestParam("year") String year,@RequestParam("search") String search) {		
+		Map<String,Object> details = dealerhomeservice.getsoldvehicllist(dealerid, month, year,search);
 		return com.autobrixusedcar.dealer.utils.Response.success(details);
 	 }
+	
+	
+	@GetMapping("/getsharecategorylist")
+	public ResponseEntity<Object> getsharecategorylist(@RequestParam("vehicle_id") String vehicle_id) {		
+		Map<String,Object> details = dealerhomeservice.getsharecategorylist(vehicle_id);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+		
+	
+	}
 	
 }
 

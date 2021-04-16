@@ -52,6 +52,13 @@ public class DealerAddVehicleRequestDTO {
 	private String vendor_id;
 	private String employee_name;
 	private String phone_no;
+	public String getActual_price() {
+		return actual_price;
+	}
+	public void setActual_price(String actual_price) {
+		this.actual_price = actual_price;
+	}
+
 	private String employee_image;
 	private String category_id;
 	private String d_package_id;
@@ -64,6 +71,21 @@ public class DealerAddVehicleRequestDTO {
 	private String payment_option;
 	private String follow_up_on;
 	private String payment_mode_id;
+	private String actual_price;
+	private String rc_front_image_url;
+	public String getRc_front_image_url() {
+		return rc_front_image_url;
+	}
+	public void setRc_front_image_url(String rc_front_image_url) {
+		this.rc_front_image_url = rc_front_image_url;
+	}
+	public String getRc_rear_image_url() {
+		return rc_rear_image_url;
+	}
+	public void setRc_rear_image_url(String rc_rear_image_url) {
+		this.rc_rear_image_url = rc_rear_image_url;
+	}
+	private String rc_rear_image_url;
 
 	public List<Map<String, String>> getAddonid() {
 		return addonid;

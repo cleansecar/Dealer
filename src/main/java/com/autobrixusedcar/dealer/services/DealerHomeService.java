@@ -60,8 +60,9 @@ public interface DealerHomeService {
 	
 	Map<String, Object>completepayment(DealerAddVehicleRequestDTO dto) throws JPAException;
 
-	Map<String, Object> getsoldvehicllist(String dealerid, String month, String year);
+	Map<String, Object> getsoldvehicllist(String dealerid, String month, String year,String search);
 
-
+	
+	Map<String, Object> getsharecategorylist(String vehicle_id);
 
 }

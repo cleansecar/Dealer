@@ -79,7 +79,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 
 	 @Modifying(flushAutomatically = true)
 	 @Transactional
-	 @Query(value ="call uci_add_vehicle(?,?,?,?,?,?,?,?,?,?,?,?,?);",nativeQuery =true)
+	 @Query(value ="call uci_add_vehicle(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",nativeQuery =true)
 	 Integer insert_uci_addvehicle(
 			 @Param("model_id")Integer model_id,
 			 @Param("vehicle_make")String vehicle_make,
@@ -93,8 +93,12 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			 @Param("insurance_validity")String insurance_validity,
 			 @Param("about_car")String about_car,
              @Param("status_id")Integer status_id,
-             @Param("insurance_type")String insurance_type
-			 );
+             @Param("insurance_type")String insurance_type,
+             @Param("actual_price")Double actual_price,
+             @Param("'rc_front'")String rc_front,
+             @Param("'rc_rear'")String rc_rear
+             
+             );
 	 
      @Modifying(flushAutomatically = true)
 	 @Transactional
@@ -252,7 +256,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 
 	 @Modifying(flushAutomatically = true)
 	 @Transactional
-	 @Query(value="Update used_car_add_vehicle set model_id=:model_id,vehicle_make=:vehicle_make,vehicle_model=:vehicle_model,fuel_type=:fuel_type,vehicle_no=:vehicle_no,manufacturing_year=:manufacturing_year,odometer=:odometer,dealer_id=:vendor_id,ownership_id=:ownership_id,insurance_validity=:insurance_validity,about_car=:about_car,status_id=:status_id,insurance_type=:insurance_type,user_id=null,customer_name=null,phone_no=null,customer_address=null where vehicle_id=:vehicle_id and is_active='Y';",nativeQuery = true)
+	 @Query(value="Update used_car_add_vehicle set model_id=:model_id,vehicle_make=:vehicle_make,vehicle_model=:vehicle_model,fuel_type=:fuel_type,vehicle_no=:vehicle_no,manufacturing_year=:manufacturing_year,odometer=:odometer,dealer_id=:vendor_id,ownership_id=:ownership_id,insurance_validity=:insurance_validity,about_car=:about_car,status_id=:status_id,insurance_type=:insurance_type,user_id=null,customer_name=null,phone_no=null,customer_address=null,actual_price=:actual_price,rc_front=:rc_front,rc_rear=:rc_rear where vehicle_id=:vehicle_id and is_active='Y';",nativeQuery = true)
 	 void update_existing_vehicle(
 			 @Param("model_id")Integer model_id,
 			 @Param("vehicle_make")String vehicle_make,
@@ -267,14 +271,17 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			 @Param("about_car")String about_car,
 			 @Param("status_id")Integer status_id,
 			 @Param("insurance_type")String insurance_type,
-			 @Param("vehicle_id")Integer vehicle_id
+			 @Param("vehicle_id")Integer vehicle_id,
+			 @Param("actual_price")Double actual_price,
+			 @Param("rc_front")String rc_front,
+			 @Param("rc_rear")String rc_rear
 			 
-			 );
+		 );
 	 
 	 
 	 @Modifying(flushAutomatically = true)
 	 @Transactional
-	 @Query(value ="INSERT INTO uci_vehicle_flow_tbl (vehicle_id,model_id,dealer_id,fuel_type,vehicle_no,manufacturing_year,odometer,ownership_id,insurance_validity,about_car,status_id,insurance_type) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);",nativeQuery =true)
+	 @Query(value ="INSERT INTO uci_vehicle_flow_tbl (vehicle_id,model_id,dealer_id,fuel_type,vehicle_no,manufacturing_year,odometer,ownership_id,insurance_validity,about_car,status_id,insurance_type,actual_price,rc_front,rc_rear) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",nativeQuery =true)
 	 Integer insert_uci_flow_addvehicle(
 			 @Param("vehicle_id")Integer vehicle_id,
 			 @Param("model_id")Integer model_id,
@@ -287,7 +294,10 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			 @Param("insurance_validity")String insurance_validity,
 			 @Param("about_car")String about_car,
 			 @Param("status_id")Integer status_id,
-             @Param("insurance_type")String insurance_type
+             @Param("insurance_type")String insurance_type,
+             @Param("actual_price")Double actual_price,
+             @Param("rc_front")String rc_front,
+			 @Param("rc_rear")String rc_rear
 			 );
 	 
 	 
@@ -403,9 +413,9 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
        List<Map<String,Object>> Addon_list(@Param("dealerid")Integer dealerid,@Param("categoryid")Integer categoryid);
      
      
-     
-     @Modifying(flushAutomatically = true)
-  	 @Transactional
+//     
+//     @Modifying(flushAutomatically = true)
+//  	 @Transactional
 	 @Query(value="call uci_create_customer(:customer_name,:phone_no,:comments,:vehicle_id,:category_id,:dealer_id,:d_package_id);",nativeQuery = true)
     Integer create_customer(
   			 @Param("dealer_id")Integer dealer_id,
@@ -560,8 +570,8 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	  			@Param("couponcode")String couponcode);
 	     
 	     
-	     @Modifying(flushAutomatically = true)
-	  	 @Transactional
+//	     @Modifying(flushAutomatically = true)
+//	  	 @Transactional
 		 @Query(value="call uci_insert_payment_details(:user_id,:uci_vehicle_id,:actual_amount,:final_discount,:after_discount,:tax_amount,:final_amount,:payment_option,:follow_up_on,:payment_mode_id,:status,:order_id,:payment_link,:reference_id);",nativeQuery = true)
 	    Integer complete_payment_status(
 	  			 @Param("user_id")Integer user_id,
@@ -583,10 +593,10 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 		 
 
 	     
-	     @Query(value = "select vendor_name,owner_name,phone_no,alternative_no,email_id,\n" + 
-	     		"	location,landmark,city,state,pincode,latitude,longitude,dealer_logo \n" + 
+	     @Query(value = "select ifnull(vendor_name,'') vendor_name,ifnull(owner_name,'')owner_name,ifnull(phone_no,'')phone_no,ifnull(alternative_no,'')alternative_no,ifnull(email_id,'')email_id,\n" + 
+	     		"	ifnull(location,'')location,ifnull(landmark,'')landmark,ifnull(city,'')city,ifnull(state,'')state,ifnull(pincode,'')pincode,ifnull(latitude,'')latitude,ifnull(longitude,'')longitude,ifnull(dealer_logo,'')dealer_logo \n" + 
 	     		"from car_vendor_admin_master_tbl\n" + 
-	     		"Where is_active='Y' and vendor_admin_id=:dealerid\n" + 
+	     		"Where is_active='Y' and vendor_admin_id=:dealerid " + 
 	     		" ;", nativeQuery = true)
 		      Map<String,Object> profile_details(@Param("dealerid")Integer dealerid);
 	     
@@ -599,9 +609,9 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	     
 	     
 	     
-	     @Query(value = "call uci_get_sold_vehicles(:dealerid,:month,:year);\n" + 
+	     @Query(value = "call uci_get_sold_vehicles(:dealerid,:month,:year,:search);\n" + 
 		     		"", nativeQuery = true)
-	     List<soldData> sold_vehicle_list(@Param("dealerid")Integer dealerid,@Param("month")String month,@Param("year")String year);
+	     List<soldData> sold_vehicle_list(@Param("dealerid")Integer dealerid,@Param("month")String month,@Param("year")String year,@Param("search")String search);
 	     
 	     @Query(value = "call uci_get_vehicle_package_and_add_ons(:vehicle_id);\n" + 
 		     		"", nativeQuery = true)
@@ -611,6 +621,8 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 		     		"", nativeQuery = true)
 	     List<soldData> sold_vehicle_includes(@Param("vehicle_id")Integer vehicle_id,@Param("id")Integer id,@Param("item_type")String item_type);
 	     
-     
+	     @Query(value = "call uci_vehicle_info_category_list(:vehicle_id);\n" + 
+		     		"", nativeQuery = true)
+	     List<Map<String,Object>> share_category_list(@Param("vehicle_id")Integer vehicle_id);
 	     
 }
