@@ -79,7 +79,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 
 	 @Modifying(flushAutomatically = true)
 	 @Transactional
-	 @Query(value ="call uci_add_vehicle(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",nativeQuery =true)
+	 @Query(value ="call uci_add_vehicle(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",nativeQuery =true)
 	 Integer insert_uci_addvehicle(
 			 @Param("model_id")Integer model_id,
 			 @Param("vehicle_make")String vehicle_make,
@@ -90,13 +90,41 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			 @Param("odometer")String odometer,
 			 @Param("vendor_id")Integer vendor_id,
 			 @Param("ownership_id")Integer ownership_id,
+			 @Param("ownership")String ownership,
 			 @Param("insurance_validity")String insurance_validity,
 			 @Param("about_car")String about_car,
              @Param("status_id")Integer status_id,
              @Param("insurance_type")String insurance_type,
              @Param("actual_price")Double actual_price,
              @Param("'rc_front'")String rc_front,
-             @Param("'rc_rear'")String rc_rear
+             @Param("'rc_rear'")String rc_rear,
+			 @Param("transmission_type")String transmission_type ,
+			 @Param("color")String color,
+			 @Param("engine_no")String engine_no,
+			 @Param("chassis_no")String chassis_no,
+			 @Param("insurance_provider")String insurance_provider,
+			 @Param("insurance_copy")String insurance_copy,
+			 @Param("rc_transfer")String rc_transfer,
+			 @Param("lifetime_tax_copy")String lifetime_tax_copy,
+			 @Param("lifetime_tax")String lifetime_tax,
+			 @Param("negotiable")String negotiable,
+			 @Param("loan_option")String loan_option,
+			 @Param("video_url")String video_url,
+			 @Param("test_drive")String test_drive,
+			 @Param("test_drive_type")String test_drive_type,
+			 @Param("test_drive_amount")Double test_drive_amount,
+			 @Param("abs")String abs,
+			 @Param("adjustable_external_mirror")String adjustable_external_mirror,
+			 @Param("adjustable_steering")String adjustable_steering,
+			 @Param("air_conditioning")String air_conditioning,
+			 @Param("number_of_airbags")Integer number_of_airbags,
+			 @Param("alloy_wheels")String alloy_wheels,
+			 @Param("lock_system")String lock_system,
+			 @Param("parking_sensors")String parking_sensors,
+			 @Param("power_steering")String power_steering,
+			 @Param("power_windows")String power_windows,
+			 @Param("am_fm_radio")String am_fm_radio,
+			 @Param("usb_compability")String usb_compability
              
              );
 	 
@@ -256,7 +284,38 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 
 	 @Modifying(flushAutomatically = true)
 	 @Transactional
-	 @Query(value="Update used_car_add_vehicle set model_id=:model_id,vehicle_make=:vehicle_make,vehicle_model=:vehicle_model,fuel_type=:fuel_type,vehicle_no=:vehicle_no,manufacturing_year=:manufacturing_year,odometer=:odometer,dealer_id=:vendor_id,ownership_id=:ownership_id,insurance_validity=:insurance_validity,about_car=:about_car,status_id=:status_id,insurance_type=:insurance_type,user_id=null,customer_name=null,phone_no=null,customer_address=null,actual_price=:actual_price,rc_front=:rc_front,rc_rear=:rc_rear where vehicle_id=:vehicle_id and is_active='Y';",nativeQuery = true)
+	 @Query(value="Update used_car_add_vehicle set model_id=:model_id,vehicle_make=:vehicle_make,vehicle_model=:vehicle_model,fuel_type=:fuel_type,vehicle_no=:vehicle_no,"
+	 		+ "manufacturing_year=:manufacturing_year,odometer=:odometer,dealer_id=:vendor_id,ownership_id=:ownership_id,insurance_validity=:insurance_validity,about_car=:about_car,status_id=:status_id,"
+	 		+ "insurance_type=:insurance_type,user_id=null,customer_name=null,phone_no=null,"
+	 		+ "customer_address=null,actual_price=:actual_price,rc_front=:rc_front,rc_rear=:rc_rear , "
+	 		+ "    transmission_type = :transmission_type,\n"
+	 		+ "    color = :color,\n"
+	 		+ "    engine_no = :engine_no,\n"
+	 		+ "    chassis_no = :chassis_no,\n"
+	 		+ "    insurance_provider = :insurance_provider,\n"
+	 		+ "    insurance_copy = :insurance_copy,\n"
+	 		+ "    rc_transfer = :rc_transfer,\n"
+	 		+ "    lifetime_tax_copy = :lifetime_tax_copy,\n"
+	 		+ "    lifetime_tax = :lifetime_tax,\n"
+	 		+ "    negotiable = :negotiable,\n"
+	 		+ "    loan_option = :loan_option,\n"
+	 		+ "    video_url = :video_url,\n"
+	 		+ "    test_drive = :test_drive,\n"
+	 		+ "    test_drive_type = :test_drive_type,\n"
+	 		+ "    test_drive_amount = :test_drive_amount,\n"
+	 		+ "    abs = :abs,\n"
+	 		+ "    adjustable_external_mirror = :adjustable_external_mirror,\n"
+	 		+ "    adjustable_steering = :adjustable_steering,\n"
+	 		+ "    air_conditioning = :air_conditioning,\n"
+	 		+ "    number_of_airbags = :number_of_airbags,\n"
+	 		+ "    alloy_wheels = :alloy_wheels,\n"
+	 		+ "    lock_system = :lock_system,\n"
+	 		+ "    parking_sensors = :parking_sensors,\n"
+	 		+ "    power_steering = :power_steering,\n"
+	 		+ "    power_windows = :power_windows,\n"
+	 		+ "    am_fm_radio = :am_fm_radio,\n"
+	 		+ "    usb_compability = :usb_compability,ownership = :ownership "
+	 		+ "where vehicle_id=:vehicle_id and is_active='Y';",nativeQuery = true)
 	 void update_existing_vehicle(
 			 @Param("model_id")Integer model_id,
 			 @Param("vehicle_make")String vehicle_make,
@@ -274,14 +333,46 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			 @Param("vehicle_id")Integer vehicle_id,
 			 @Param("actual_price")Double actual_price,
 			 @Param("rc_front")String rc_front,
-			 @Param("rc_rear")String rc_rear
+			 @Param("rc_rear")String rc_rear,
+			 @Param("ownership")String ownership,
+			 @Param("transmission_type")String transmission_type ,
+			 @Param("color")String color,
+			 @Param("engine_no")String engine_no,
+			 @Param("chassis_no")String chassis_no,
+			 @Param("insurance_provider")String insurance_provider,
+			 @Param("insurance_copy")String insurance_copy,
+			 @Param("rc_transfer")String rc_transfer,
+			 @Param("lifetime_tax_copy")String lifetime_tax_copy,
+			 @Param("lifetime_tax")String lifetime_tax,
+			 @Param("negotiable")String negotiable,
+			 @Param("loan_option")String loan_option,
+			 @Param("video_url")String video_url,
+			 @Param("test_drive")String test_drive,
+			 @Param("test_drive_type")String test_drive_type,
+			 @Param("test_drive_amount")Double test_drive_amount,
+			 @Param("abs")String abs,
+			 @Param("adjustable_external_mirror")String adjustable_external_mirror,
+			 @Param("adjustable_steering")String adjustable_steering,
+			 @Param("air_conditioning")String air_conditioning,
+			 @Param("number_of_airbags")Integer number_of_airbags,
+			 @Param("alloy_wheels")String alloy_wheels,
+			 @Param("lock_system")String lock_system,
+			 @Param("parking_sensors")String parking_sensors,
+			 @Param("power_steering")String power_steering,
+			 @Param("power_windows")String power_windows,
+			 @Param("am_fm_radio")String am_fm_radio,
+			 @Param("usb_compability")String usb_compability
 			 
 		 );
 	 
 	 
 	 @Modifying(flushAutomatically = true)
 	 @Transactional
-	 @Query(value ="INSERT INTO uci_vehicle_flow_tbl (vehicle_id,model_id,dealer_id,fuel_type,vehicle_no,manufacturing_year,odometer,ownership_id,insurance_validity,about_car,status_id,insurance_type,actual_price,rc_front,rc_rear) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",nativeQuery =true)
+	 @Query(value ="INSERT INTO uci_vehicle_flow_tbl (vehicle_id,model_id,dealer_id,fuel_type,vehicle_no,manufacturing_year,odometer,ownership_id,insurance_validity,about_car,"
+	 		+ "status_id,insurance_type,actual_price,rc_front,rc_rear,transmission_type,color,engine_no,chassis_no,insurance_provider,insurance_copy,rc_transfer,"
+	 		+ "lifetime_tax_copy,lifetime_tax,negotiable,loan_option,video_url,test_drive,test_drive_type,test_drive_amount,"
+	 		+ "abs,adjustable_external_mirror,adjustable_steering,air_conditioning,number_of_airbags,alloy_wheels,lock_system,parking_sensors,"
+	 		+ "power_steering,power_windows,am_fm_radio,usb_compability) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",nativeQuery =true)
 	 Integer insert_uci_flow_addvehicle(
 			 @Param("vehicle_id")Integer vehicle_id,
 			 @Param("model_id")Integer model_id,
@@ -297,7 +388,34 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
              @Param("insurance_type")String insurance_type,
              @Param("actual_price")Double actual_price,
              @Param("rc_front")String rc_front,
-			 @Param("rc_rear")String rc_rear
+			 @Param("rc_rear")String rc_rear,
+			 @Param("transmission_type")String transmission_type ,
+			 @Param("color")String color,
+			 @Param("engine_no")String engine_no,
+			 @Param("chassis_no")String chassis_no,
+			 @Param("insurance_provider")String insurance_provider,
+			 @Param("insurance_copy")String insurance_copy,
+			 @Param("rc_transfer")String rc_transfer,
+			 @Param("lifetime_tax_copy")String lifetime_tax_copy,
+			 @Param("lifetime_tax")String lifetime_tax,
+			 @Param("negotiable")String negotiable,
+			 @Param("loan_option")String loan_option,
+			 @Param("video_url")String video_url,
+			 @Param("test_drive")String test_drive,
+			 @Param("test_drive_type")String test_drive_type,
+			 @Param("test_drive_amount")Double test_drive_amount,
+			 @Param("abs")String abs,
+			 @Param("adjustable_external_mirror")String adjustable_external_mirror,
+			 @Param("adjustable_steering")String adjustable_steering,
+			 @Param("air_conditioning")String air_conditioning,
+			 @Param("number_of_airbags")Integer number_of_airbags,
+			 @Param("alloy_wheels")String alloy_wheels,
+			 @Param("lock_system")String lock_system,
+			 @Param("parking_sensors")String parking_sensors,
+			 @Param("power_steering")String power_steering,
+			 @Param("power_windows")String power_windows,
+			 @Param("am_fm_radio")String am_fm_radio,
+			 @Param("usb_compability")String usb_compability
 			 );
 	 
 	 
