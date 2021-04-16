@@ -197,8 +197,29 @@ public class DealerHomeServiceImpl implements DealerHomeService {
 		Map<String,Object> datalist = dealerhomerepository.checkvehicleexist(dto.getVehicle_no());
 		if(datalist==null||datalist.isEmpty()) {
 			
-			 Integer value=dealerhomerepository.insert_uci_addvehicle(Integer.valueOf(dto.getModel_id()), dto.getVehicle_make(), dto.getVehicle_model(), dto.getFuel_type(), dto.getVehicle_no(), dto.getManfufacturing_year(),dto. getOdometer(),Integer.valueOf(dto.getVendor_id()), dto.getOwnership_id() == null || dto.getOwnership_id() .isEmpty() ? null : Integer.valueOf(dto.getOwnership_id()), dto.getInsurance_validity() == null || dto.getInsurance_validity().isEmpty() ? null : dto.getInsurance_validity(), dto.getAbout_car(),Integer.valueOf(dto.getStatus_id()),dto.getInsurance_type(),dto.getActual_price() == null || dto.getActual_price().isEmpty() ? null : Double.valueOf(dto.getActual_price()),dto.getRc_front_image_url(),dto.getRc_rear_image_url());
-		     dealerhomerepository.insert_uci_flow_addvehicle(value, Integer.valueOf(dto.getModel_id()), Integer.valueOf(dto.getVendor_id()),  dto.getFuel_type(), dto.getVehicle_no(), dto.getManfufacturing_year(), dto. getOdometer(), dto.getOwnership_id() == null || dto.getOwnership_id().isEmpty() ? null : Integer.valueOf(dto.getOwnership_id()), dto.getInsurance_validity() == null || dto.getInsurance_validity().isEmpty() ? null : dto.getInsurance_validity(), dto.getAbout_car(), Integer.valueOf(dto.getStatus_id()), dto.getInsurance_type(),dto.getActual_price() == null || dto.getActual_price().isEmpty() ? null : Double.valueOf(dto.getActual_price()),dto.getRc_front_image_url(),dto.getRc_rear_image_url());
+System.out.print(Double.valueOf(dto.getTest_drive_amount()));
+System.out.print(dto.getTest_drive_amount());
+
+			
+			 Integer value=dealerhomerepository.insert_uci_addvehicle(Integer.valueOf(dto.getModel_id()), dto.getVehicle_make(), dto.getVehicle_model(), dto.getFuel_type(), dto.getVehicle_no(), 
+					 dto.getManfufacturing_year(),dto. getOdometer(),Integer.valueOf(dto.getVendor_id()), dto.getOwnership_id() == null || dto.getOwnership_id() .isEmpty() ? null : Integer.valueOf(dto.getOwnership_id()), dto.getOwnership(),
+							 dto.getInsurance_validity() == null || dto.getInsurance_validity().isEmpty() ? null : dto.getInsurance_validity(), dto.getAbout_car(),Integer.valueOf(dto.getStatus_id()),
+									 dto.getInsurance_type(),dto.getActual_price() == null || dto.getActual_price().isEmpty() ? null : Double.valueOf(dto.getActual_price()),dto.getRc_front_image_url(),dto.getRc_rear_image_url(),
+											 dto.getTransmission_type(),dto.getColor(),dto.getEngine_no(),dto.getChassis_no(),dto.getInsurance_provider(),dto.getInsurance_copy(),dto.getRc_transfer(),
+											 dto.getLifetime_tax_copy(),dto.getLifetime_tax(),dto.getNegotiable(),dto.getLoan_option(),dto.getVideo_url(),dto.getTest_drive(),dto.getTest_drive_type()
+											 ,Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),Integer.valueOf(dto.getNumber_of_airbags()),
+											dto.getAlloy_wheels(),dto.getLock_system(),dto.getParking_sensors(),dto.getPower_steering(),dto.getPower_windows(),dto.getAm_fm_radio(),dto.getUsb_compability());
+			 
+			 
+			 
+		     dealerhomerepository.insert_uci_flow_addvehicle(value, Integer.valueOf(dto.getModel_id()), Integer.valueOf(dto.getVendor_id()),  dto.getFuel_type(), dto.getVehicle_no(), dto.getManfufacturing_year(), dto. getOdometer(), 
+		    		 dto.getOwnership_id() == null || dto.getOwnership_id().isEmpty() ? null : Integer.valueOf(dto.getOwnership_id()), 
+		    				 dto.getInsurance_validity() == null || dto.getInsurance_validity().isEmpty() ? null : dto.getInsurance_validity(), dto.getAbout_car(), Integer.valueOf(dto.getStatus_id()), 
+		    						 dto.getInsurance_type(),dto.getActual_price() == null || dto.getActual_price().isEmpty() ? null : Double.valueOf(dto.getActual_price()),dto.getRc_front_image_url(),
+		    								 dto.getRc_rear_image_url(), dto.getTransmission_type(),dto.getColor(),dto.getEngine_no(),dto.getChassis_no(),dto.getInsurance_provider(),dto.getInsurance_copy(),dto.getRc_transfer(),
+											 dto.getLifetime_tax_copy(),dto.getLifetime_tax(),dto.getNegotiable(),dto.getLoan_option(),dto.getVideo_url(),dto.getTest_drive(),dto.getTest_drive_type()
+											 ,Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),Integer.valueOf(dto.getNumber_of_airbags()),
+											dto.getAlloy_wheels(),dto.getLock_system(),dto.getParking_sensors(),dto.getPower_steering(),dto.getPower_windows(),dto.getAm_fm_radio(),dto.getUsb_compability());
 
 			  List<Map<String,Object>> data = dto.getImagesArr();
 				
@@ -216,9 +237,14 @@ public class DealerHomeServiceImpl implements DealerHomeService {
 
 				
 			}else {
-				
-				dealerhomerepository.update_existing_vehicle(Integer.valueOf(dto.getModel_id()), dto.getVehicle_make(), dto.getVehicle_model(), dto.getFuel_type(), dto.getVehicle_no(), dto.getManfufacturing_year(), dto.getOdometer(), Integer.valueOf(dto.getVendor_id()), dto.getOwnership_id() == null || dto.getOwnership_id().isEmpty() ? null : Integer.valueOf(dto.getOwnership_id()), dto.getInsurance_validity() == null || dto.getInsurance_validity().isEmpty() ? null : dto.getInsurance_validity(), dto.getAbout_car(), Integer.valueOf(dto.getStatus_id()), dto.getInsurance_type(), Integer.valueOf(datalist.get("vehicle_id").toString()),dto.getActual_price() == null || dto.getActual_price().isEmpty() ? null : Double.valueOf(dto.getActual_price()),dto.getRc_front_image_url(),dto.getRc_rear_image_url());
-				
+				dealerhomerepository.update_existing_vehicle(Integer.valueOf(dto.getModel_id()), dto.getVehicle_make(), dto.getVehicle_model(), dto.getFuel_type(), dto.getVehicle_no(), dto.getManfufacturing_year(), dto.getOdometer(), Integer.valueOf(dto.getVendor_id()), 
+						dto.getOwnership_id() == null || dto.getOwnership_id().isEmpty() ? null : Integer.valueOf(dto.getOwnership_id()), dto.getInsurance_validity() == null || dto.getInsurance_validity().isEmpty() ? null : dto.getInsurance_validity(),
+								dto.getAbout_car(), Integer.valueOf(dto.getStatus_id()), dto.getInsurance_type(), Integer.valueOf(datalist.get("vehicle_id").toString()),
+								dto.getActual_price() == null || dto.getActual_price().isEmpty() ? null : Double.valueOf(dto.getActual_price()),dto.getRc_front_image_url(),dto.getRc_rear_image_url(),dto.getOwnership(),
+										 dto.getTransmission_type(),dto.getColor(),dto.getEngine_no(),dto.getChassis_no(),dto.getInsurance_provider(),dto.getInsurance_copy(),dto.getRc_transfer(),
+										 dto.getLifetime_tax_copy(),dto.getLifetime_tax(),dto.getNegotiable(),dto.getLoan_option(),dto.getVideo_url(),dto.getTest_drive(),dto.getTest_drive_type()
+										 ,Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),Integer.valueOf(dto.getNumber_of_airbags()),
+										dto.getAlloy_wheels(),dto.getLock_system(),dto.getParking_sensors(),dto.getPower_steering(),dto.getPower_windows(),dto.getAm_fm_radio(),dto.getUsb_compability());
 			}
 			
 			
