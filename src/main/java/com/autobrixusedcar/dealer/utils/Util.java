@@ -118,7 +118,14 @@ public class Util {
 	   return sb.toString();
 	}
 
-
+	public static String urlString( int len ){
+		final String AB = "abcdefghijklmnopqrstuvwxyz"; 
+		Random rnd = new Random();
+		StringBuilder sb = new StringBuilder( len );
+	   for( int i = 0; i < len; i++ ) 
+	      sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
+	   return sb.toString();
+	}
 	public static String getDay(Date dt1) throws ParseException {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(dt1);

@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.autobrixusedcar.dealer.dtos.DealerAddVehicleRequestDTO;
 import com.autobrixusedcar.dealer.dtos.DealerHomeRequestDTO;
+import com.autobrixusedcar.dealer.dtos.DealerShareRequestDTO;
 import com.autobrixusedcar.dealer.services.DealerHomeService;
 import com.autobrixusedcar.dealer.services.*;
-import com.autobrixusedcar.dealer.utils.*;
 
 @Controller
 @RequestMapping("/dealerHomeservices")
@@ -305,12 +305,50 @@ public class DealerHomeController {
 	
 	
 	@GetMapping("/getsharecategorylist")
-	public ResponseEntity<Object> getsharecategorylist(@RequestParam("vehicle_id") String vehicle_id) {		
-		Map<String,Object> details = dealerhomeservice.getsharecategorylist(vehicle_id);
+	public ResponseEntity<Object> getsharecategorylist(@RequestParam("vehicle_id") String vehicle_id,@RequestParam("dealer_id") String dealer_id) {		
+		Map<String,Object> details = dealerhomeservice.getsharecategorylist(vehicle_id,dealer_id);
 		return com.autobrixusedcar.dealer.utils.Response.success(details);
 		
 	
 	}
+	
+	
+	@GetMapping("/getsharesubcategorylist")
+	public ResponseEntity<Object> getsharesubcategorylist(@RequestParam("vehicle_id") String vehicle_id,@RequestParam("category_id") String category_id,@RequestParam("dealer_id") String dealer_id) {		
+		Map<String,Object> details = dealerhomeservice.getsharesubcategorylist(vehicle_id, category_id,dealer_id);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+		
+	
+	}
+	
+	@GetMapping("/getsupportlist")
+	public ResponseEntity<Object> getsupportlist(@RequestParam("dealerid") String dealerid) {		
+		Map<String,Object> details = dealerhomeservice.getsupportlist(dealerid);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+		
+		
+	
+	}
+	
+	
+	@PostMapping("/updatesharedetails")
+	public ResponseEntity<Object>updatesharedetails(@RequestBody DealerShareRequestDTO dto) throws JPAException{
+		dealerhomeservice.updatesharedetails(dto);	
+		 Map<String, String> map = new HashMap<>();
+	        map.put("message", "Updated successfully.");		
+		return com.autobrixusedcar.dealer.utils.Response.success(map);
+		
+	}
+	
+	@PostMapping("/generatelink")
+	public ResponseEntity<Object> generatelink(@RequestBody DealerShareRequestDTO dto) throws JPAException {		
+		Map<String,Object> details = dealerhomeservice.generatelink(dto);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+		
+		
+	
+	}
+	
 	
 }
 

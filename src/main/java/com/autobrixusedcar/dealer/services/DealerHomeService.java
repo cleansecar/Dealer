@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.autobrixusedcar.dealer.dtos.DealerAddVehicleRequestDTO;
 import com.autobrixusedcar.dealer.dtos.DealerHomeRequestDTO;
+import com.autobrixusedcar.dealer.dtos.DealerShareRequestDTO;
 
 
 public interface DealerHomeService {
@@ -59,10 +60,17 @@ public interface DealerHomeService {
 	void addsalesdetails(DealerAddVehicleRequestDTO dto) throws JPAException;
 	
 	Map<String, Object>completepayment(DealerAddVehicleRequestDTO dto) throws JPAException;
-
-	Map<String, Object> getsoldvehicllist(String dealerid, String month, String year,String search);
+    Map<String, Object> getsoldvehicllist(String dealerid, String month, String year,String search);
 
 	
-	Map<String, Object> getsharecategorylist(String vehicle_id);
+	Map<String, Object> getsharecategorylist(String vehicle_id,String dealer_id);
+	
+
+	Map<String, Object> getsharesubcategorylist(String vehicle_id,String category_id,String dealer_id);
+	
+	Map<String, Object> getsupportlist(String dealerid);
+	
+	void updatesharedetails(DealerShareRequestDTO dto) throws JPAException;
+	Map<String,Object> generatelink(DealerShareRequestDTO dto);
 
 }
