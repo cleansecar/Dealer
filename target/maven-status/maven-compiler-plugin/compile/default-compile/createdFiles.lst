@@ -14,6 +14,7 @@ com/autobrixusedcar/dealer/services/SalesHomeServiceImpl.class
 com/autobrixusedcar/dealer/repositories/DealerHomeRepository.class
 com/autobrixusedcar/dealer/dtos/DealerAddVehicleRequestDTO.class
 com/autobrixusedcar/dealer/repositories/OtpRepository.class
+com/autobrixusedcar/dealer/dtos/DealerShareRequestDTO.class
 com/autobrixusedcar/dealer/ServletInitializer.class
 com/autobrixusedcar/dealer/repositories/LoginRepository.class
 com/autobrixusedcar/dealer/dtos/soldData.class

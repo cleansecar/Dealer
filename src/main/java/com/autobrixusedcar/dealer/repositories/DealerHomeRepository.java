@@ -76,9 +76,9 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			 @Param("car_type")String car_type
 			 );
 	 
-	 
-	 @Modifying(flushAutomatically = true)
-	 @Transactional
+//	 
+//	 @Modifying(flushAutomatically = true)
+//	 @Transactional
 	 @Query(value ="call uci_add_vehicle(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",nativeQuery =true)
 	 Integer insert_uci_addvehicle(
 			 @Param("model_id")Integer model_id,
@@ -739,8 +739,255 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 		     		"", nativeQuery = true)
 	     List<soldData> sold_vehicle_includes(@Param("vehicle_id")Integer vehicle_id,@Param("id")Integer id,@Param("item_type")String item_type);
 	     
-	     @Query(value = "call uci_vehicle_info_category_list(:vehicle_id);\n" + 
+	     @Query(value = "call uci_vehicle_info_category_list(:vehicle_id,:dealer_id);\n" + 
 		     		"", nativeQuery = true)
-	     List<Map<String,Object>> share_category_list(@Param("vehicle_id")Integer vehicle_id);
+	     List<Map<String,Object>> share_category_list(@Param("vehicle_id")Integer vehicle_id,@Param("dealer_id")Integer dealer_id);
+	     
+	     
+	     @Query(value = "call uci_vehicle_info_category_data_points(:vehicle_id,:category_id,:dealer_id);\n" + 
+		     		"", nativeQuery = true)
+	    Map<String,Object> share_subcategory_list(@Param("vehicle_id")Integer vehicle_id,@Param("category_id")Integer category_id,@Param("dealer_id")Integer dealer_id);
+	     
+	     
+	     
+	     @Query(value = "call uci_help_and_support_data((:dealerid);\n" + 
+		     		"", nativeQuery = true)
+	      List<Map<String,Object>> help_support_list(@Param("dealerid")Integer dealerid);
+	     
+	     
+	     @Modifying(flushAutomatically = true)
+		 @Transactional
+		 @Query(value = "call uci_update_vehicle_info_category_wise(:vehicle_id,:dealer_id, :category_id,:odometer,:ownership_id,:ownership,:insurance_validity,:insurance_type,"
+		 		+ ":insurance_provider,:insurance_copy,:engine_no,"
+		 		+ ":chassis_no,:rc_front,:rc_rear,:rc_transfer,:lifetime_tax_copy,:lifetime_tax,"
+		 		+ ":actual_price,:negotiable,:loan_option,:video_url,:test_drive,:test_drive_type,"
+		 		+ ":test_drive_amount,:abs,:adjustable_external_mirror,:adjustable_steering,:air_conditioning,"
+		 		+ ":number_of_airbags,:alloy_wheels,:lock_system,:parking_sensors,:power_steering,"
+		 		+ ":power_windows,:am_fm_radio,:usb_compability,:front_image,:right_image,:left_image,:rear_image,"
+		 		+ ":trunk_image,:dashboard_image,:front_seat_image,:floor_mat_image,:infotainm_image,:odometer_image,"
+		 		+ ":rear_seat_image,:engine_image,:fl_tyre_image,:fr_tyre_image,:rl_tyre_image,:rr_tyre_image);\n" + 
+		     		"", nativeQuery = true)
+		 void update_data_points(
+				 @Param("vehicle_id")Integer vehicle_id,
+				 @Param("dealer_id")Integer dealer_id,
+		         @Param("category_id")Integer category_id,
+                 @Param("odometer")String odometer,
+                 @Param("ownership_id")Integer ownership_id,
+                 @Param("ownership")String ownership,
+                 @Param("insurance_validity")String insurance_validity,
+                 @Param("insurance_type")String insurance_type,
+                 @Param("insurance_provider")String insurance_provider,
+                 @Param("insurance_copy")String insurance_copy,
+                 @Param("engine_no")String engine_no,
+                 @Param("chassis_no")String chassis_no,
+                 @Param("rc_front")String rc_front,
+                 @Param("rc_rear")String rc_rear,
+                 @Param("rc_transfer")String rc_transfer,
+                 @Param("lifetime_tax_copy")String lifetime_tax_copy,
+                 @Param("lifetime_tax")String lifetime_tax,
+                 @Param("actual_price")Double actual_price,
+                 @Param("negotiable")String negotiable,
+                 @Param("loan_option")String loan_option,
+                 @Param("video_url")String video_url,
+                 @Param("test_drive")String test_drive,
+                 @Param("test_drive_type")String test_drive_type,
+                 @Param("test_drive_amount")Double test_drive_amount,
+                 @Param("abs")String abs,
+                 @Param("adjustable_external_mirror")String adjustable_external_mirror,
+                 @Param("adjustable_steering")String adjustable_steering,
+                 @Param("air_conditioning")String air_conditioning,
+                 @Param("number_of_airbags")Integer number_of_airbags,
+                 @Param("alloy_wheels")String alloy_wheels,
+                 @Param("lock_system")String lock_system,
+                 @Param("parking_sensors")String parking_sensors,
+                 @Param("power_steering")String power_steering,
+                 @Param("power_windows")String power_windows,
+                 @Param("am_fm_radio")String am_fm_radio,
+                 @Param("usb_compability")String usb_compability,
+                 @Param("front_image")String front_image,
+                 @Param("right_image")String right_image,
+                 @Param("left_image")String left_image,
+                 @Param("rear_image")String rear_image,
+                 @Param("trunk_image")String trunk_image,
+                 @Param("dashboard_image")String dashboard_image,
+                 @Param("front_seat_image")String front_seat_image,
+                 @Param("floor_mat_image")String floor_mat_image,
+                 @Param("infotainm_image")String infotainm_image,
+                 @Param("odometer_image")String odometer_image,
+                 @Param("rear_seat_image")String rear_seat_image,
+                 @Param("engine_image")String engine_image,
+                 @Param("fl_tyre_image")String fl_tyre_image,
+                 @Param("fr_tyre_image")String fr_tyre_image,
+                 @Param("rl_tyre_image")String rl_tyre_image,
+                 @Param("rr_tyre_image")String rr_tyre_image
+
+                 );
+		 
+	     @Modifying(flushAutomatically = true)
+		 @Transactional
+		 @Query(value = "call uci_update_vehicle_info_data_point_access_category_wise(:vehicle_id, :dealer_id,:category_id,:is_car_brand,:is_car_model,"
+		 		+ ":is_fuel_type,:is_vehicle_no,:is_manufacturg_year,"
+		 		+ ":is_odometer,:is_ownership,:is_transmission_type,"
+		 		+ ":is_color,:is_insurance_validity,:is_insurance_type,:is_insurance_provider,:is_insurance_copy,:is_enge_no,"
+		 		+ ":is_chassis_no,:is_rc_front,:is_rc_rear,:is_rc_transfer,:is_lifetime_tax_copy,:is_lifetime_tax,"
+		 		+ ":is_actual_price,:is_negotiable,:is_loan_option,:is_front_image,:is_left_image,"
+		 		+ ":is_right_image,:is_rear_image,:is_enge_image,:is_dashboard_image,:is_fl_tyre_image,"
+		 		+ ":is_fr_tyre_image,:is_rl_tyre_image,:is_rr_tyre_image,:is_floor_mat_image,\n" 
+		 		+ ":is_front_seat_image,:is_trunk_image,:is_rear_seat_image,:is_fotam_image,\n" 
+		 		+ ":is_odometer_image,:is_video_url,:is_inspection_report_image,:is_diagnostic_report_image,\n" 
+		 		+ ":is_warranty_certificate_image,:is_matenance_url,:is_test_drive,:is_test_drive_type,\n" 
+		 		+ ":is_test_drive_amount,:is_abs,:is_adjustable_external_mirror,:is_adjustable_steerg,\n"  
+                + ":is_air_conditiong,:is_number_of_airbags,:is_alloy_wheels,:is_lock_system,\n" 
+		 		+ ":is_parkg_sensors,:is_power_steerg,:is_power_wdows,:is_am_fm_radio,:is_usb_compability);\n"+
+		 		"", nativeQuery = true)
+		 void update_data_access_points(
+				 @Param("vehicle_id")Integer vehicle_id,
+				 @Param("dealer_id")Integer dealer_id,
+		         @Param("category_id")Integer category_id,
+		          @Param("is_car_brand")String is_car_brand,
+                 @Param("is_car_model")String is_car_model,
+                 @Param("is_fuel_type")String is_fuel_type,
+                 @Param("is_vehicle_no")String is_vehicle_no,
+                 @Param("is_manufacturg_year")String is_manufacturg_year,
+                 @Param("is_odometer")String is_odometer,
+                 @Param("is_ownership")String is_ownership,
+                 @Param("is_transmission_type")String is_transmission_type,
+                 @Param("is_color")String is_color,
+                 @Param("is_insurance_validity")String is_insurance_validity,
+                 @Param("is_insurance_type")String is_insurance_type,
+                 @Param("is_insurance_provider")String is_insurance_provider,
+                 @Param("is_insurance_copy")String is_insurance_copy,
+                 @Param("is_enge_no")String is_enge_no,
+                 @Param("is_chassis_no")String is_chassis_no,
+                 @Param("is_rc_front")String is_rc_front,
+                 @Param("is_rc_rear")String is_rc_rear,
+                 @Param("is_rc_transfer")String is_rc_transfer,
+                 @Param("is_lifetime_tax_copy")String is_lifetime_tax_copy,
+                 @Param("is_lifetime_tax")String is_lifetime_tax,
+                 @Param("is_actual_price")String is_actual_price,             
+                 @Param("is_negotiable")String is_negotiable,
+                 @Param("is_loan_option")String is_loan_option,
+                 @Param("is_front_image")String is_front_image,
+                 @Param("is_left_image")String is_left_image,
+                 @Param("is_right_image")String is_right_image,
+                 @Param("is_rear_image")String is_rear_image,
+                 @Param("is_enge_image")String is_enge_image,
+                 @Param("is_dashboard_image")String is_dashboard_image,
+                 @Param("is_fl_tyre_image")String is_fl_tyre_image,
+                 @Param("is_fr_tyre_image")String is_fr_tyre_image,
+                 @Param("is_rl_tyre_image")String is_rl_tyre_image,
+                 @Param("is_rr_tyre_image")String is_rr_tyre_image,
+                 @Param("is_floor_mat_image")String is_floor_mat_image, 
+                 @Param("is_front_seat_image")String is_front_seat_image,
+                 @Param("is_trunk_image")String is_trunk_image,
+                 @Param("is_rear_seat_image")String is_rear_seat_image,
+                 @Param("is_fotam_image")String is_fotam_image,
+                 @Param("is_odometer_image")String is_odometer_image,
+                 @Param("is_video_url")String is_video_url,
+                 @Param("is_inspection_report_image")String is_inspection_report_image,
+                 @Param("is_diagnostic_report_image")String is_diagnostic_report_image,
+                 @Param("is_warranty_certificate_image")String is_warranty_certificate_image,
+                 @Param("is_matenance_url")String is_matenance_url,
+                 @Param("is_test_drive")String is_test_drive,
+                 @Param("is_test_drive_type")String is_test_drive_type,
+                 @Param("is_test_drive_amount")String is_test_drive_amount,
+                 @Param("is_abs")String is_abs,
+                 @Param("is_adjustable_external_mirror")String is_adjustable_external_mirror,
+                 @Param("is_adjustable_steerg")String is_adjustable_steerg,
+                 @Param("is_air_conditiong")String is_air_conditiong,
+                 @Param("is_number_of_airbags")String is_number_of_airbags,
+                 @Param("is_alloy_wheels")String is_alloy_wheels,
+                 @Param("is_lock_system")String is_lock_system,
+                 @Param("is_parkg_sensors")String is_parkg_sensors,
+                 @Param("is_power_steerg")String is_power_steerg,
+                 @Param("is_power_wdows")String is_power_wdows,
+                 @Param("is_am_fm_radio")String is_am_fm_radio,
+                 @Param("is_usb_compability")String is_usb_compability
+                 );
+	     
+	     
+	     
+		 
+	     @Query(value = "call uci_create_vehicle_info_url(:vehicle_id,:valid_minutes,:is_car_brand,:is_car_model,:is_fuel_type,"
+	     		+ ":is_vehicle_no,:is_manufacturing_year,:is_odometer,:is_ownership,:is_transmission_type,:is_color,"
+	     		+ ":is_insurance_validity,:is_insurance_type,:is_insurance_provider,:is_insurance_copy,:is_engine_no,"
+	     		+ ":is_chassis_no,:is_rc_front,:is_rc_rear,:is_rc_transfer,:is_lifetime_tax_copy,:is_lifetime_tax,"
+	     		+ ":is_actual_price,:is_negotiable,:is_loan_option,:is_front_image,:is_left_image,:is_right_image,"
+	     		+ ":is_rear_image,:is_engine_image,:is_dashboard_image,:is_fl_tyre_image,:is_fr_tyre_image,"
+	     		+ ":is_rl_tyre_image,:is_rr_tyre_image,:is_floor_mat_image,:is_front_seat_image,:is_trunk_image,"
+	     		+ ":is_rear_seat_image,:is_infotainm_image,:is_odometer_image,:is_video_url,:is_inspection_report_image,"
+	     		+ ":is_diagnostic_report_image,:is_warranty_certificate_image,:is_maintenance_url,:is_test_drive,:is_test_drive_type,"
+	     		+ ":is_test_drive_amount,:is_abs,:is_adjustable_external_mirror,:is_adjustable_steering,:is_air_conditioning,"
+	     		+ ":is_number_of_airbags,:is_alloy_wheels,:is_lock_system,:is_parking_sensors,:is_power_steering,"
+	     		+ ":is_power_windows,:is_am_fm_radio,:is_usb_compability);" +
+		     		"", nativeQuery = true)
+	    Map<String,Object> store_url_data(@Param("vehicle_id")Integer vehicle_id,
+	    		@Param("valid_minutes")String valid_minutes,
+	    		@Param("is_car_brand")String is_car_brand,
+	    		@Param("is_car_model")String is_car_model,
+	    		@Param("is_fuel_type")String is_fuel_type,
+	    		@Param("is_vehicle_no")String is_vehicle_no,
+	    		@Param("is_manufacturing_year")String is_manufacturing_year,
+	    		@Param("is_odometer")String is_odometer,
+	    		@Param("is_ownership")String is_ownership,
+	    		@Param("is_transmission_type")String is_transmission_type,
+	    		@Param("is_color")String is_color,
+	    		@Param("is_insurance_validity")String is_insurance_validity,
+	    		@Param("is_insurance_type")String is_insurance_type,
+	    		@Param("is_insurance_provider")String is_insurance_provider,
+	    		@Param("is_insurance_copy")String is_insurance_copy,
+	    		@Param("is_engine_no")String is_engine_no,
+	    		@Param("is_chassis_no")String is_chassis_no,
+	    		@Param("is_rc_front")String is_rc_front,
+	    		@Param("is_rc_rear")String is_rc_rear,
+	    		@Param("is_rc_transfer")String is_rc_transfer,
+	    		@Param("is_lifetime_tax_copy")String is_lifetime_tax_copy,
+	    		@Param("is_lifetime_tax")String is_lifetime_tax,
+	    		@Param("is_actual_price")String is_actual_price,
+	    		@Param("is_negotiable")String is_negotiable,
+	    		@Param("is_loan_option")String is_loan_option,
+	    		@Param("is_front_image")String is_front_image,
+	    		@Param("is_left_image")String is_left_image,
+	    		@Param("is_right_image")String is_right_image,
+	    		@Param("is_rear_image")String is_rear_image,
+	    		@Param("is_engine_image")String is_engine_image,
+	    		@Param("is_dashboard_image")String is_dashboard_image,
+	    		@Param("is_fl_tyre_image")String is_fl_tyre_image,
+	    		@Param("is_fr_tyre_image")String is_fr_tyre_image,
+	    		@Param("is_rl_tyre_image")String is_rl_tyre_image,
+	    		@Param("is_rr_tyre_image")String is_rr_tyre_image,
+	    		@Param("is_floor_mat_image")String is_floor_mat_image,
+	    		@Param("is_front_seat_image")String is_front_seat_image,
+	    		@Param("is_trunk_image")String is_trunk_image,
+	    		@Param("is_rear_seat_image")String is_rear_seat_image,
+	    		@Param("is_infotainm_image")String is_infotainm_image,
+	    		@Param("is_odometer_image")String is_odometer_image,
+	    		@Param("is_video_url")String is_video_url,
+	    		@Param("is_inspection_report_image")String is_inspection_report_image,
+	    		@Param("is_diagnostic_report_image")String is_diagnostic_report_image,
+	    		@Param("is_warranty_certificate_image")String is_warranty_certificate_image,
+	    		@Param("is_maintenance_url")String is_maintenance_url,
+	    		@Param("is_test_drive")String is_test_drive,
+	    		@Param("is_test_drive_type")String is_test_drive_type,
+	    		@Param("is_test_drive_amount")String is_test_drive_amount,
+	    		@Param("is_abs")String is_abs,
+	    		@Param("is_adjustable_external_mirror")String is_adjustable_external_mirror,
+	    		@Param("is_adjustable_steering")String is_adjustable_steering,
+	    		@Param("is_air_conditioning")String is_air_conditioning,
+	    		@Param("is_number_of_airbags")String is_number_of_airbags,
+	    		@Param("is_alloy_wheels")String is_alloy_wheels,
+	    		@Param("is_lock_system")String is_lock_system,
+	    		@Param("is_parking_sensors")String is_parking_sensors,
+	    		@Param("is_power_steering")String is_power_steering,
+	    		@Param("is_power_windows")String is_power_windows,
+	    		@Param("is_am_fm_radio")String is_am_fm_radio,
+	    		@Param("is_usb_compability")String is_usb_compability
+	    		);
+	     
+	     @Modifying(flushAutomatically = true)
+	  	 @Transactional
+		 @Query(value="Update uci_vehicle_info_url_tbl Set url=:mainurl,url_code=:url_code Where url_id=:url_id and is_active='Y';",nativeQuery = true)
+	  	 void generateurl( @Param("url_id")Integer url_id,@Param("url_code")String url_code,@Param("mainurl")String mainurl);
+	     
 	     
 }

@@ -94,8 +94,7 @@ public class loginController {
 	Map<String, Object> mapObj = new HashMap<String, Object>();
 	mapObj.put("message", "Otp Sent Successfully");
 
-
-		return Response.success(mapObj);
+     return Response.success(mapObj);
 
 	}
 	

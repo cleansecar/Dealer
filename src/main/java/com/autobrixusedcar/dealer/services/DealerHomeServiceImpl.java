@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.autobrixusedcar.dealer.dtos.DealerAddVehicleRequestDTO;
 import com.autobrixusedcar.dealer.dtos.DealerHomeRequestDTO;
+import com.autobrixusedcar.dealer.dtos.DealerShareRequestDTO;
 import com.autobrixusedcar.dealer.dtos.soldData;
 import com.autobrixusedcar.dealer.repositories.DealerHomeRepository;
 import com.autobrixusedcar.dealer.utils.Util;
@@ -207,7 +208,7 @@ System.out.print(dto.getTest_drive_amount());
 									 dto.getInsurance_type(),dto.getActual_price() == null || dto.getActual_price().isEmpty() ? null : Double.valueOf(dto.getActual_price()),dto.getRc_front_image_url(),dto.getRc_rear_image_url(),
 											 dto.getTransmission_type(),dto.getColor(),dto.getEngine_no(),dto.getChassis_no(),dto.getInsurance_provider(),dto.getInsurance_copy(),dto.getRc_transfer(),
 											 dto.getLifetime_tax_copy(),dto.getLifetime_tax(),dto.getNegotiable(),dto.getLoan_option(),dto.getVideo_url(),dto.getTest_drive(),dto.getTest_drive_type()
-											 ,Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),Integer.valueOf(dto.getNumber_of_airbags()),
+											 ,Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),
 											dto.getAlloy_wheels(),dto.getLock_system(),dto.getParking_sensors(),dto.getPower_steering(),dto.getPower_windows(),dto.getAm_fm_radio(),dto.getUsb_compability());
 			 
 			 
@@ -218,7 +219,7 @@ System.out.print(dto.getTest_drive_amount());
 		    						 dto.getInsurance_type(),dto.getActual_price() == null || dto.getActual_price().isEmpty() ? null : Double.valueOf(dto.getActual_price()),dto.getRc_front_image_url(),
 		    								 dto.getRc_rear_image_url(), dto.getTransmission_type(),dto.getColor(),dto.getEngine_no(),dto.getChassis_no(),dto.getInsurance_provider(),dto.getInsurance_copy(),dto.getRc_transfer(),
 											 dto.getLifetime_tax_copy(),dto.getLifetime_tax(),dto.getNegotiable(),dto.getLoan_option(),dto.getVideo_url(),dto.getTest_drive(),dto.getTest_drive_type()
-											 ,Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),Integer.valueOf(dto.getNumber_of_airbags()),
+											 ,Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),
 											dto.getAlloy_wheels(),dto.getLock_system(),dto.getParking_sensors(),dto.getPower_steering(),dto.getPower_windows(),dto.getAm_fm_radio(),dto.getUsb_compability());
 
 			  List<Map<String,Object>> data = dto.getImagesArr();
@@ -243,7 +244,7 @@ System.out.print(dto.getTest_drive_amount());
 								dto.getActual_price() == null || dto.getActual_price().isEmpty() ? null : Double.valueOf(dto.getActual_price()),dto.getRc_front_image_url(),dto.getRc_rear_image_url(),dto.getOwnership(),
 										 dto.getTransmission_type(),dto.getColor(),dto.getEngine_no(),dto.getChassis_no(),dto.getInsurance_provider(),dto.getInsurance_copy(),dto.getRc_transfer(),
 										 dto.getLifetime_tax_copy(),dto.getLifetime_tax(),dto.getNegotiable(),dto.getLoan_option(),dto.getVideo_url(),dto.getTest_drive(),dto.getTest_drive_type()
-										 ,Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),Integer.valueOf(dto.getNumber_of_airbags()),
+										 ,Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),
 										dto.getAlloy_wheels(),dto.getLock_system(),dto.getParking_sensors(),dto.getPower_steering(),dto.getPower_windows(),dto.getAm_fm_radio(),dto.getUsb_compability());
 			}
 			
@@ -373,8 +374,7 @@ System.out.print(dto.getTest_drive_amount());
 	}
 
 
-
-	@Override
+    @Override
 	public Map<String, Object> getcheckoutdetails(String dealerid, String vehicle_id, String coupon_id,
 			String couponcode) {
 		
@@ -534,13 +534,107 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 
 
 	@Override
-	public Map<String, Object> getsharecategorylist(String vehicle_id) {
+	public Map<String, Object> getsharecategorylist(String vehicle_id,String dealer_id) {
 	
-		List<Map<String,Object>> datalist = dealerhomerepository.share_category_list(Integer.valueOf(vehicle_id));
-		Map<String, Object> map = new HashMap<>();
+		List<Map<String,Object>> datalist = dealerhomerepository.share_category_list(Integer.valueOf(vehicle_id),Integer.valueOf(dealer_id));
+	    Map<String,Object> getsubcategorylist = dealerhomerepository.share_subcategory_list(Integer.valueOf(vehicle_id), null, Integer.valueOf(dealer_id));
+		
+        Map<String, Object> map = new HashMap<>();
 		map.put("getsharecategorylist", datalist);
+		map.put("getallsubcategorylist", getsubcategorylist);
 		return map;
 	}
 
 
+
+	@Override
+	public Map<String, Object> getsupportlist(String dealerid) {
+		List<Map<String,Object>> datalist = dealerhomerepository.help_support_list(Integer.valueOf(dealerid));
+		Map<String, Object> map = new HashMap<>();
+		map.put("getsupportlist", datalist);
+		return map;
+	}
+
+	
+	@Override
+	public Map<String, Object> getsharesubcategorylist(String vehicle_id,String category_id,String dealer_id) {
+	
+		Map<String,Object> datalist = dealerhomerepository.share_subcategory_list(Integer.valueOf(vehicle_id),Integer.valueOf(category_id),Integer.valueOf(dealer_id));
+		Map<String, Object> map = new HashMap<>();
+		map.put("getsharesubcategorylist", datalist);
+		return map;
+	}
+
+
+
+	@Override
+	public void updatesharedetails(DealerShareRequestDTO dto) throws JPAException {
+		// TODO Auto-generated method stub
+		if(dto.getIsdatachanged().equalsIgnoreCase("y")) {
+			
+			dealerhomerepository.update_data_points(Integer.valueOf(dto.getVehicle_id()),Integer.valueOf(dto.getDealer_id()), Integer.valueOf(dto.getCategory_id()), dto.getOdometer(),
+					Integer.valueOf(dto.getOwnership_id()),
+					dto.getOwnership(),dto.getInsurance_validity(), dto.getInsurance_type(), 
+					dto.getInsurance_provider(), dto.getInsurance_copy(), dto.getEngine_no(), 
+					dto.getChassis_no(), dto.getRc_front(), dto.getRc_rear(), dto.getIs_rc_transfer(),
+					dto.getLifetime_tax_copy(), dto.getLifetime_tax(),Double.valueOf(dto.getActual_price()) ,
+					dto.getNegotiable(), dto.getLoan_option(), dto.getVideo_url(), dto.getTest_drive(), 
+					dto.getTest_drive_type(), Double.valueOf(dto.getTest_drive_amount()), dto.getAbs(),
+					dto.getAdjustable_external_mirror(), dto.getAdjustable_steering(), dto.getIs_air_conditiong(),
+					Integer.valueOf(dto.getNumber_of_airbags()),dto.getAlloy_wheels(),dto.getLock_system(),dto.getParking_sensors(),dto.getPower_steering(), dto.getPower_windows(), dto.getAm_fm_rad(), dto.getUsb_compability(), 
+					dto.getFront_image(),dto.getRight_image(), dto.getLeft_image(), dto.getRear_image(), dto.getTrunk_image(), dto.getDashboard_image(), dto.getFront_seat_image(), 
+					dto.getFloor_mat_image(), dto.getInfotainm_image(), dto.getOdometer_image(), dto.getRear_seat_image(), dto.getEngine_image(), 
+					dto.getFl_tyre_image(), dto.getFr_tyre_image(), dto.getRl_tyre_image(), dto.getIs_rr_tyre_image());
+			
+		}
+		
+		if(dto.getIsaccesschanged().equalsIgnoreCase("y")) {
+		dealerhomerepository.update_data_access_points(Integer.valueOf(dto.getVehicle_id()), Integer.valueOf(dto.getDealer_id()), Integer.valueOf(dto.getCategory_id()),
+					dto.getIs_car_brand(),dto.getIs_car_model(), dto.getIs_fuel_type(), dto.getIs_vehicle_no(), dto.getIs_manufacturg_year(), 
+					dto.getIs_odometer(), dto.getIs_ownership(), dto.getIs_transmission_type(), dto.getIs_color(),dto.getIs_insurance_validity(), dto.getIs_insurance_type(),
+					dto.getIs_insurance_provider(), dto.getIs_insurance_copy(), dto.getIs_enge_no(), dto.getIs_chassis_no(), dto.getIs_rc_front(), dto.getIs_rc_rear(), 
+					dto.getIs_rc_transfer(), dto.getIs_lifetime_tax_copy(), dto.getIs_lifetime_tax(), dto.getIs_actual_price(), 
+					dto.getIs_negotiable(), dto.getIs_loan_option(), dto.getIs_front_image(), dto.getIs_left_image(), dto.getIs_right_image(), 
+					dto.getIs_rear_image(), dto.getIs_enge_image(), dto.getIs_dashboard_image(), dto.getIs_fl_tyre_image(),dto.getIs_fr_tyre_image(),
+					dto.getIs_rl_tyre_image(), dto.getIs_rr_tyre_image(), 
+					dto.getIs_floor_mat_image(), dto.getIs_front_seat_image(), dto.getIs_trunk_image(), dto.getIs_rear_seat_image(), dto.getIs_fotam_image(), dto.getIs_odometer_image(), 
+					dto.getIs_video_url(), dto.getIs_inspection_report_image(), dto.getIs_diagnostic_report_image(), dto.getIs_warranty_certificate_image(), dto.getIs_matenance_url(),dto.getIs_test_drive(),
+					dto.getIs_test_drive_type(), dto.getIs_test_drive_amount(), 
+					dto.getIs_abs(),dto.getIs_adjustable_external_mirror(), dto.getIs_adjustable_steerg(), dto.getIs_air_conditiong(), 
+					dto.getIs_number_of_airbags(), dto.getIs_alloy_wheels(), dto.getIs_lock_system(),
+					dto.getIs_parkg_sensors(),dto.getIs_power_steerg(), dto.getIs_power_wdows(), dto.getIs_am_fm_radio(), dto.getIs_usb_compability());
+		}
+		
+	}
+
+
+
+	@Override
+	public Map<String, Object> generatelink(DealerShareRequestDTO dto) {
+		Map<String,Object> datalist = dealerhomerepository.store_url_data(Integer.valueOf(dto.getVehicle_id()), dto.getValid_minutes(), dto.getIs_car_brand(), dto.getIs_car_model(),
+				dto.getIs_fuel_type(), dto.getIs_vehicle_no(), dto.getIs_manufacturg_year(), dto.getIs_odometer(), dto.getIs_ownership(), 
+				dto.getIs_transmission_type(), dto.getIs_color(), dto.getIs_insurance_validity(), dto.getIs_insurance_type(), 
+				dto.getIs_insurance_provider(), dto.getIs_insurance_copy(), dto.getIs_enge_no(), dto.getIs_chassis_no(),
+				dto.getIs_rc_front(), dto.getIs_rc_rear(), dto.getIs_rc_transfer(), dto.getIs_lifetime_tax_copy(), dto.getIs_lifetime_tax(), 
+				dto.getIs_actual_price(), dto.getIs_negotiable(), dto.getIs_loan_option(), dto.getIs_front_image(), dto.getIs_left_image(), 
+				dto.getIs_right_image(), dto.getIs_rear_image(), dto.getIs_enge_image(), dto.getIs_dashboard_image(), dto.getIs_fl_tyre_image(), 
+				dto.getIs_fr_tyre_image(), dto.getRl_tyre_image(), dto.getRr_tyre_image(), dto.getIs_floor_mat_image(), 
+				dto.getIs_front_seat_image(), dto.getIs_trunk_image(), dto.getIs_rear_seat_image(), dto.getIs_fotam_image(), 
+				dto.getIs_odometer_image(), dto.getIs_video_url(), dto.getIs_inspection_report_image() ,dto.getIs_diagnostic_report_image(), 
+				dto.getIs_warranty_certificate_image(), dto.getIs_matenance_url(), dto.getIs_test_drive(), dto.getIs_test_drive_type(), 
+				dto.getIs_test_drive_amount(), dto.getIs_abs(), dto.getIs_adjustable_external_mirror(), dto.getIs_adjustable_steerg(), 
+				dto.getIs_air_conditiong(), dto.getIs_number_of_airbags(),dto.getIs_alloy_wheels(), dto.getIs_lock_system(), dto.getIs_parkg_sensors(), 
+				dto.getIs_power_steerg(), dto.getIs_power_wdows(), dto.getIs_am_fm_radio(), dto.getIs_usb_compability());
+		Integer urlid=Integer.valueOf(datalist.get("url_id").toString());
+		Integer url_unique_id=Integer.valueOf(datalist.get("url_unique_id").toString());
+		String random;
+		random = Util.urlString(15);
+		 String mainurl ="http://localhost:8080/car_details/"+random;
+		dealerhomerepository.generateurl(urlid, random, mainurl);
+		Map<String, Object> map = new HashMap<>();
+		map.put("shareurl", mainurl);
+		return map;
+	
+	}
+	
 }
