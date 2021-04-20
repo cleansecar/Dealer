@@ -15,7 +15,7 @@ public class DealerShareRequestDTO {
 	public void setIsaccesschanged(String isaccesschanged) {
 		this.isaccesschanged = isaccesschanged;
 	}
-	private String dealerId;
+//	private String dealerId;
 	
 	private String odometer; 
 	private String ownership_id;
@@ -254,12 +254,12 @@ public class DealerShareRequestDTO {
 	public void setRr_tyre_image(String rr_tyre_image) {
 		this.rr_tyre_image = rr_tyre_image;
 	}
-	public String getDealerId() {
-		return dealerId;
-	}
-	public void setDealerId(String dealerId) {
-		this.dealerId = dealerId;
-	}
+//	public String getDealerId() {
+//		return dealerId;
+//	}
+//	public void setDealerId(String dealerId) {
+//		this.dealerId = dealerId;
+//	}
 	public String getOdometer() {
 		return odometer;
 	}
