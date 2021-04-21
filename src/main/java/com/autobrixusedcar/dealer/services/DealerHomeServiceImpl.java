@@ -208,7 +208,7 @@ System.out.print(dto.getTest_drive_amount());
 									 dto.getInsurance_type(),dto.getActual_price() == null || dto.getActual_price().isEmpty() ? null : Double.valueOf(dto.getActual_price()),dto.getRc_front_image_url(),dto.getRc_rear_image_url(),
 											 dto.getTransmission_type(),dto.getColor(),dto.getEngine_no(),dto.getChassis_no(),dto.getInsurance_provider(),dto.getInsurance_copy(),dto.getRc_transfer(),
 											 dto.getLifetime_tax_copy(),dto.getLifetime_tax(),dto.getNegotiable(),dto.getLoan_option(),dto.getVideo_url(),dto.getTest_drive(),dto.getTest_drive_type()
-											 ,Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),
+											 ,dto.getTest_drive_amount() == null || dto.getTest_drive_amount() .isEmpty() ? null : Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),
 											dto.getAlloy_wheels(),dto.getLock_system(),dto.getParking_sensors(),dto.getPower_steering(),dto.getPower_windows(),dto.getAm_fm_radio(),dto.getUsb_compability());
 			 
 			 
@@ -219,7 +219,7 @@ System.out.print(dto.getTest_drive_amount());
 		    						 dto.getInsurance_type(),dto.getActual_price() == null || dto.getActual_price().isEmpty() ? null : Double.valueOf(dto.getActual_price()),dto.getRc_front_image_url(),
 		    								 dto.getRc_rear_image_url(), dto.getTransmission_type(),dto.getColor(),dto.getEngine_no(),dto.getChassis_no(),dto.getInsurance_provider(),dto.getInsurance_copy(),dto.getRc_transfer(),
 											 dto.getLifetime_tax_copy(),dto.getLifetime_tax(),dto.getNegotiable(),dto.getLoan_option(),dto.getVideo_url(),dto.getTest_drive(),dto.getTest_drive_type()
-											 ,Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),
+											 ,dto.getTest_drive_amount() == null || dto.getTest_drive_amount() .isEmpty() ? null : Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),
 											dto.getAlloy_wheels(),dto.getLock_system(),dto.getParking_sensors(),dto.getPower_steering(),dto.getPower_windows(),dto.getAm_fm_radio(),dto.getUsb_compability());
 
 			  List<Map<String,Object>> data = dto.getImagesArr();
@@ -244,7 +244,7 @@ System.out.print(dto.getTest_drive_amount());
 								dto.getActual_price() == null || dto.getActual_price().isEmpty() ? null : Double.valueOf(dto.getActual_price()),dto.getRc_front_image_url(),dto.getRc_rear_image_url(),dto.getOwnership(),
 										 dto.getTransmission_type(),dto.getColor(),dto.getEngine_no(),dto.getChassis_no(),dto.getInsurance_provider(),dto.getInsurance_copy(),dto.getRc_transfer(),
 										 dto.getLifetime_tax_copy(),dto.getLifetime_tax(),dto.getNegotiable(),dto.getLoan_option(),dto.getVideo_url(),dto.getTest_drive(),dto.getTest_drive_type()
-										 ,Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),
+										 ,dto.getTest_drive_amount() == null || dto.getTest_drive_amount() .isEmpty() ? null : Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),
 										dto.getAlloy_wheels(),dto.getLock_system(),dto.getParking_sensors(),dto.getPower_steering(),dto.getPower_windows(),dto.getAm_fm_radio(),dto.getUsb_compability());
 			}
 			
