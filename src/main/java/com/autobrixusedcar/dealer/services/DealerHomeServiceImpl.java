@@ -208,7 +208,7 @@ System.out.print(dto.getTest_drive_amount());
 									 dto.getInsurance_type(),dto.getActual_price() == null || dto.getActual_price().isEmpty() ? null : Double.valueOf(dto.getActual_price()),dto.getRc_front_image_url(),dto.getRc_rear_image_url(),
 											 dto.getTransmission_type(),dto.getColor(),dto.getEngine_no(),dto.getChassis_no(),dto.getInsurance_provider(),dto.getInsurance_copy(),dto.getRc_transfer(),
 											 dto.getLifetime_tax_copy(),dto.getLifetime_tax(),dto.getNegotiable(),dto.getLoan_option(),dto.getVideo_url(),dto.getTest_drive(),dto.getTest_drive_type()
-											 ,Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),
+											 ,dto.getTest_drive_amount() == null || dto.getTest_drive_amount() .isEmpty() ? null : Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),
 											dto.getAlloy_wheels(),dto.getLock_system(),dto.getParking_sensors(),dto.getPower_steering(),dto.getPower_windows(),dto.getAm_fm_radio(),dto.getUsb_compability());
 			 
 			 
@@ -219,7 +219,7 @@ System.out.print(dto.getTest_drive_amount());
 		    						 dto.getInsurance_type(),dto.getActual_price() == null || dto.getActual_price().isEmpty() ? null : Double.valueOf(dto.getActual_price()),dto.getRc_front_image_url(),
 		    								 dto.getRc_rear_image_url(), dto.getTransmission_type(),dto.getColor(),dto.getEngine_no(),dto.getChassis_no(),dto.getInsurance_provider(),dto.getInsurance_copy(),dto.getRc_transfer(),
 											 dto.getLifetime_tax_copy(),dto.getLifetime_tax(),dto.getNegotiable(),dto.getLoan_option(),dto.getVideo_url(),dto.getTest_drive(),dto.getTest_drive_type()
-											 ,Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),
+											 ,dto.getTest_drive_amount() == null || dto.getTest_drive_amount() .isEmpty() ? null : Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),
 											dto.getAlloy_wheels(),dto.getLock_system(),dto.getParking_sensors(),dto.getPower_steering(),dto.getPower_windows(),dto.getAm_fm_radio(),dto.getUsb_compability());
 
 			  List<Map<String,Object>> data = dto.getImagesArr();
@@ -244,7 +244,7 @@ System.out.print(dto.getTest_drive_amount());
 								dto.getActual_price() == null || dto.getActual_price().isEmpty() ? null : Double.valueOf(dto.getActual_price()),dto.getRc_front_image_url(),dto.getRc_rear_image_url(),dto.getOwnership(),
 										 dto.getTransmission_type(),dto.getColor(),dto.getEngine_no(),dto.getChassis_no(),dto.getInsurance_provider(),dto.getInsurance_copy(),dto.getRc_transfer(),
 										 dto.getLifetime_tax_copy(),dto.getLifetime_tax(),dto.getNegotiable(),dto.getLoan_option(),dto.getVideo_url(),dto.getTest_drive(),dto.getTest_drive_type()
-										 ,Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),
+										 ,dto.getTest_drive_amount() == null || dto.getTest_drive_amount() .isEmpty() ? null : Double.valueOf(dto.getTest_drive_amount()),dto.getAbs(),dto.getAdjustable_external_mirror(),dto.getAdjustable_steering(),dto.getAir_conditioning(),dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),
 										dto.getAlloy_wheels(),dto.getLock_system(),dto.getParking_sensors(),dto.getPower_steering(),dto.getPower_windows(),dto.getAm_fm_radio(),dto.getUsb_compability());
 			}
 			
@@ -573,19 +573,18 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 		if(dto.getIsdatachanged().equalsIgnoreCase("y")) {
 			
 			dealerhomerepository.update_data_points(Integer.valueOf(dto.getVehicle_id()),Integer.valueOf(dto.getDealer_id()), Integer.valueOf(dto.getCategory_id()), dto.getOdometer(),
-					Integer.valueOf(dto.getOwnership_id()),
-					dto.getOwnership(),dto.getInsurance_validity(), dto.getInsurance_type(), 
+					dto.getOwnership_id() == null || dto.getOwnership_id().isEmpty() ? null : Integer.valueOf(dto.getOwnership_id()),
+					dto.getOwnership(),dto.getInsurance_validity() == null || dto.getInsurance_validity().isEmpty() ? null : dto.getInsurance_validity(), dto.getInsurance_type(), 
 					dto.getInsurance_provider(), dto.getInsurance_copy(), dto.getEngine_no(), 
-					dto.getChassis_no(), dto.getRc_front(), dto.getRc_rear(), dto.getIs_rc_transfer(),
-					dto.getLifetime_tax_copy(), dto.getLifetime_tax(),Double.valueOf(dto.getActual_price()) ,
+					dto.getChassis_no(), dto.getRc_front(), dto.getRc_rear(), dto.getRc_transfer(),
+					dto.getLifetime_tax_copy(), dto.getLifetime_tax(),dto.getActual_price() == null || dto.getActual_price().isEmpty() ? null : Double.valueOf(dto.getActual_price()) ,
 					dto.getNegotiable(), dto.getLoan_option(), dto.getVideo_url(), dto.getTest_drive(), 
-					dto.getTest_drive_type(), Double.valueOf(dto.getTest_drive_amount()), dto.getAbs(),
-					dto.getAdjustable_external_mirror(), dto.getAdjustable_steering(), dto.getIs_air_conditiong(),
-					Integer.valueOf(dto.getNumber_of_airbags()),dto.getAlloy_wheels(),dto.getLock_system(),dto.getParking_sensors(),dto.getPower_steering(), dto.getPower_windows(), dto.getAm_fm_rad(), dto.getUsb_compability(), 
+					dto.getTest_drive_type(), dto.getTest_drive_amount() == null || dto.getTest_drive_amount().isEmpty() ? null : Double.valueOf(dto.getTest_drive_amount()), dto.getAbs(),
+					dto.getAdjustable_external_mirror(), dto.getAdjustable_steering(), dto.getAir_conditioning(),
+					dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),dto.getAlloy_wheels(),dto.getLock_system(),dto.getParking_sensors(),dto.getPower_steering(), dto.getPower_windows(), dto.getAm_fm_rad(), dto.getUsb_compability(), 
 					dto.getFront_image(),dto.getRight_image(), dto.getLeft_image(), dto.getRear_image(), dto.getTrunk_image(), dto.getDashboard_image(), dto.getFront_seat_image(), 
 					dto.getFloor_mat_image(), dto.getInfotainm_image(), dto.getOdometer_image(), dto.getRear_seat_image(), dto.getEngine_image(), 
-					dto.getFl_tyre_image(), dto.getFr_tyre_image(), dto.getRl_tyre_image(), dto.getIs_rr_tyre_image());
-			
+					dto.getFl_tyre_image(), dto.getFr_tyre_image(), dto.getRl_tyre_image(), dto.getRr_tyre_image());
 		}
 		
 		if(dto.getIsaccesschanged().equalsIgnoreCase("y")) {
@@ -604,7 +603,7 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 					dto.getIs_number_of_airbags(), dto.getIs_alloy_wheels(), dto.getIs_lock_system(),
 					dto.getIs_parkg_sensors(),dto.getIs_power_steerg(), dto.getIs_power_wdows(), dto.getIs_am_fm_radio(), dto.getIs_usb_compability());
 		}
-		
+
 	}
 
 
@@ -618,7 +617,7 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 				dto.getIs_rc_front(), dto.getIs_rc_rear(), dto.getIs_rc_transfer(), dto.getIs_lifetime_tax_copy(), dto.getIs_lifetime_tax(), 
 				dto.getIs_actual_price(), dto.getIs_negotiable(), dto.getIs_loan_option(), dto.getIs_front_image(), dto.getIs_left_image(), 
 				dto.getIs_right_image(), dto.getIs_rear_image(), dto.getIs_enge_image(), dto.getIs_dashboard_image(), dto.getIs_fl_tyre_image(), 
-				dto.getIs_fr_tyre_image(), dto.getRl_tyre_image(), dto.getRr_tyre_image(), dto.getIs_floor_mat_image(), 
+				dto.getIs_fr_tyre_image(), dto.getIs_rl_tyre_image(), dto.getIs_rr_tyre_image(), dto.getIs_floor_mat_image(), 
 				dto.getIs_front_seat_image(), dto.getIs_trunk_image(), dto.getIs_rear_seat_image(), dto.getIs_fotam_image(), 
 				dto.getIs_odometer_image(), dto.getIs_video_url(), dto.getIs_inspection_report_image() ,dto.getIs_diagnostic_report_image(), 
 				dto.getIs_warranty_certificate_image(), dto.getIs_matenance_url(), dto.getIs_test_drive(), dto.getIs_test_drive_type(), 

@@ -3,19 +3,8 @@ package com.autobrixusedcar.dealer.dtos;
 public class DealerShareRequestDTO {
 	private String isdatachanged;
 	private String isaccesschanged;
-	public String getIsdatachanged() {
-		return isdatachanged;
-	}
-	public void setIsdatachanged(String isdatachanged) {
-		this.isdatachanged = isdatachanged;
-	}
-	public String getIsaccesschanged() {
-		return isaccesschanged;
-	}
-	public void setIsaccesschanged(String isaccesschanged) {
-		this.isaccesschanged = isaccesschanged;
-	}
-	private String dealerId;
+	
+//	private String dealerId;
 	
 	private String odometer; 
 	private String ownership_id;
@@ -150,6 +139,21 @@ public class DealerShareRequestDTO {
 	private String rl_tyre_image;
 	private String rr_tyre_image;
 	
+	
+	
+	public String getIsdatachanged() {
+		return isdatachanged;
+	}
+	public void setIsdatachanged(String isdatachanged) {
+		this.isdatachanged = isdatachanged;
+	}
+	public String getIsaccesschanged() {
+		return isaccesschanged;
+	}
+	public void setIsaccesschanged(String isaccesschanged) {
+		this.isaccesschanged = isaccesschanged;
+	}
+	
 	public String getValid_minutes() {
 		return valid_minutes;
 	}
@@ -254,12 +258,12 @@ public class DealerShareRequestDTO {
 	public void setRr_tyre_image(String rr_tyre_image) {
 		this.rr_tyre_image = rr_tyre_image;
 	}
-	public String getDealerId() {
-		return dealerId;
-	}
-	public void setDealerId(String dealerId) {
-		this.dealerId = dealerId;
-	}
+//	public String getDealerId() {
+//		return dealerId;
+//	}
+//	public void setDealerId(String dealerId) {
+//		this.dealerId = dealerId;
+//	}
 	public String getOdometer() {
 		return odometer;
 	}
