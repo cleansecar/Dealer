@@ -57,6 +57,25 @@ public class DealerAddVehicleRequestDTO {
 	private String maintenance_url;
 	private String test_drive;
 	private String test_drive_type;
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	private String test_drive_amount;
 	private String abs;
 	private String adjustable_external_mirror;
@@ -71,7 +90,9 @@ public class DealerAddVehicleRequestDTO {
 	private String am_fm_radio;
 	private String usb_compability;
 	
-	
+	private String date;
+	private String time;
+	private String address;
 	
 	
 	public String getOwnership() {
@@ -281,6 +302,14 @@ public class DealerAddVehicleRequestDTO {
 	private String follow_up_on;
 	private String payment_mode_id;
 	private String actual_price;
+	private String page_no;
+	public String getPage_no() {
+		return page_no;
+	}
+	public void setPage_no(String page_no) {
+		this.page_no = page_no;
+	}
+
 	private String rc_front_image_url;
 	public String getRc_front_image_url() {
 		return rc_front_image_url;

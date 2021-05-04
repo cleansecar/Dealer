@@ -72,5 +72,15 @@ public interface DealerHomeService {
 	
 	void updatesharedetails(DealerShareRequestDTO dto) throws JPAException;
 	Map<String,Object> generatelink(DealerShareRequestDTO dto);
+	
+	Map<String, Object> getinspectionreportdata(String vehicle_id);
+	
+	Map<String, Object> gettestdrivereqlist(String vehicle_id);
+	
+	Map<String, Object> getvehiclelinklist(String vehicle_id);
+	
+	void addnewtestdriverequest(DealerAddVehicleRequestDTO dto) throws JPAException;
+	
+	Map<String, Object> getVehicleInspectionFlow(String vehicle_id);
 
 }
