@@ -198,8 +198,7 @@ public class DealerHomeServiceImpl implements DealerHomeService {
 		Map<String,Object> datalist = dealerhomerepository.checkvehicleexist(dto.getVehicle_no());
 		if(datalist==null||datalist.isEmpty()) {
 			
-System.out.print(Double.valueOf(dto.getTest_drive_amount()));
-System.out.print(dto.getTest_drive_amount());
+
 
 			
 			 Integer value=dealerhomerepository.insert_uci_addvehicle(Integer.valueOf(dto.getModel_id()), dto.getVehicle_make(), dto.getVehicle_model(), dto.getFuel_type(), dto.getVehicle_no(), 
@@ -225,8 +224,7 @@ System.out.print(dto.getTest_drive_amount());
 			  List<Map<String,Object>> data = dto.getImagesArr();
 				
 					for (Map<String, Object> map : data) {
-				     dealerhomerepository.insert_used_car_vehicle_images(Integer.valueOf(dto.getDealer_id()),value,Integer.valueOf(map.get("id").toString()), map.get("imageurl").toString());
-				
+				     dealerhomerepository.insert_used_car_vehicle_images(Integer.valueOf(dto.getDealer_id()),value,Integer.valueOf(map.get("id").toString()), map.get("imageurl").toString(),map.get("is_profile_image").toString());
 					
 				}
 		}else if(datalist!=null) {
@@ -280,7 +278,7 @@ System.out.print(dto.getTest_drive_amount());
 
 	@Override
 	public Map<String, Object> gethomepagecarlist(DealerAddVehicleRequestDTO dto) {
-		List<Map<String,Object>> datalist = dealerhomerepository.home_page_carlist(Integer.valueOf(dto.getVendor_id()), Integer.valueOf(dto.getStatus_id()), dto.getSearchtext());
+		List<Map<String,Object>> datalist = dealerhomerepository.home_page_carlist(Integer.valueOf(dto.getVendor_id()), Integer.valueOf(dto.getStatus_id()), dto.getSearchtext(),dto.getPage_no());
 		List<Map<String,Object>> offers = dealerhomerepository.offer_list(Integer.valueOf(dto.getVendor_id()));
 
 		Map<String, Object> map = new HashMap<>();
@@ -312,7 +310,17 @@ System.out.print(dto.getTest_drive_amount());
 
 	@Override
 	public void updateinspectionrequest(DealerAddVehicleRequestDTO dto) throws JPAException {
-		dealerhomerepository.update_inspection_request(Integer.valueOf(dto.getStatus_id()), Integer.valueOf(dto.getDealer_id()), Integer.valueOf(dto.getVehicleid()));
+		if(dto.getStatus_id().equalsIgnoreCase("2")) {
+			dealerhomerepository.update_inspection_request_status(Integer.valueOf(dto.getStatus_id()), Integer.valueOf(dto.getDealer_id()), Integer.valueOf(dto.getVehicleid()));
+
+			
+		}else {
+			dealerhomerepository.update_inspection_request(Integer.valueOf(dto.getStatus_id()), Integer.valueOf(dto.getDealer_id()), Integer.valueOf(dto.getVehicleid()));
+
+			
+		}
+		dealerhomerepository.update_vehicle_status_flow(Integer.valueOf(dto.getVehicleid()),Integer.valueOf(dto.getStatus_id()));
+
 		return;
 		
 	}
@@ -584,7 +592,7 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 					dto.getNumber_of_airbags() == null || dto.getNumber_of_airbags().isEmpty() ? null : Integer.valueOf(dto.getNumber_of_airbags()),dto.getAlloy_wheels(),dto.getLock_system(),dto.getParking_sensors(),dto.getPower_steering(), dto.getPower_windows(), dto.getAm_fm_rad(), dto.getUsb_compability(), 
 					dto.getFront_image(),dto.getRight_image(), dto.getLeft_image(), dto.getRear_image(), dto.getTrunk_image(), dto.getDashboard_image(), dto.getFront_seat_image(), 
 					dto.getFloor_mat_image(), dto.getInfotainm_image(), dto.getOdometer_image(), dto.getRear_seat_image(), dto.getEngine_image(), 
-					dto.getFl_tyre_image(), dto.getFr_tyre_image(), dto.getRl_tyre_image(), dto.getRr_tyre_image());
+					dto.getFl_tyre_image(), dto.getFr_tyre_image(), dto.getRl_tyre_image(), dto.getRr_tyre_image(),dto.getProfile_image());
 		}
 		
 		if(dto.getIsaccesschanged().equalsIgnoreCase("y")) {
@@ -608,7 +616,7 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 
 
 
-	@Override
+   @Override
 	public Map<String, Object> generatelink(DealerShareRequestDTO dto) {
 		Map<String,Object> datalist = dealerhomerepository.store_url_data(Integer.valueOf(dto.getVehicle_id()), dto.getValid_minutes(), dto.getIs_car_brand(), dto.getIs_car_model(),
 				dto.getIs_fuel_type(), dto.getIs_vehicle_no(), dto.getIs_manufacturg_year(), dto.getIs_odometer(), dto.getIs_ownership(), 
@@ -628,12 +636,60 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 		Integer url_unique_id=Integer.valueOf(datalist.get("url_unique_id").toString());
 		String random;
 		random = Util.urlString(15);
-		 String mainurl ="http://localhost:8080/car_details/"+random;
+		 String mainurl ="https://carinfo.autobrix.com/car_details/"+random;
 		dealerhomerepository.generateurl(urlid, random, mainurl);
 		Map<String, Object> map = new HashMap<>();
 		map.put("shareurl", mainurl);
 		return map;
 	
+	}
+	
+	@Override
+	public Map<String, Object> getinspectionreportdata(String vehicle_id) {
+				List<Map<String,Object>> datalist = dealerhomerepository.inspection_report_data(Integer.valueOf(vehicle_id));
+				Map<String, Object> map = new HashMap<>();
+				map.put("getinspectionreportdata", datalist);
+				return map;
+	}
+
+
+
+    @Override
+	public Map<String, Object> gettestdrivereqlist(String vehicle_id) {
+		List<Map<String,Object>> datalist = dealerhomerepository.test_drive_request_list(Integer.valueOf(vehicle_id));
+		Map<String, Object> map = new HashMap<>();
+		map.put("gettestdrivereqlist", datalist);
+		return map;
+	}
+
+
+
+	@Override
+	public Map<String, Object> getvehiclelinklist(String vehicle_id) {
+		List<Map<String,Object>> datalist = dealerhomerepository.vehicle_info_link(Integer.valueOf(vehicle_id));
+		Map<String, Object> map = new HashMap<>();
+		map.put("getvehiclelinklist", datalist);
+		return map;
+	}
+
+
+
+	@Override
+	public void addnewtestdriverequest(DealerAddVehicleRequestDTO dto) throws JPAException {
+	dealerhomerepository.insert_new_test_drive_request( Integer.valueOf(dto.getVehicleid()), dto.getCustomername(), dto.getCustomerno(),dto.getDate(),dto.getTime(),dto.getAddress());
+		
+		return;
+		
+	}
+
+
+
+	@Override
+	public Map<String, Object> getVehicleInspectionFlow(String vehicle_id) {
+    Map<String,Object> vehicledata = dealerhomerepository.vehicle_inspection_flow(Integer.valueOf(vehicle_id));
+		 Map<String, Object> map = new HashMap<>();
+		map.put("getvehicleinspectioflowdata", vehicledata);
+		return map;
 	}
 	
 }

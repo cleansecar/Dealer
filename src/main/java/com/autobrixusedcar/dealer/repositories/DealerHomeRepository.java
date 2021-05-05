@@ -130,12 +130,13 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 
      @Modifying(flushAutomatically = true)
 	 @Transactional
-	 @Query(value ="INSERT INTO uci_vehicle_images_tbl (dealer_id, vehicle_id, image_type_id, image) VALUES (?,?,?,?); ",nativeQuery =true)
+	 @Query(value ="INSERT INTO uci_vehicle_images_tbl (dealer_id, vehicle_id, image_type_id, image,is_profile_image) VALUES (?,?,?,?,?); ",nativeQuery =true)
 	 void insert_used_car_vehicle_images(
 			 @Param("dealer_id")Integer dealer_id,
 			 @Param("vehicle_id")Integer vehicle_id,
 			 @Param("image_type_id")Integer image_type_id,
-			 @Param("image")String image
+			 @Param("image")String image,
+			 @Param("is_profile_image")String is_profile_image
 			
 			 );
 	 
@@ -455,8 +456,8 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 
 	 
 	 
-	 @Query(value = "call uci_my_vehicle(:status_id, :dealerid,:searchtext);", nativeQuery = true)
-			 List<Map<String,Object>> home_page_carlist(@Param("dealerid")Integer dealerid,@Param("status_id")Integer status_id,@Param("searchtext")String searchtext);
+	 @Query(value = "call uci_my_vehicle(:status_id, :dealerid,:searchtext,:page_no);", nativeQuery = true)
+			 List<Map<String,Object>> home_page_carlist(@Param("dealerid")Integer dealerid,@Param("status_id")Integer status_id,@Param("searchtext")String searchtext,@Param("page_no")String page_no);
 	 
 	 
      @Modifying(flushAutomatically = true)
@@ -472,10 +473,13 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			 );
      
      
-            @Query(value = "Select customer_name,phone_no,description,date_format(created_on,\"%D %b %Y\") as created_on  \n" + 
-            		"From uci_vehicle_enquiry_tbl\n" + 
-            		"Where is_active='Y'\n" + 
-            		" and dealer_id=:dealerid and vehicle_id=:vehicleid ;", nativeQuery = true)
+//   
+//            @Query(value = "Select customer_name,phone_no,description,date_format(created_on,\"%D %b %Y\") as created_on  \n" + 
+//            		"From uci_vehicle_enquiry_tbl\n" + 
+//            		"Where is_active='Y'\n" + 
+//            		" and dealer_id=:dealerid and vehicle_id=:vehicleid ;", nativeQuery = true)
+	 @Query(value = "call uci_enquiry_list(:dealerid,:vehicleid);", nativeQuery = true)
+
 	        List<Map<String,Object>> vehicle_enquiry_list(@Param("dealerid")Integer dealerid,@Param("vehicleid")Integer vehicleid);
      
   
@@ -486,6 +490,18 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 		"Where is_active='Y' and dealer_id=:dealer_id and vehicle_id=:vehicle_id\n" + 
 	 		";",nativeQuery = true)
 	   void update_inspection_request(
+			 @Param("status_id")Integer status_id,
+			 @Param("dealer_id")Integer dealer_id,
+			 @Param("vehicle_id")Integer vehicle_id	 
+			 );
+	 
+	 
+	 @Modifying(flushAutomatically = true)
+	 @Transactional
+	 @Query(value="Update used_car_add_vehicle Set status_id=:status_id,inspection_on=now(),inspection_on_display=now()\n" + 
+	 		"Where is_active='Y' and dealer_id=:dealer_id and vehicle_id=:vehicle_id\n" +  
+	 		";",nativeQuery = true)
+	   void update_inspection_request_status(
 			 @Param("status_id")Integer status_id,
 			 @Param("dealer_id")Integer dealer_id,
 			 @Param("vehicle_id")Integer vehicle_id	 
@@ -765,7 +781,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 		 		+ ":number_of_airbags,:alloy_wheels,:lock_system,:parking_sensors,:power_steering,"
 		 		+ ":power_windows,:am_fm_radio,:usb_compability,:front_image,:right_image,:left_image,:rear_image,"
 		 		+ ":trunk_image,:dashboard_image,:front_seat_image,:floor_mat_image,:infotainm_image,:odometer_image,"
-		 		+ ":rear_seat_image,:engine_image,:fl_tyre_image,:fr_tyre_image,:rl_tyre_image,:rr_tyre_image);\n" + 
+		 		+ ":rear_seat_image,:engine_image,:fl_tyre_image,:fr_tyre_image,:rl_tyre_image,:rr_tyre_image,:profile_image);\n" + 
 		     		"", nativeQuery = true)
 		 void update_data_points(
 				 @Param("vehicle_id")Integer vehicle_id,
@@ -819,7 +835,9 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
                  @Param("fl_tyre_image")String fl_tyre_image,
                  @Param("fr_tyre_image")String fr_tyre_image,
                  @Param("rl_tyre_image")String rl_tyre_image,
-                 @Param("rr_tyre_image")String rr_tyre_image
+                 @Param("rr_tyre_image")String rr_tyre_image,
+                 @Param("profile_image")String profile_image
+                 
 
                  );
 		 
@@ -906,9 +924,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
                  );
 	     
 	     
-	     
-		 
-	     @Query(value = "call uci_create_vehicle_info_url(:vehicle_id,:valid_minutes,:is_car_brand,:is_car_model,:is_fuel_type,"
+	    @Query(value = "call uci_create_vehicle_info_url(:vehicle_id,:valid_minutes,:is_car_brand,:is_car_model,:is_fuel_type,"
 	     		+ ":is_vehicle_no,:is_manufacturing_year,:is_odometer,:is_ownership,:is_transmission_type,:is_color,"
 	     		+ ":is_insurance_validity,:is_insurance_type,:is_insurance_provider,:is_insurance_copy,:is_engine_no,"
 	     		+ ":is_chassis_no,:is_rc_front,:is_rc_rear,:is_rc_transfer,:is_lifetime_tax_copy,:is_lifetime_tax,"
@@ -989,5 +1005,43 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 		 @Query(value="Update uci_vehicle_info_url_tbl Set url=:mainurl,url_code=:url_code Where url_id=:url_id and is_active='Y';",nativeQuery = true)
 	  	 void generateurl( @Param("url_id")Integer url_id,@Param("url_code")String url_code,@Param("mainurl")String mainurl);
 	     
+	     
+	     @Query(value = "call uci_vehicle_inspection_report_data(:vehicle_id);", nativeQuery = true)
+	      List<Map<String,Object>> inspection_report_data(@Param("vehicle_id")Integer vehicle_id);
+	     
+	     @Query(value = "call uci_get_test_drive_requests(:vehicle_id);", nativeQuery = true)
+	      List<Map<String,Object>> test_drive_request_list(@Param("vehicle_id")Integer vehicle_id);
+	     
+	     @Query(value = "call uci_get_vehicle_info_links(:vehicle_id);", nativeQuery = true)
+	      List<Map<String,Object>> vehicle_info_link(@Param("vehicle_id")Integer vehicle_id);
+	     
+	     
+	     @Modifying(flushAutomatically = true)
+		 @Transactional
+		 @Query(value ="call uci_create_test_drive_request(:vehicle_id, :customer_name, :phone_no,:date,:time,:address); ",nativeQuery =true)
+		 void insert_new_test_drive_request(
+				
+			     @Param("vehicle_id")Integer vehicle_id,
+				 @Param("customer_name")String customer_name,
+				 @Param("phone_no")String phone_no,
+				 @Param("date")String date,
+				 @Param("time")String time,
+				 @Param("address")String address
+	 );
+	     
+	     
+	     @Query(value = "call uci_get_vehicle_inspection_flow(:vehicle_id);", nativeQuery = true)
+	      Map<String,Object> vehicle_inspection_flow(@Param("vehicle_id")Integer vehicle_id);
+	     
+	     
+	     @Modifying(flushAutomatically = true)
+			 @Transactional
+			 @Query(value ="call uci_create_vehicle_status_flow(:vehicle_id, :status_id); ",nativeQuery =true)
+			 void update_vehicle_status_flow(
+					
+				      @Param("vehicle_id")Integer vehicle_id,
+					 @Param("status_id")Integer status_id
+					
+		 );
 	     
 }

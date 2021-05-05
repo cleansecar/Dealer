@@ -350,6 +350,46 @@ public class DealerHomeController {
 	}
 	
 	
+	@GetMapping("/getinspectionreportdata")
+	public ResponseEntity<Object> getinspectionreportdata(@RequestParam("vehicle_id") String vehicle_id) {		
+		Map<String,Object> details = dealerhomeservice.getinspectionreportdata(vehicle_id);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+		
+	
+	}
+	
+	@GetMapping("/gettestdriverequestlist")
+	public ResponseEntity<Object> gettestdriverequestlist(@RequestParam("vehicle_id") String vehicle_id) {		
+		Map<String,Object> details = dealerhomeservice.gettestdrivereqlist(vehicle_id);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+		
+	
+	}
+	
+	@GetMapping("/vehiclelinklist")
+	public ResponseEntity<Object> vehiclelinklist(@RequestParam("vehicle_id") String vehicle_id) {		
+		Map<String,Object> details = dealerhomeservice.getvehiclelinklist(vehicle_id);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+		
+	
+	}
+	
+	@PostMapping("/addnewtestdriverequest")
+	public ResponseEntity<Object>addnewtestdriverequest(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException{
+		dealerhomeservice.addnewtestdriverequest(dto);	
+		 Map<String, String> map = new HashMap<>();
+	        map.put("message", "Added successfully.");		
+		return com.autobrixusedcar.dealer.utils.Response.success(map);
+		
+	}
+	
+	@GetMapping("/getvehicleinspectionflow")
+	public ResponseEntity<Object> getvehicleinspectionflow(@RequestParam("vehicle_id") String vehicle_id) {		
+		Map<String,Object> details = dealerhomeservice.getVehicleInspectionFlow(vehicle_id);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	 }
+	
+	
 }
 
 

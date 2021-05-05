@@ -138,9 +138,16 @@ public class DealerShareRequestDTO {
 	private String fr_tyre_image;
 	private String rl_tyre_image;
 	private String rr_tyre_image;
+	private String profile_image;
 	
 	
 	
+	public String getProfile_image() {
+		return profile_image;
+	}
+	public void setProfile_image(String profile_image) {
+		this.profile_image = profile_image;
+	}
 	public String getIsdatachanged() {
 		return isdatachanged;
 	}
