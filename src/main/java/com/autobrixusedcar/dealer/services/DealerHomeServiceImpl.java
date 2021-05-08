@@ -278,7 +278,7 @@ public class DealerHomeServiceImpl implements DealerHomeService {
 
 	@Override
 	public Map<String, Object> gethomepagecarlist(DealerAddVehicleRequestDTO dto) {
-		List<Map<String,Object>> datalist = dealerhomerepository.home_page_carlist(Integer.valueOf(dto.getVendor_id()), Integer.valueOf(dto.getStatus_id()), dto.getSearchtext(),dto.getPage_no());
+		List<Map<String,Object>> datalist = dealerhomerepository.home_page_carlist(Integer.valueOf(dto.getVendor_id()), Integer.valueOf(dto.getStatus_id()), dto.getSearchtext(),Integer.valueOf(dto.getPage_no()));
 		List<Map<String,Object>> offers = dealerhomerepository.offer_list(Integer.valueOf(dto.getVendor_id()));
 
 		Map<String, Object> map = new HashMap<>();
@@ -690,6 +690,24 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 		 Map<String, Object> map = new HashMap<>();
 		map.put("getvehicleinspectioflowdata", vehicledata);
 		return map;
+	}
+
+
+	@Override
+	public Map<String, Object> lead_status_reason_list(String status_id, String sub_status_id) {
+		List<Map<String,Object>> datalist = dealerhomerepository.lead_status_reason_list(Integer.valueOf(status_id),null);
+		Map<String, Object> map = new HashMap<>();
+		map.put("getreasonlist", datalist);
+		return map;
+	}
+
+
+
+	@Override
+	public void updateenquirystatus(DealerAddVehicleRequestDTO dto) throws JPAException {
+	dealerhomerepository.update_enquiry_status( Integer.valueOf(dto.getLeadid()), Integer.valueOf(dto.getStatus_id()), Integer.valueOf(dto.getSubstatusid()),dto.getDate(),dto.getTime(),Integer.valueOf(dto.getQuestionid()),Integer.valueOf(dto.getOptionid()),dto.getComments());
+		
+		return;		
 	}
 	
 }
