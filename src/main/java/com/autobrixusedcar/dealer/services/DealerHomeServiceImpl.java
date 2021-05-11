@@ -709,5 +709,15 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 		
 		return;		
 	}
-	
+
+
+
+   @Override
+	public Map<String, Object> getleadhistorylist(String lead_id) {
+		List<Map<String,Object>> datalist = dealerhomerepository.lead_history_list(Integer.valueOf(lead_id));
+		Map<String, Object> map = new HashMap<>();
+		map.put("getleadhistorylist", datalist);
+		return map;
+	}
+   	
 }

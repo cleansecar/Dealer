@@ -407,6 +407,14 @@ public class DealerHomeController {
 		
 	}
 	
+	@GetMapping("/getleadhistorylist")
+	public ResponseEntity<Object> getleadhistorylist(@RequestParam("lead_id") String lead_id) {		
+		Map<String,Object> details = dealerhomeservice.getleadhistorylist(lead_id);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+		
+	
+	}
+	
 	
 }
 

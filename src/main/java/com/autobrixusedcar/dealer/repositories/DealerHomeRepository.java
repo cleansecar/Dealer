@@ -1049,12 +1049,12 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 		      List<Map<String,Object>> lead_status_reason_list(@Param("status_id")Integer status_id,@Param("sub_status_id")Integer sub_status_id);
                
                
-      	      @Modifying(flushAutomatically = true)
+      	     @Modifying(flushAutomatically = true)
     		 @Transactional
     		 @Query(value ="call uci_update_enquiry_status(:lead_id, :status_id, :sub_status_id,:selected_date,:selected_time,:question_id,:option_id,:comments); ",nativeQuery =true)
     		 void update_enquiry_status(
     				
-               		 @Param("lead_id")Integer lead_id,
+               	     @Param("lead_id")Integer lead_id,
     				 @Param("status_id")Integer status_id,
     				 @Param("sub_status_id")Integer sub_status_id,
     				 @Param("selected_date")String selected_date,
@@ -1062,6 +1062,9 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
     				 @Param("question_id")Integer question_id,
     				 @Param("option_id")Integer option_id,
     				 @Param("option_id")String comments );  
+      	     
+      	   @Query(value = "call uci_get_lead_history(:lead_id);", nativeQuery = true)
+ 	      List<Map<String,Object>> lead_history_list(@Param("lead_id")Integer lead_id);
       	     
       	 
 	     
