@@ -457,7 +457,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 
 	 
 	 @Query(value = "call uci_my_vehicle(:status_id, :dealerid,:searchtext,:page_no);", nativeQuery = true)
-			 List<Map<String,Object>> home_page_carlist(@Param("dealerid")Integer dealerid,@Param("status_id")Integer status_id,@Param("searchtext")String searchtext,@Param("page_no")String page_no);
+			 List<Map<String,Object>> home_page_carlist(@Param("dealerid")Integer dealerid,@Param("status_id")Integer status_id,@Param("searchtext")String searchtext,@Param("page_no")Integer page_no);
 	 
 	 
      @Modifying(flushAutomatically = true)
@@ -1034,7 +1034,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	      Map<String,Object> vehicle_inspection_flow(@Param("vehicle_id")Integer vehicle_id);
 	     
 	     
-	     @Modifying(flushAutomatically = true)
+	         @Modifying(flushAutomatically = true)
 			 @Transactional
 			 @Query(value ="call uci_create_vehicle_status_flow(:vehicle_id, :status_id); ",nativeQuery =true)
 			 void update_vehicle_status_flow(
@@ -1043,5 +1043,29 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 					 @Param("status_id")Integer status_id
 					
 		 );
+	         
+	         
+               @Query(value = "call uci_status_questions_list(:status_id,:sub_status_id);", nativeQuery = true)
+		      List<Map<String,Object>> lead_status_reason_list(@Param("status_id")Integer status_id,@Param("sub_status_id")Integer sub_status_id);
+               
+               
+      	     @Modifying(flushAutomatically = true)
+    		 @Transactional
+    		 @Query(value ="call uci_update_enquiry_status(:lead_id, :status_id, :sub_status_id,:selected_date,:selected_time,:question_id,:option_id,:comments); ",nativeQuery =true)
+    		 void update_enquiry_status(
+    				
+               	     @Param("lead_id")Integer lead_id,
+    				 @Param("status_id")Integer status_id,
+    				 @Param("sub_status_id")Integer sub_status_id,
+    				 @Param("selected_date")String selected_date,
+    				 @Param("selected_time")String selected_time,
+    				 @Param("question_id")Integer question_id,
+    				 @Param("option_id")Integer option_id,
+    				 @Param("option_id")String comments );  
+      	     
+      	   @Query(value = "call uci_get_lead_history(:lead_id);", nativeQuery = true)
+ 	      List<Map<String,Object>> lead_history_list(@Param("lead_id")Integer lead_id);
+      	     
+      	 
 	     
 }

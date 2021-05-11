@@ -387,7 +387,33 @@ public class DealerHomeController {
 	public ResponseEntity<Object> getvehicleinspectionflow(@RequestParam("vehicle_id") String vehicle_id) {		
 		Map<String,Object> details = dealerhomeservice.getVehicleInspectionFlow(vehicle_id);
 		return com.autobrixusedcar.dealer.utils.Response.success(details);
+		
 	 }
+	
+	@GetMapping("/getreasonlist")
+	public ResponseEntity<Object> getleadstatusreasonlist(@RequestParam("status_id") String status_id,@RequestParam("sub_status_id") String sub_status_id) {		
+		Map<String,Object> details = dealerhomeservice.lead_status_reason_list(status_id,sub_status_id);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+		
+	
+	}
+	
+	@PostMapping("/updateenquirystatus")
+	public ResponseEntity<Object>updateenquirystatus(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException{
+		dealerhomeservice.updateenquirystatus(dto);	
+		 Map<String, String> map = new HashMap<>();
+	        map.put("message", "Updated successfully.");		
+		return com.autobrixusedcar.dealer.utils.Response.success(map);
+		
+	}
+	
+	@GetMapping("/getleadhistorylist")
+	public ResponseEntity<Object> getleadhistorylist(@RequestParam("lead_id") String lead_id) {		
+		Map<String,Object> details = dealerhomeservice.getleadhistorylist(lead_id);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+		
+	
+	}
 	
 	
 }

@@ -82,5 +82,11 @@ public interface DealerHomeService {
 	void addnewtestdriverequest(DealerAddVehicleRequestDTO dto) throws JPAException;
 	
 	Map<String, Object> getVehicleInspectionFlow(String vehicle_id);
+	
+	Map<String, Object> lead_status_reason_list(String status_id,String sub_status_id);
+	
+	void updateenquirystatus(DealerAddVehicleRequestDTO dto) throws JPAException;
+	
+	Map<String, Object> getleadhistorylist(String lead_id);
 
 }

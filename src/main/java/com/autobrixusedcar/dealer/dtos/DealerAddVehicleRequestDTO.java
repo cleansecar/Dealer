@@ -93,8 +93,49 @@ public class DealerAddVehicleRequestDTO {
 	private String date;
 	private String time;
 	private String address;
+	private String leadid;
+	private String questionid;
+	private String optionid;
+	private String statusid;
+	private String substatusid;
+	private String comments;
 	
-	
+	public String getLeadid() {
+		return leadid;
+	}
+	public void setLeadid(String leadid) {
+		this.leadid = leadid;
+	}
+	public String getQuestionid() {
+		return questionid;
+	}
+	public void setQuestionid(String questionid) {
+		this.questionid = questionid;
+	}
+	public String getOptionid() {
+		return optionid;
+	}
+	public void setOptionid(String optionid) {
+		this.optionid = optionid;
+	}
+	public String getStatusid() {
+		return statusid;
+	}
+	public void setStatusid(String statusid) {
+		this.statusid = statusid;
+	}
+	public String getSubstatusid() {
+		return substatusid;
+	}
+	public void setSubstatusid(String substatusid) {
+		this.substatusid = substatusid;
+	}
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
 	public String getOwnership() {
 		return ownership;
 	}
