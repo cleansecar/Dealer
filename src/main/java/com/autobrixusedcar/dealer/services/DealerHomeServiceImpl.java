@@ -655,8 +655,8 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 
 
     @Override
-	public Map<String, Object> gettestdrivereqlist(String vehicle_id) {
-		List<Map<String,Object>> datalist = dealerhomerepository.test_drive_request_list(Integer.valueOf(vehicle_id));
+	public Map<String, Object> gettestdrivereqlist(String vehicle_id,String lead_id) {
+		List<Map<String,Object>> datalist = dealerhomerepository.test_drive_request_list(Integer.valueOf(vehicle_id),lead_id == null || lead_id.isEmpty() ? null : Integer.valueOf(lead_id));
 		Map<String, Object> map = new HashMap<>();
 		map.put("gettestdrivereqlist", datalist);
 		return map;
@@ -705,7 +705,7 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 
 	@Override
 	public void updateenquirystatus(DealerAddVehicleRequestDTO dto) throws JPAException {
-	dealerhomerepository.update_enquiry_status( Integer.valueOf(dto.getLeadid()), Integer.valueOf(dto.getStatus_id()), Integer.valueOf(dto.getSubstatusid()),dto.getDate(),dto.getTime(),Integer.valueOf(dto.getQuestionid()),Integer.valueOf(dto.getOptionid()),dto.getComments());
+	dealerhomerepository.update_enquiry_status( Integer.valueOf(dto.getLeadid()), Integer.valueOf(dto.getStatus_id()),dto.getSubstatusid() == null || dto.getSubstatusid() .isEmpty() ? null : Integer.valueOf(dto.getSubstatusid()),dto.getDate() == null || dto.getDate() .isEmpty() ? null : dto.getDate(),dto.getTime() == null || dto.getTime() .isEmpty() ? null : dto.getTime(),dto.getQuestionid() == null || dto.getQuestionid() .isEmpty() ? null : Integer.valueOf(dto.getQuestionid()),dto.getOptionid() == null || dto.getOptionid() .isEmpty() ? null : Integer.valueOf(dto.getOptionid()),dto.getComments());
 		
 		return;		
 	}
@@ -719,5 +719,5 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 		map.put("getleadhistorylist", datalist);
 		return map;
 	}
-   	
+  	
 }

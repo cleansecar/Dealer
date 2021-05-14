@@ -359,8 +359,8 @@ public class DealerHomeController {
 	}
 	
 	@GetMapping("/gettestdriverequestlist")
-	public ResponseEntity<Object> gettestdriverequestlist(@RequestParam("vehicle_id") String vehicle_id) {		
-		Map<String,Object> details = dealerhomeservice.gettestdrivereqlist(vehicle_id);
+	public ResponseEntity<Object> gettestdriverequestlist(@RequestParam("vehicle_id") String vehicle_id,@RequestParam("lead_id") String lead_id) {		
+		Map<String,Object> details = dealerhomeservice.gettestdrivereqlist(vehicle_id,lead_id);
 		return com.autobrixusedcar.dealer.utils.Response.success(details);
 		
 	

@@ -462,14 +462,13 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	 
      @Modifying(flushAutomatically = true)
 	 @Transactional
-	 @Query(value ="INSERT INTO uci_vehicle_enquiry_tbl (dealer_id, vehicle_id, customer_name, phone_no, description) VALUES (?,?,?,?,?); ",nativeQuery =true)
+	 @Query(value="call uci_create_enquiry(:dealer_id,:vehicle_id,:customer_name,:phone_no,:description);",nativeQuery = true)
 	 void insert_used_car_vehicle_enquiries(
 			 @Param("dealer_id")Integer dealer_id,
 			 @Param("vehicle_id")Integer vehicle_id,
 			 @Param("customer_name")String customer_name,
 			 @Param("phone_no")String phone_no,
 			 @Param("description")String description
-			
 			 );
      
      
@@ -597,7 +596,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	  
 	  			
 	  
-	     @Modifying(flushAutomatically = true)
+	    @Modifying(flushAutomatically = true)
 		 @Transactional
 		 @Query(value ="Insert Into uci_payments_tbl(user_id,uci_vehicle_id,actual_amount,final_discount,after_discount,tax_amount,final_amount,payment_option,follow_up_on,\n" + 
 		 		"		payment_mode_id,status,order_id,payment_link,reference_id)\n" + 
@@ -1009,8 +1008,8 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	     @Query(value = "call uci_vehicle_inspection_report_data(:vehicle_id);", nativeQuery = true)
 	      List<Map<String,Object>> inspection_report_data(@Param("vehicle_id")Integer vehicle_id);
 	     
-	     @Query(value = "call uci_get_test_drive_requests(:vehicle_id);", nativeQuery = true)
-	      List<Map<String,Object>> test_drive_request_list(@Param("vehicle_id")Integer vehicle_id);
+	     @Query(value = "call uci_get_test_drive_requests(:vehicle_id,:lead_id);", nativeQuery = true)
+	      List<Map<String,Object>> test_drive_request_list(@Param("vehicle_id")Integer vehicle_id,@Param("lead_id")Integer lead_id);
 	     
 	     @Query(value = "call uci_get_vehicle_info_links(:vehicle_id);", nativeQuery = true)
 	      List<Map<String,Object>> vehicle_info_link(@Param("vehicle_id")Integer vehicle_id);
@@ -1061,7 +1060,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
     				 @Param("selected_time")String selected_time,
     				 @Param("question_id")Integer question_id,
     				 @Param("option_id")Integer option_id,
-    				 @Param("option_id")String comments );  
+    				 @Param("comments")String comments );  
       	     
       	   @Query(value = "call uci_get_lead_history(:lead_id);", nativeQuery = true)
  	      List<Map<String,Object>> lead_history_list(@Param("lead_id")Integer lead_id);
