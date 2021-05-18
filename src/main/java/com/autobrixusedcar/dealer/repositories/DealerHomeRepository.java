@@ -12,10 +12,9 @@ import org.springframework.data.repository.query.Param;
 
 import com.autobrixusedcar.dealer.dtos.soldData;
 import com.autobrixusedcar.dealer.entities.BaseEntity;
-
 public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	
-	@Modifying(flushAutomatically = true)
+    @Modifying(flushAutomatically = true)
 	@Transactional
 	@Query(value = "insert into car_vendor_admin_master_tbl (vendor_name,owner_name,phone_no,alternative_no,location,landmark,created_by,city,state,latitude,longitude,\n" + 
 			"			adhar_card_image,adhar_card_number,pan_card_image,pan_card_number,driving_licence_image,driving_licence_number,suv_commission,hatchback_commission,sedan_commission,\n" + 
@@ -49,12 +48,10 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			@Param("pincode") String pincode
 			);
 	 
-	
-     @Query(value = "call used_car_home_page_sales_amount(:mobileno,:type,:fromdate,:todate,:duration)" , nativeQuery = true)
-	 Map<String, Object> used_car_home_page_sales_amount(@Param("mobileno")String mobileno,@Param("type")String type,@Param("fromdate")String fromdate,@Param("todate")String todate,@Param("duration") String duration);
+      @Query(value = "call used_car_home_page_sales_amount(:mobileno,:type,:fromdate,:todate,:duration)" , nativeQuery = true)
+	  Map<String, Object> used_car_home_page_sales_amount(@Param("mobileno")String mobileno,@Param("type")String type,@Param("fromdate")String fromdate,@Param("todate")String todate,@Param("duration") String duration);
 
-	 
-	 @Query(value = "call used_car_home_page_vendor_details(:mobileno,:type)" , nativeQuery = true)
+	  @Query(value = "call used_car_home_page_vendor_details(:mobileno,:type)" , nativeQuery = true)
 	 Map<String, Object> used_car_home_page_vendor_details(@Param("mobileno")String mobileno,@Param("type")String type);
 
 	 	
@@ -75,6 +72,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			 @Param("vendor_id")String vendor_id,
 			 @Param("car_type")String car_type
 			 );
+	 
 	 
 //	 
 //	 @Modifying(flushAutomatically = true)
@@ -515,7 +513,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
      
      @Query(value = "Select  \n" + 
      		"	udmpmt.d_package_id,umpmt.name as d_package_name,udmpmt.actual_price,udmpmt.final_discount,udmpmt.after_discount,\n" + 
-     		"    udmpmt.tax_percentage,udmpmt.tax_amount,udmpmt.final_amount\n" + 
+     		"    udmpmt.tax_percentage,udmpmt.tax_amount,round(udmpmt.final_amount) as final_amount\n" + 
      		"\n" + 
      		"from uci_dealer_main_package_mapping_tbl udmpmt\n" + 
      		"Inner Join uci_main_package_master_tbl umpmt on umpmt.main_package_id=udmpmt.main_package_id\n" + 
@@ -528,14 +526,14 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
       List<Map<String,Object>> package_list(@Param("dealerid")Integer dealerid,@Param("categoryid")Integer categoryid);
      
      
-     @Query(value = "Select uaoppmt.id,uaomt.name,uaoppmt.actual_price,uaoppmt.final_discount,uaoppmt.after_discount,uaoppmt.tax_percentage,uaoppmt.tax_amount,uaoppmt.final_amount,'N' as is_warranty\n" + 
+     @Query(value = "Select uaoppmt.id,uaomt.name,uaoppmt.actual_price,uaoppmt.final_discount,uaoppmt.after_discount,uaoppmt.tax_percentage,uaoppmt.tax_amount,round(uaoppmt.final_amount) as final_amount,'N' as is_warranty\n" + 
      		"From uci_add_ons_package_price_mapping_tbl uaoppmt\n" + 
      		"Inner Join uci_add_ons_master_tbl uaomt on uaomt.id=uaoppmt.add_on_id\n" + 
      		"Where uaomt.is_active='Y'\n" + 
      		"and Date(now()) between Date(uaoppmt.valid_from) and Date(uaoppmt.valid_to)\n" + 
      		"and uaoppmt.dealer_id=1 and uaoppmt.category_id=1\n" + 
      		"UNION ALL\n" + 
-     		"select udwpmt.id,uwpmt.name,udwpmt.actual_price,udwpmt.final_discount,udwpmt.after_discount,udwpmt.tax_percentage,udwpmt.tax_amount,udwpmt.final_amount,'Y' as is_warranty\n" + 
+     		"select udwpmt.id,uwpmt.name,udwpmt.actual_price,udwpmt.final_discount,udwpmt.after_discount,udwpmt.tax_percentage,udwpmt.tax_amount,round(udwpmt.final_amount) as final_amount,'Y' as is_warranty\n" + 
      		"From uci_dealer_warranty_package_mapping_tbl udwpmt\n" + 
      		"Inner Join uci_warranty_package_price_mapping_tbl uwppmt on uwppmt.id=udwpmt.wp_package_id\n" + 
      		"Inner Join uci_warranty_package_master_tbl uwpmt on uwpmt.id=uwppmt.w_package_id\n" + 
@@ -640,7 +638,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	     @Query(value = "select umpmt.name as main_package_name,date_format(ucpmt.valid_from, \"%d/%m/%y\") as valid_from,\n" + 
 	     		"        date_format(ucpmt.valid_to, \"%d/%m/%y\") as valid_to,\n" + 
 	     		"        udmpmt.actual_price,\n" + 
-	     		"        udmpmt.final_discount,udmpmt.after_discount,udmpmt.tax_amount,udmpmt.final_amount\n" + 
+	     		"        udmpmt.final_discount,udmpmt.after_discount,udmpmt.tax_amount,round(udmpmt.final_amount) as final_amount\n" + 
 	     		"		from uci_customer_package_mapping_tbl ucpmt\n" + 
 	     		"		Inner Join uci_dealer_main_package_mapping_tbl udmpmt on udmpmt.d_package_id=ucpmt.d_package_id\n" + 
 	     		"			and udmpmt.is_active='Y'\n" + 
@@ -652,7 +650,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	     
 	     
 	     @Query(value = "Select uvaot.id,uaomt.name,uvaot.actual_price,uvaot.final_discount,uvaot.after_discount,\n" + 
-	     		"		uvaot.tax_amount,uvaot.final_amount,'N' as is_warranty,\n" + 
+	     		"		uvaot.tax_amount,round(uvaot.final_amount) as final_amount,'N' as is_warranty,\n" + 
 	     		"        date_format(uvaot.valid_from, \"%d/%m/%y\") as valid_from,\n" + 
 	     		"        date_format(uvaot.valid_to, \"%d/%m/%y\") as valid_to\n" + 
 	     		"		From uci_vehicle_add_ons_tbl uvaot\n" + 
@@ -663,7 +661,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	     		"		and uvaot.vehicle_id=:vehicle_id\n" + 
 	     		"		UNION ALL\n" + 
 	     		"		select ucwpmt.id,uwpmt.name,udwpmt.actual_price,udwpmt.final_discount,udwpmt.after_discount,\n" + 
-	     		"		udwpmt.tax_amount,udwpmt.final_amount,'Y' as is_warranty,\n" + 
+	     		"		udwpmt.tax_amount,round(udwpmt.final_amount) as final_amount,'Y' as is_warranty,\n" + 
 	     		"        date_format(ucwpmt.valid_from, \"%d/%m/%y\") as valid_from,\n" + 
 	     		"        date_format(ucwpmt.valid_to, \"%d/%m/%y\") as valid_to\n" + 
 	     		"		From uci_customer_warranty_package_mapping_tbl ucwpmt\n" + 
@@ -1005,10 +1003,10 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 	  	 void generateurl( @Param("url_id")Integer url_id,@Param("url_code")String url_code,@Param("mainurl")String mainurl);
 	     
 	     
-	     @Query(value = "call uci_vehicle_inspection_report_data(:vehicle_id);", nativeQuery = true)
+	      @Query(value = "call uci_vehicle_inspection_report_data(:vehicle_id);", nativeQuery = true)
 	      List<Map<String,Object>> inspection_report_data(@Param("vehicle_id")Integer vehicle_id);
 	     
-	     @Query(value = "call uci_get_test_drive_requests(:vehicle_id,:lead_id);", nativeQuery = true)
+	      @Query(value = "call uci_get_test_drive_requests(:vehicle_id,:lead_id);", nativeQuery = true)
 	      List<Map<String,Object>> test_drive_request_list(@Param("vehicle_id")Integer vehicle_id,@Param("lead_id")Integer lead_id);
 	     
 	     @Query(value = "call uci_get_vehicle_info_links(:vehicle_id);", nativeQuery = true)
@@ -1048,10 +1046,13 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 		      List<Map<String,Object>> lead_status_reason_list(@Param("status_id")Integer status_id,@Param("sub_status_id")Integer sub_status_id);
                
                
+             
+               
+               
       	     @Modifying(flushAutomatically = true)
-    		 @Transactional
+   		 @Transactional
     		 @Query(value ="call uci_update_enquiry_status(:lead_id, :status_id, :sub_status_id,:selected_date,:selected_time,:question_id,:option_id,:comments); ",nativeQuery =true)
-    		 void update_enquiry_status(
+      	   void update_enquiry_status(
     				
                	     @Param("lead_id")Integer lead_id,
     				 @Param("status_id")Integer status_id,
@@ -1062,8 +1063,32 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
     				 @Param("option_id")Integer option_id,
     				 @Param("comments")String comments );  
       	     
+             
+      	 
+    		 @Query(value ="call uci_update_enquiry_status(:lead_id, :status_id, :sub_status_id,:selected_date,:selected_time,:question_id,:option_id,:comments); ",nativeQuery =true)
+      	   Integer update_cancel_status(
+    				
+               	     @Param("lead_id")Integer lead_id,
+    				 @Param("status_id")Integer status_id,
+    				 @Param("sub_status_id")Integer sub_status_id,
+    				 @Param("selected_date")String selected_date,
+    				 @Param("selected_time")String selected_time,
+    				 @Param("question_id")Integer question_id,
+    				 @Param("option_id")Integer option_id,
+    				 @Param("comments")String comments );  
+    		 
+  	     @Modifying(flushAutomatically = true)
+		 @Transactional
+		 @Query(value ="call uci_create_lead_flow_reasons(:lead_flow_id, :question_id, :option_ids,:comments); ",nativeQuery =true)
+  	     void update_cancel_reasons(
+           	     @Param("lead_flow_id")Integer lead_flow_id,
+				 @Param("question_id")Integer question_id,
+				 @Param("option_ids")String option_ids,
+				 @Param("comments")String comments);   
+    		 
+      	     
       	   @Query(value = "call uci_get_lead_history(:lead_id);", nativeQuery = true)
- 	      List<Map<String,Object>> lead_history_list(@Param("lead_id")Integer lead_id);
+ 	       List<Map<String,Object>> lead_history_list(@Param("lead_id")Integer lead_id);
       	     
       	 
 	     
