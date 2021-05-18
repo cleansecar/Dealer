@@ -75,7 +75,7 @@ public interface DealerHomeService {
 	
 	Map<String, Object> getinspectionreportdata(String vehicle_id);
 	
-	Map<String, Object> gettestdrivereqlist(String vehicle_id);
+	Map<String, Object> gettestdrivereqlist(String vehicle_id,String lead_id);
 	
 	Map<String, Object> getvehiclelinklist(String vehicle_id);
 	
@@ -88,5 +88,7 @@ public interface DealerHomeService {
 	void updateenquirystatus(DealerAddVehicleRequestDTO dto) throws JPAException;
 	
 	Map<String, Object> getleadhistorylist(String lead_id);
+	
+	void cancelstatusupdate(DealerAddVehicleRequestDTO dto) throws JPAException;
 
 }
