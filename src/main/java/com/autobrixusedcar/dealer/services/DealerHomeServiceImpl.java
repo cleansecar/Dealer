@@ -724,10 +724,12 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 
 @Override
 public void cancelstatusupdate(DealerAddVehicleRequestDTO dto) throws JPAException {
-	
-	dealerhomerepository.update_cancel_status(Integer.valueOf(dto.getLeadid()), Integer.valueOf(dto.getStatus_id()),dto.getSubstatusid() == null || dto.getSubstatusid() .isEmpty() ? null : Integer.valueOf(dto.getSubstatusid()),dto.getDate() == null || dto.getDate() .isEmpty() ? null : dto.getDate(),dto.getTime() == null || dto.getTime() .isEmpty() ? null : dto.getTime(),dto.getQuestionid() == null || dto.getQuestionid() .isEmpty() ? null : Integer.valueOf(dto.getQuestionid()),dto.getOptionid() == null || dto.getOptionid() .isEmpty() ? null : Integer.valueOf(dto.getOptionid()),dto.getComments());
-
-	// TODO Auto-generated method stub
+	  List<Map<String,Object>> data = dto.getCanceloptionsarr();
+			for (Map<String, Object> map : data) {
+				Integer value = dealerhomerepository.update_cancel_status(Integer.valueOf(dto.getLeadid()), Integer.valueOf(dto.getStatus_id()),dto.getSubstatusid() == null || dto.getSubstatusid() .isEmpty() ? null : Integer.valueOf(dto.getSubstatusid()),dto.getDate() == null || dto.getDate() .isEmpty() ? null : dto.getDate(),dto.getTime() == null || dto.getTime() .isEmpty() ? null : dto.getTime(), Integer.valueOf(map.get("questionid").toString()),dto.getOptionid() == null || dto.getOptionid() .isEmpty() ? null : Integer.valueOf(dto.getOptionid()),dto.getComments());
+				dealerhomerepository.update_cancel_reasons(value, Integer.valueOf(map.get("questionid").toString()), "", "");		
+			}
+			return;
 	
 }
   	

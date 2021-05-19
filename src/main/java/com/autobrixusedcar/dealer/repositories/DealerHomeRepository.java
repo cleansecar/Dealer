@@ -1065,30 +1065,31 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
       	     
              
       	 
-    		 @Query(value ="call uci_update_enquiry_status(:lead_id, :status_id, :sub_status_id,:selected_date,:selected_time,:question_id,:option_id,:comments); ",nativeQuery =true)
-      	   Integer update_cancel_status(
-    				
-               	     @Param("lead_id")Integer lead_id,
-    				 @Param("status_id")Integer status_id,
-    				 @Param("sub_status_id")Integer sub_status_id,
-    				 @Param("selected_date")String selected_date,
-    				 @Param("selected_time")String selected_time,
-    				 @Param("question_id")Integer question_id,
-    				 @Param("option_id")Integer option_id,
-    				 @Param("comments")String comments );  
-    		 
-  	     @Modifying(flushAutomatically = true)
-		 @Transactional
-		 @Query(value ="call uci_create_lead_flow_reasons(:lead_flow_id, :question_id, :option_ids,:comments); ",nativeQuery =true)
-  	     void update_cancel_reasons(
-           	     @Param("lead_flow_id")Integer lead_flow_id,
-				 @Param("question_id")Integer question_id,
-				 @Param("option_ids")String option_ids,
-				 @Param("comments")String comments);   
-    		 
-      	     
+    
       	   @Query(value = "call uci_get_lead_history(:lead_id);", nativeQuery = true)
  	       List<Map<String,Object>> lead_history_list(@Param("lead_id")Integer lead_id);
+      	   
+      	   
+      	 @Query(value ="call uci_update_enquiry_status(:lead_id, :status_id, :sub_status_id,:selected_date,:selected_time,:question_id,:option_id,:comments); ",nativeQuery =true)
+	       Integer update_cancel_status(
+				
+         	     @Param("lead_id")Integer lead_id,
+				 @Param("status_id")Integer status_id,
+				 @Param("sub_status_id")Integer sub_status_id,
+				 @Param("selected_date")String selected_date,
+				 @Param("selected_time")String selected_time,
+				 @Param("question_id")Integer question_id,
+				 @Param("option_id")Integer option_id,
+				 @Param("comments")String comments );  
+		 
+     @Modifying(flushAutomatically = true)
+	 @Transactional
+	 @Query(value ="call uci_create_lead_flow_reasons(:lead_flow_id, :question_id, :option_ids,:comments); ",nativeQuery =true)
+     void update_cancel_reasons(
+     	     @Param("lead_flow_id")Integer lead_flow_id,
+			 @Param("question_id")Integer question_id,
+			 @Param("option_ids")String option_ids,
+			 @Param("comments")String comments); 
       	     
       	 
 	     

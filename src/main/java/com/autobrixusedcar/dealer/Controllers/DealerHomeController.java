@@ -416,6 +416,16 @@ public class DealerHomeController {
 	}
 	
 	
+    @PostMapping("/updateCancelenquirystatus")
+	public ResponseEntity<Object>updateCancelenquirystatus(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException{
+		dealerhomeservice.cancelstatusupdate(dto);	
+		 Map<String, String> map = new HashMap<>();
+	        map.put("message", "Updated successfully.");		
+		return com.autobrixusedcar.dealer.utils.Response.success(map);
+		
+	}
+	
+	
 }
 
 
