@@ -57,6 +57,16 @@ public class DealerAddVehicleRequestDTO {
 	private String maintenance_url;
 	private String test_drive;
 	private String test_drive_type;
+	
+private List<Map<String, Object>> canceloptionsarr;
+
+	
+	public List<Map<String, Object>> getCanceloptionsarr() {
+		return canceloptionsarr;
+	}
+	public void setCanceloptionsarr(List<Map<String, Object>> canceloptionsarr) {
+		this.canceloptionsarr = canceloptionsarr;
+	}
 	public String getDate() {
 		return date;
 	}
