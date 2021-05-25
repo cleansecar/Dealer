@@ -59,8 +59,44 @@ public class DealerAddVehicleRequestDTO {
 	private String test_drive_type;
 	
 private List<Map<String, Object>> canceloptionsarr;
+private List<Map<String, Object>> vehiclearr;
+public List<Map<String, Object>> getCategoryarr() {
+	return categoryarr;
+}
+public void setCategoryarr(List<Map<String, Object>> categoryarr) {
+	this.categoryarr = categoryarr;
+}
+public List<Map<String, Object>> getBrandarr() {
+	return brandarr;
+}
+public void setBrandarr(List<Map<String, Object>> brandarr) {
+	this.brandarr = brandarr;
+}
+public List<Map<String, Object>> getOwnerarr() {
+	return ownerarr;
+}
+public void setOwnerarr(List<Map<String, Object>> ownerarr) {
+	this.ownerarr = ownerarr;
+}
+public List<Map<String, Object>> getColorarr() {
+	return colorarr;
+}
+public void setColorarr(List<Map<String, Object>> colorarr) {
+	this.colorarr = colorarr;
+}
+
+private List<Map<String, Object>> categoryarr;
+private List<Map<String, Object>> brandarr;
+private List<Map<String, Object>> ownerarr;
+private List<Map<String, Object>> colorarr;
 
 	
+	public List<Map<String, Object>> getVehiclearr() {
+	return vehiclearr;
+}
+public void setVehiclearr(List<Map<String, Object>> vehiclearr) {
+	this.vehiclearr = vehiclearr;
+}
 	public List<Map<String, Object>> getCanceloptionsarr() {
 		return canceloptionsarr;
 	}

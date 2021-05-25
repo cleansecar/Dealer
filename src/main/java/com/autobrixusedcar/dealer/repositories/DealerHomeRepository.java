@@ -1090,7 +1090,39 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 			 @Param("question_id")Integer question_id,
 			 @Param("option_ids")String option_ids,
 			 @Param("comments")String comments); 
-      	     
+     
+     
+     @Modifying(flushAutomatically = true)
+ 	 @Transactional
+	 @Query(value ="call uci_create_new_customer_enquiry(:dealer_id, :vehicle_id, :customer_name,:customer_no,:main_status_id,:sub_status_id,:selected_date,:selected_time,:description); ",nativeQuery =true)
+     void update_enquiry_customer(
+			
+   	         @Param("dealer_id")Integer dealer_id,
+			 @Param("vehicle_id")Integer vehicle_id,
+			 @Param("customer_name")String customer_name,
+			 @Param("customer_no")String customer_no,
+			 @Param("main_status_id")Integer main_status_id,
+			 @Param("sub_status_id")Integer sub_status_id,
+			 @Param("selected_date")String selected_date,
+			 @Param("selected_time")String selected_time, 
+	         @Param("description")String description ); 
+
+	 
+     @Query(value = "call uci_dealer_vehicle_filters(:lead_id);", nativeQuery = true)
+      List<Map<String,Object>> lead_filter_list(@Param("lead_id")Integer lead_id);
+     
+     
+     @Query(value = "call uci_dealer_vehicle_filter_data(:dealer_id);\n" + 
+	     		"", nativeQuery = true)
+     Map<String,Object> filter_min_max_data(@Param("dealer_id")Integer dealer_id);
+     
+     @Modifying(flushAutomatically = true)
+ 	 @Transactional
+	 @Query(value ="call uci_vehicles_list(:dealer_id, :category_ids, :brand_ids,:ownership_ids,:colors,:min_price,:max_price,:min_odometer,:max_odometer); ",nativeQuery =true)
+     List<Map<String,Object>> getfiltered_vehicles(@Param("dealer_id")Integer dealer_id,@Param("category_ids")Integer category_ids,@Param("brand_ids")Integer brand_ids,@Param("ownership_ids")Integer ownership_ids,@Param("colors")String colors,@Param("min_price")String min_price,@Param("max_price")String max_price,@Param("min_odometer")String min_odometer,@Param("max_odometer")String max_odometer);
+
+  
+   
       	 
 	     
 }

@@ -489,8 +489,12 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 			mapObjVertical.put("phone_no", Obj.getphone_no());
 			mapObjVertical.put("payment_status", Obj.getpayment_status());
 			mapObjVertical.put("payment_amount", Obj.getpayment_amount());
+			mapObjVertical.put("sold_on", Obj.getsold_on());
+
+
+
 			
-			List<soldData> packagedata = dealerhomerepository.sold_vehicle_packaddonlist(Obj.getvehicle_id());
+	     List<soldData> packagedata = dealerhomerepository.sold_vehicle_packaddonlist(Obj.getvehicle_id());
 			ArrayList<Map<String, Object>> packageslist = new ArrayList<Map<String, Object>>();
 			
 			packagedata.forEach(Obj1 -> {
@@ -546,8 +550,7 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 	
 		List<Map<String,Object>> datalist = dealerhomerepository.share_category_list(Integer.valueOf(vehicle_id),Integer.valueOf(dealer_id));
 	    Map<String,Object> getsubcategorylist = dealerhomerepository.share_subcategory_list(Integer.valueOf(vehicle_id), null, Integer.valueOf(dealer_id));
-		
-        Map<String, Object> map = new HashMap<>();
+		 Map<String, Object> map = new HashMap<>();
 		map.put("getsharecategorylist", datalist);
 		map.put("getallsubcategorylist", getsubcategorylist);
 		return map;
@@ -732,5 +735,65 @@ public void cancelstatusupdate(DealerAddVehicleRequestDTO dto) throws JPAExcepti
 			return;
 	
 }
+
+       @Override
+       public void addgeneralenquiry(DealerAddVehicleRequestDTO dto) throws JPAException {
+	    List<Map<String,Object>> data = dto.getVehiclearr();
+		for (Map<String, Object> map : data) {
+			dealerhomerepository.update_enquiry_customer(Integer.valueOf(dto.getLeadid()), Integer.valueOf(map.get("vehicleid").toString()), dto.getCustomername(), dto.getCustomerno(), Integer.valueOf(dto.getStatus_id()),dto.getSubstatusid() == null || dto.getSubstatusid() .isEmpty() ? null : Integer.valueOf(dto.getSubstatusid()),dto.getDate() == null || dto.getDate() .isEmpty() ? null : dto.getDate(),dto.getTime() == null || dto.getTime() .isEmpty() ? null : dto.getTime(), dto.getComments());		
+		}
+		return;
+	
+}
+
+
+
+	@Override
+	public Map<String, Object> getenquiryfilterlist(DealerAddVehicleRequestDTO dto) {
+		List<Map<String,Object>> datalist = dealerhomerepository.lead_filter_list(Integer.valueOf(dto.getVendor_id()));
+	    Map<String,Object> minmaxvalue = dealerhomerepository.filter_min_max_data(Integer.valueOf(dto.getVendor_id()));
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("getenquiryfilterlist", datalist);
+		map.put("getenquiryminmaxvalue", minmaxvalue);
+		return map;
+	}
+
+
+
+	@Override
+	public Map<String, Object> getfilteredvehiclelist(DealerAddVehicleRequestDTO dto) {
+		   List<Map<String,Object>> categoryid = dto.getCategoryarr();
+		   List<Map<String,Object>> brandid = dto.getBrandarr();
+		   List<Map<String,Object>> ownerid = dto.getOwnerarr();
+		   List<Map<String,Object>> colorr = dto.getColorarr();
+		   
+		   for (Map<String, Object> map : categoryid) {
+			   //List<Map<String,Object>> datalist = dealerhomerepository.getfiltered_vehicles(Integer.valueOf(dto.getVendor_id()), category_ids, brand_ids, ownership_ids, colors, min_price, max_price, min_odometer, max_odometer);		
+			}
+		   
+		   
+		   for (Map<String, Object> map : brandid) {
+				Integer value = dealerhomerepository.update_cancel_status(Integer.valueOf(dto.getLeadid()), Integer.valueOf(dto.getStatus_id()),dto.getSubstatusid() == null || dto.getSubstatusid() .isEmpty() ? null : Integer.valueOf(dto.getSubstatusid()),dto.getDate() == null || dto.getDate() .isEmpty() ? null : dto.getDate(),dto.getTime() == null || dto.getTime() .isEmpty() ? null : dto.getTime(), Integer.valueOf(map.get("questionid").toString()),dto.getOptionid() == null || dto.getOptionid() .isEmpty() ? null : Integer.valueOf(dto.getOptionid()),dto.getComments());
+				dealerhomerepository.update_cancel_reasons(value, Integer.valueOf(map.get("questionid").toString()), "", "");		
+			}
+		   
+		   for (Map<String, Object> map : ownerid) {
+				Integer value = dealerhomerepository.update_cancel_status(Integer.valueOf(dto.getLeadid()), Integer.valueOf(dto.getStatus_id()),dto.getSubstatusid() == null || dto.getSubstatusid() .isEmpty() ? null : Integer.valueOf(dto.getSubstatusid()),dto.getDate() == null || dto.getDate() .isEmpty() ? null : dto.getDate(),dto.getTime() == null || dto.getTime() .isEmpty() ? null : dto.getTime(), Integer.valueOf(map.get("questionid").toString()),dto.getOptionid() == null || dto.getOptionid() .isEmpty() ? null : Integer.valueOf(dto.getOptionid()),dto.getComments());
+				dealerhomerepository.update_cancel_reasons(value, Integer.valueOf(map.get("questionid").toString()), "", "");		
+			}
+		   
+		   for (Map<String, Object> map : colorr) {
+				Integer value = dealerhomerepository.update_cancel_status(Integer.valueOf(dto.getLeadid()), Integer.valueOf(dto.getStatus_id()),dto.getSubstatusid() == null || dto.getSubstatusid() .isEmpty() ? null : Integer.valueOf(dto.getSubstatusid()),dto.getDate() == null || dto.getDate() .isEmpty() ? null : dto.getDate(),dto.getTime() == null || dto.getTime() .isEmpty() ? null : dto.getTime(), Integer.valueOf(map.get("questionid").toString()),dto.getOptionid() == null || dto.getOptionid() .isEmpty() ? null : Integer.valueOf(dto.getOptionid()),dto.getComments());
+				dealerhomerepository.update_cancel_reasons(value, Integer.valueOf(map.get("questionid").toString()), "", "");		
+			}
+		   
+		   Map<String, Object> map = new HashMap<>();
+//			map.put("getfilteredvehiclelist", datalist);
+		   
+		   
+		   return map;
+	}
+
   	
 }
