@@ -90,5 +90,15 @@ public interface DealerHomeService {
 	Map<String, Object> getleadhistorylist(String lead_id);
 	
 	void cancelstatusupdate(DealerAddVehicleRequestDTO dto) throws JPAException;
+	
+	void addgeneralenquiry(DealerAddVehicleRequestDTO dto) throws JPAException;
+	
+	Map<String,Object> getenquiryfilterlist(DealerAddVehicleRequestDTO dto);
+	
+	Map<String,Object> getfilteredvehiclelist(DealerAddVehicleRequestDTO dto);
+	
+
+	
+	
 
 }

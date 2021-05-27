@@ -14,7 +14,10 @@ public interface soldData {
 	
 
 	public String getfuel_type();
-	
+	public String getsold_on();
+
+
+
 
 	public String getbrand_icon();
 	

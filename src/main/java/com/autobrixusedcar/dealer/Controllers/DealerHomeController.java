@@ -424,7 +424,33 @@ public class DealerHomeController {
 		return com.autobrixusedcar.dealer.utils.Response.success(map);
 		
 	}
+    
+    
+    @PostMapping("/addgeneralenquiry")
+  	public ResponseEntity<Object>addgenaralenquiry(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException{
+  		dealerhomeservice.cancelstatusupdate(dto);	
+  		 Map<String, String> map = new HashMap<>();
+  	        map.put("message", "Updated successfully.");		
+  		return com.autobrixusedcar.dealer.utils.Response.success(map);
+  		
+  	}
+    
+	@PostMapping("/getfilterlist")
+	public ResponseEntity<Object> getfilterlist(@RequestBody DealerAddVehicleRequestDTO dto) {
+	 Map<String,Object> details = dealerhomeservice.getenquiryfilterlist(dto);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+
+		
+	}
 	
+	
+	@PostMapping("/getfilteredvehiclelist")
+	public ResponseEntity<Object>getfilteredvehiclelist(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException{
+		Map<String,Object> details = dealerhomeservice.getfilteredvehiclelist(dto);
+	    
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+		
+	}
 	
 }
 
