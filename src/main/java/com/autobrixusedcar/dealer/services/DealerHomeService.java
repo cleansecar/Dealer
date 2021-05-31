@@ -95,10 +95,7 @@ public interface DealerHomeService {
 	
 	Map<String,Object> getenquiryfilterlist(DealerAddVehicleRequestDTO dto);
 	
-	Map<String,Object> getfilteredvehiclelist(DealerAddVehicleRequestDTO dto);
-	
-
-	
+	Map<String,Object> getfilteredvehiclelist(String dealer_id,String category_ids,String brand_ids,String ownership_ids,String colors,String min_price,String max_price,String min_odometer,String max_odometer);
 	
 
 }

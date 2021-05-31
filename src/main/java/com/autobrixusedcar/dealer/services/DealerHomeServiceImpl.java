@@ -753,47 +753,23 @@ public void cancelstatusupdate(DealerAddVehicleRequestDTO dto) throws JPAExcepti
 		List<Map<String,Object>> datalist = dealerhomerepository.lead_filter_list(Integer.valueOf(dto.getVendor_id()));
 	    Map<String,Object> minmaxvalue = dealerhomerepository.filter_min_max_data(Integer.valueOf(dto.getVendor_id()));
 
-		Map<String, Object> map = new HashMap<>();
+	    Map<String, Object> map = new HashMap<>();
+		Map<String, Object> mapmain = new HashMap<>();
 		map.put("getenquiryfilterlist", datalist);
 		map.put("getenquiryminmaxvalue", minmaxvalue);
-		return map;
+		mapmain.put("Enquiryfilterlist", map);
+		return mapmain;
 	}
 
 
-
-	@Override
-	public Map<String, Object> getfilteredvehiclelist(DealerAddVehicleRequestDTO dto) {
-		   List<Map<String,Object>> categoryid = dto.getCategoryarr();
-		   List<Map<String,Object>> brandid = dto.getBrandarr();
-		   List<Map<String,Object>> ownerid = dto.getOwnerarr();
-		   List<Map<String,Object>> colorr = dto.getColorarr();
-		   
-		   for (Map<String, Object> map : categoryid) {
-			   //List<Map<String,Object>> datalist = dealerhomerepository.getfiltered_vehicles(Integer.valueOf(dto.getVendor_id()), category_ids, brand_ids, ownership_ids, colors, min_price, max_price, min_odometer, max_odometer);		
-			}
-		   
-		   
-		   for (Map<String, Object> map : brandid) {
-				Integer value = dealerhomerepository.update_cancel_status(Integer.valueOf(dto.getLeadid()), Integer.valueOf(dto.getStatus_id()),dto.getSubstatusid() == null || dto.getSubstatusid() .isEmpty() ? null : Integer.valueOf(dto.getSubstatusid()),dto.getDate() == null || dto.getDate() .isEmpty() ? null : dto.getDate(),dto.getTime() == null || dto.getTime() .isEmpty() ? null : dto.getTime(), Integer.valueOf(map.get("questionid").toString()),dto.getOptionid() == null || dto.getOptionid() .isEmpty() ? null : Integer.valueOf(dto.getOptionid()),dto.getComments());
-				dealerhomerepository.update_cancel_reasons(value, Integer.valueOf(map.get("questionid").toString()), "", "");		
-			}
-		   
-		   for (Map<String, Object> map : ownerid) {
-				Integer value = dealerhomerepository.update_cancel_status(Integer.valueOf(dto.getLeadid()), Integer.valueOf(dto.getStatus_id()),dto.getSubstatusid() == null || dto.getSubstatusid() .isEmpty() ? null : Integer.valueOf(dto.getSubstatusid()),dto.getDate() == null || dto.getDate() .isEmpty() ? null : dto.getDate(),dto.getTime() == null || dto.getTime() .isEmpty() ? null : dto.getTime(), Integer.valueOf(map.get("questionid").toString()),dto.getOptionid() == null || dto.getOptionid() .isEmpty() ? null : Integer.valueOf(dto.getOptionid()),dto.getComments());
-				dealerhomerepository.update_cancel_reasons(value, Integer.valueOf(map.get("questionid").toString()), "", "");		
-			}
-		   
-		   for (Map<String, Object> map : colorr) {
-				Integer value = dealerhomerepository.update_cancel_status(Integer.valueOf(dto.getLeadid()), Integer.valueOf(dto.getStatus_id()),dto.getSubstatusid() == null || dto.getSubstatusid() .isEmpty() ? null : Integer.valueOf(dto.getSubstatusid()),dto.getDate() == null || dto.getDate() .isEmpty() ? null : dto.getDate(),dto.getTime() == null || dto.getTime() .isEmpty() ? null : dto.getTime(), Integer.valueOf(map.get("questionid").toString()),dto.getOptionid() == null || dto.getOptionid() .isEmpty() ? null : Integer.valueOf(dto.getOptionid()),dto.getComments());
-				dealerhomerepository.update_cancel_reasons(value, Integer.valueOf(map.get("questionid").toString()), "", "");		
-			}
-		   
-		   Map<String, Object> map = new HashMap<>();
-//			map.put("getfilteredvehiclelist", datalist);
-		   
-		   
-		   return map;
-	}
-
-  	
+    @Override
+	public Map<String, Object> getfilteredvehiclelist(String dealer_id, String category_ids, String brand_ids,
+			String ownership_ids, String colors, String min_price, String max_price, String min_odometer,
+			String max_odometer) {
+	    	List<Map<String,Object>> datalist = dealerhomerepository.getfiltered_vehicles(Integer.valueOf(dealer_id), category_ids == null || category_ids.isEmpty() ? null : category_ids, brand_ids == null || brand_ids.isEmpty() ? null : brand_ids, ownership_ids == null || ownership_ids.isEmpty() ? null : ownership_ids, colors, min_price, max_price, min_odometer, max_odometer);
+		    Map<String, Object> map = new HashMap<>();
+		    map.put("getfilteredvehiclelist", datalist);
+		    return map;
+		    
+	}	
 }

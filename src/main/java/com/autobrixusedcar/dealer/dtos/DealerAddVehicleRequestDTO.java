@@ -12,7 +12,6 @@ public class DealerAddVehicleRequestDTO {
 	private String fuel_type;
 	private String vehicle_no;
 	private String manfufacturing_year;
-	
 	private String car_type;
 	private String saleid;
 	private String actualamount;
@@ -24,12 +23,10 @@ public class DealerAddVehicleRequestDTO {
 	private String vehicleid;
 	private String customername;
 	private String customerno;
-	
 	private String model_id;
 	private String couponid;
 	private String couponcode;
-
-	private String ownership_id;
+    private String ownership_id;
 	private String insurance_validity;
 	private String about_car;
 	private String status_id;
@@ -135,7 +132,6 @@ public void setVehiclearr(List<Map<String, Object>> vehiclearr) {
 	private String power_windows;
 	private String am_fm_radio;
 	private String usb_compability;
-	
 	private String date;
 	private String time;
 	private String address;
@@ -145,7 +141,6 @@ public void setVehiclearr(List<Map<String, Object>> vehiclearr) {
 	private String statusid;
 	private String substatusid;
 	private String comments;
-	
 	public String getLeadid() {
 		return leadid;
 	}
