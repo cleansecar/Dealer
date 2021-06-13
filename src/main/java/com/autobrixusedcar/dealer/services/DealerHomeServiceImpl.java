@@ -550,9 +550,14 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 	
 		List<Map<String,Object>> datalist = dealerhomerepository.share_category_list(Integer.valueOf(vehicle_id),Integer.valueOf(dealer_id));
 	    Map<String,Object> getsubcategorylist = dealerhomerepository.share_subcategory_list(Integer.valueOf(vehicle_id), null, Integer.valueOf(dealer_id));
+		List<Map<String,Object>> imagelist = dealerhomerepository.uci_vehicle_info_category_data_points_images(Integer.valueOf(vehicle_id),Integer.valueOf(dealer_id) );
+
+	    
 		 Map<String, Object> map = new HashMap<>();
 		map.put("getsharecategorylist", datalist);
 		map.put("getallsubcategorylist", getsubcategorylist);
+		map.put("getsubcategorylistofimages", imagelist);
+
 		return map;
 	}
 
@@ -640,6 +645,42 @@ Map<String,Object> supportdata = dealerhomerepository.help_support_details();
 		String random;
 		random = Util.urlString(15);
 		 String mainurl ="https://carinfo.autobrix.com/car_details/"+random;
+		 
+		 
+		dealerhomerepository.generateurl(urlid, random, mainurl);
+		Map<String, Object> map = new HashMap<>();
+		map.put("shareurl", mainurl);
+		return map;
+	
+	}
+   
+   @Override
+	public Map<String, Object> generatelinkNew(DealerShareRequestDTO dto) {
+		Map<String,Object> datalist = dealerhomerepository.store_url_data(Integer.valueOf(dto.getVehicle_id()), dto.getValid_minutes(), dto.getIs_car_brand(), dto.getIs_car_model(),
+				dto.getIs_fuel_type(), dto.getIs_vehicle_no(), dto.getIs_manufacturg_year(), dto.getIs_odometer(), dto.getIs_ownership(), 
+				dto.getIs_transmission_type(), dto.getIs_color(), dto.getIs_insurance_validity(), dto.getIs_insurance_type(), 
+				dto.getIs_insurance_provider(), dto.getIs_insurance_copy(), dto.getIs_enge_no(), dto.getIs_chassis_no(),
+				dto.getIs_rc_front(), dto.getIs_rc_rear(), dto.getIs_rc_transfer(), dto.getIs_lifetime_tax_copy(), dto.getIs_lifetime_tax(), 
+				dto.getIs_actual_price(), dto.getIs_negotiable(), dto.getIs_loan_option(), dto.getIs_front_image(), dto.getIs_left_image(), 
+				dto.getIs_right_image(), dto.getIs_rear_image(), dto.getIs_enge_image(), dto.getIs_dashboard_image(), dto.getIs_fl_tyre_image(), 
+				dto.getIs_fr_tyre_image(), dto.getIs_rl_tyre_image(), dto.getIs_rr_tyre_image(), dto.getIs_floor_mat_image(), 
+				dto.getIs_front_seat_image(), dto.getIs_trunk_image(), dto.getIs_rear_seat_image(), dto.getIs_fotam_image(), 
+				dto.getIs_odometer_image(), dto.getIs_video_url(), dto.getIs_inspection_report_image() ,dto.getIs_diagnostic_report_image(), 
+				dto.getIs_warranty_certificate_image(), dto.getIs_matenance_url(), dto.getIs_test_drive(), dto.getIs_test_drive_type(), 
+				dto.getIs_test_drive_amount(), dto.getIs_abs(), dto.getIs_adjustable_external_mirror(), dto.getIs_adjustable_steerg(), 
+				dto.getIs_air_conditiong(), dto.getIs_number_of_airbags(),dto.getIs_alloy_wheels(), dto.getIs_lock_system(), dto.getIs_parkg_sensors(), 
+				dto.getIs_power_steerg(), dto.getIs_power_wdows(), dto.getIs_am_fm_radio(), dto.getIs_usb_compability());
+		Integer urlid=Integer.valueOf(datalist.get("url_id").toString());
+		Integer url_unique_id=Integer.valueOf(datalist.get("url_unique_id").toString());
+		String random;
+		random = Util.urlString(15);
+		 String mainurl ="https://carinfo.autobrix.com/car_details/"+random;
+		 
+		 
+			for(int i=0;i<dto.getShare_image_data_arr().size();i++) {
+				dealerhomerepository.uci_vehicle_info_url_data_point_image(urlid, dto.getShare_image_data_arr().get(i).get("data_point_id").toString() == null || dto.getShare_image_data_arr().get(i).get("data_point_id").toString().isEmpty() ? null : Integer.valueOf(dto.getShare_image_data_arr().get(i).get("data_point_id").toString()), dto.getShare_image_data_arr().get(i).get("is_access").toString(),dto.getShare_image_data_arr().get(i).get("image").toString());				
+			}
+		 
 		dealerhomerepository.generateurl(urlid, random, mainurl);
 		Map<String, Object> map = new HashMap<>();
 		map.put("shareurl", mainurl);
@@ -771,5 +812,44 @@ public void cancelstatusupdate(DealerAddVehicleRequestDTO dto) throws JPAExcepti
 		    map.put("getfilteredvehiclelist", datalist);
 		    return map;
 		    
+	}
+
+
+
+	@Override
+	public Map<String, Object> getimagesinsharepage(String dealer_id, String vehicle_id) {				
+		
+		List<Map<String,Object>> datalist = dealerhomerepository.uci_vehicle_info_category_data_points_images(Integer.valueOf(vehicle_id),Integer.valueOf(dealer_id) );
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("getimagesinsharepage", datalist);
+	    return map;
+	   }
+
+
+
+	@Override
+	public void updatesharePageImagesdetails(DealerShareRequestDTO dto) throws JPAException {
+		// TODO Auto-generated method stub
+		
+		
+		if(dto.getIsdatachanged().equalsIgnoreCase("y")) {
+			
+			dealerhomerepository.update_uci_vehicle_images_tbl(Integer.valueOf(dto.getVehicle_id()));
+			for(int i=0;i<dto.getShare_image_data_arr().size();i++) {
+				dealerhomerepository.uci_update_vehicle_info_category_wise_image(Integer.valueOf(dto.getVehicle_id()), Integer.valueOf(dto.getDealer_id()), dto.getShare_image_data_arr().get(i).get("image").toString(), dto.getShare_image_data_arr().get(i).get("data_point_id").toString() == null || dto.getShare_image_data_arr().get(i).get("data_point_id").toString().isEmpty() ? null :  Integer.valueOf(dto.getShare_image_data_arr().get(i).get("data_point_id").toString()), dto.getShare_image_data_arr().get(i).get("is_profile_image").toString());
+			}
+		}
+		
+		if(dto.getIsaccesschanged().equalsIgnoreCase("y")) {
+			for(int i=0;i<dto.getShare_image_data_arr().size();i++) {
+				dealerhomerepository.uci_update_vehicle_info_data_point_access_category_wise_image(Integer.valueOf(dto.getVehicle_id()), Integer.valueOf(dto.getDealer_id()), dto.getShare_image_data_arr().get(i).get("data_point_id").toString() == null || dto.getShare_image_data_arr().get(i).get("data_point_id").toString().isEmpty() ? null : Integer.valueOf(dto.getShare_image_data_arr().get(i).get("data_point_id").toString()), dto.getShare_image_data_arr().get(i).get("is_access").toString());				
+			}
+		}
+	
 	}	
+	
+	
+	
+	
+	
 }

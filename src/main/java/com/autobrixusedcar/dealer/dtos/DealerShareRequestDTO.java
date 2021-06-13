@@ -1,5 +1,8 @@
 package com.autobrixusedcar.dealer.dtos;
 
+import java.util.List;
+import java.util.Map;
+
 public class DealerShareRequestDTO {
 	private String isdatachanged;
 	private String isaccesschanged;
@@ -140,10 +143,17 @@ public class DealerShareRequestDTO {
 	private String rr_tyre_image;
 	private String profile_image;
 	
-	
+	private List<Map<String, Object>> share_image_data_arr;
+
 	
 	public String getProfile_image() {
 		return profile_image;
+	}
+	public List<Map<String, Object>> getShare_image_data_arr() {
+		return share_image_data_arr;
+	}
+	public void setShare_image_data_arr(List<Map<String, Object>> share_image_data_arr) {
+		this.share_image_data_arr = share_image_data_arr;
 	}
 	public void setProfile_image(String profile_image) {
 		this.profile_image = profile_image;

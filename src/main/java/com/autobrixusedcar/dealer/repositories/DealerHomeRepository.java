@@ -1123,6 +1123,48 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
 
   
    
-      	 
+     @Query(value = "call uci_vehicle_info_category_data_points_images(:vehicle_id,:dealer_id);", nativeQuery = true)
+      List<Map<String,Object>> uci_vehicle_info_category_data_points_images(@Param("vehicle_id")Integer vehicle_id,@Param("dealer_id")Integer dealer_id);
+	  
 	     
+     @Modifying(flushAutomatically = true)
+  	 @Transactional
+ 	 @Query(value ="update uci_vehicle_images_tbl Set is_active='N' Where vehicle_id=:vehicle_id and is_active='Y'; ",nativeQuery =true)
+      void update_uci_vehicle_images_tbl(
+ 			 @Param("vehicle_id")Integer vehicle_id ); 
+     
+     
+     
+     @Modifying(flushAutomatically = true)
+  	 @Transactional
+ 	 @Query(value ="call uci_update_vehicle_info_category_wise_image(:vehicle_id, :dealer_id , :image, :data_point_id, :is_profile_image);",nativeQuery =true)
+      void uci_update_vehicle_info_category_wise_image(
+ 			 @Param("vehicle_id")Integer vehicle_id,
+ 			 @Param("dealer_id") Integer dealer_id,
+ 			 @Param("image")String image,
+ 			 @Param("data_point_id")Integer data_point_id,
+ 			 @Param("is_profile_image")String is_profile_image); 
+     
+     
+     
+     @Modifying(flushAutomatically = true)
+  	 @Transactional
+ 	 @Query(value ="call uci_update_vehicle_info_data_point_access_category_wise_image(:vehicle_id, :dealer_id , :data_point_id, :is_access);",nativeQuery =true)
+      void uci_update_vehicle_info_data_point_access_category_wise_image(
+ 			 @Param("vehicle_id")Integer vehicle_id,
+ 			 @Param("dealer_id") Integer dealer_id,
+ 			 @Param("data_point_id")Integer data_point_id,
+ 			 @Param("is_access")String is_access); 
+     
+     
+     @Modifying(flushAutomatically = true)
+  	 @Transactional
+ 	 @Query(value ="call uci_vehicle_info_url_data_point_image(:url_id , :data_point_id, :is_access,:image);",nativeQuery =true)
+      void uci_vehicle_info_url_data_point_image(
+ 			 @Param("url_id")Integer url_id,
+ 			 @Param("data_point_id")Integer data_point_id,
+ 			 @Param("is_access")String is_access,
+ 			 @Param("image")String image); 
+      
+     
 }

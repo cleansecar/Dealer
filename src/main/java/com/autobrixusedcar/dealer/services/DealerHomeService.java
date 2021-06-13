@@ -72,7 +72,7 @@ public interface DealerHomeService {
 	
 	void updatesharedetails(DealerShareRequestDTO dto) throws JPAException;
 	Map<String,Object> generatelink(DealerShareRequestDTO dto);
-	
+
 	Map<String, Object> getinspectionreportdata(String vehicle_id);
 	
 	Map<String, Object> gettestdrivereqlist(String vehicle_id,String lead_id);
@@ -97,5 +97,9 @@ public interface DealerHomeService {
 	
 	Map<String,Object> getfilteredvehiclelist(String dealer_id,String category_ids,String brand_ids,String ownership_ids,String colors,String min_price,String max_price,String min_odometer,String max_odometer);
 	
+	Map<String, Object> getimagesinsharepage(String dealer_id,String vehicle_id);
+	void updatesharePageImagesdetails(DealerShareRequestDTO dto) throws JPAException;
+
+	Map<String,Object> generatelinkNew(DealerShareRequestDTO dto);
 
 }
