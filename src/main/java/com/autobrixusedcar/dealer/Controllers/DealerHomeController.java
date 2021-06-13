@@ -344,9 +344,7 @@ public class DealerHomeController {
 	public ResponseEntity<Object> generatelink(@RequestBody DealerShareRequestDTO dto) throws JPAException {		
 		Map<String,Object> details = dealerhomeservice.generatelink(dto);
 		return com.autobrixusedcar.dealer.utils.Response.success(details);
-		
-		
-	
+
 	}
 	
 	
@@ -447,9 +445,42 @@ public class DealerHomeController {
 	public ResponseEntity<Object> getfilteredvehiclelist(@RequestParam("dealer_id") String dealer_id,@RequestParam("category_ids") String category_ids,@RequestParam("brand_ids") String brand_ids,@RequestParam("ownership_ids") String ownership_ids,@RequestParam("colors") String colors,@RequestParam("min_price") String min_price,@RequestParam("max_price") String max_price,@RequestParam("min_odometer") String min_odometer,@RequestParam("max_odometer") String max_odometer) {		
 		Map<String,Object> details = dealerhomeservice.getfilteredvehiclelist(dealer_id, category_ids, brand_ids, ownership_ids, colors, min_price, max_price, min_odometer, max_odometer);
 		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	
+	}
+	
+	
+	
+	
+	@GetMapping("/getimagesinsharepage")
+	public ResponseEntity<Object> getimagesinsharepage(@RequestParam("dealer_id") String dealer_id,@RequestParam("vehicle_id")String vehicle_id) {		
+		Map<String,Object> details = dealerhomeservice.getimagesinsharepage(dealer_id,vehicle_id);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
 		
 	
 	}
+	
+	
+	
+	
+	
+	
+	@PostMapping("/updatesharePageImagesdetails")
+	public ResponseEntity<Object>updatesharePageImagesdetails(@RequestBody DealerShareRequestDTO dto) throws JPAException{
+		dealerhomeservice.updatesharePageImagesdetails(dto);	
+		 Map<String, String> map = new HashMap<>();
+	        map.put("message", "Updated successfully.");		
+		return com.autobrixusedcar.dealer.utils.Response.success(map);
+		
+	}
+	
+	
+	@PostMapping("/generatelinkNew")
+	public ResponseEntity<Object> generatelinkNew(@RequestBody DealerShareRequestDTO dto) throws JPAException {		
+		Map<String,Object> details = dealerhomeservice.generatelinkNew(dto);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+
+	}
+	
 	
 }
 
