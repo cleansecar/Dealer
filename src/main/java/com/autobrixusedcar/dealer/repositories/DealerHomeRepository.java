@@ -1166,7 +1166,7 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
  			 @Param("is_access")String is_access,
  			 @Param("image")String image); 
      
-     @Query(value = "call uci_dashboard_vehicle_types_list()", nativeQuery = true)
+     @Query(value = "call uci_dashboard_vehicle_types_list();", nativeQuery = true)
      List<Map<String,Object>> dashboardvehicletypelist();
      
      

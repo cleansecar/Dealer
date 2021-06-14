@@ -854,7 +854,7 @@ public void cancelstatusupdate(DealerAddVehicleRequestDTO dto) throws JPAExcepti
 	public Map<String, Object> getvehicletypelist() {
 	    	List<Map<String,Object>> datalist = dealerhomerepository.dashboardvehicletypelist();
 		    Map<String, Object> map = new HashMap<>();
-		    map.put("getfilteredvehiclelist", datalist);
+		    map.put("getvehicletypelist", datalist);
 		    return map;
 	}
 

@@ -482,7 +482,7 @@ public class DealerHomeController {
 	}
 	
 	@GetMapping("/getvehicletypelist")
-	public ResponseEntity<Object> getfilteredvehiclelist() {		
+	public ResponseEntity<Object> getvehicletypelist() {		
 		Map<String,Object> details = dealerhomeservice.getvehicletypelist();
 		return com.autobrixusedcar.dealer.utils.Response.success(details);
 	
