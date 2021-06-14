@@ -846,6 +846,32 @@ public void cancelstatusupdate(DealerAddVehicleRequestDTO dto) throws JPAExcepti
 			}
 		}
 	
+	}
+
+
+
+	@Override
+	public Map<String, Object> getvehicletypelist() {
+	    	List<Map<String,Object>> datalist = dealerhomerepository.dashboardvehicletypelist();
+		    Map<String, Object> map = new HashMap<>();
+		    map.put("getfilteredvehiclelist", datalist);
+		    return map;
+	}
+
+
+
+	@Override
+	public Map<String, Object> getdashboardsalesoverview(DealerAddVehicleRequestDTO dto) {
+		 Map<String,Object> salesoverview = dealerhomerepository.dashboard_salesoverview(Integer.valueOf(dto.getDealer_id()), Integer.valueOf(dto.getVehiclecategoryid()), dto.getMonth(), dto.getYear());
+		 Map<String,Object> todaystask = dealerhomerepository.todays_task(Integer.valueOf(dto.getDealer_id()));
+
+
+		    Map<String, Object> map = new HashMap<>();
+			map.put("salesoverview", salesoverview);
+			map.put("todaystask", todaystask);
+
+			
+			return map;
 	}	
 	
 	

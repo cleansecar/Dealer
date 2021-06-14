@@ -33,10 +33,32 @@ public class DealerAddVehicleRequestDTO {
 	private String insurance_type;
 	private String searchtext;
 	private String odometer;
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
+	}
+	public String getMonth() {
+		return month;
+	}
+	public void setMonth(String month) {
+		this.month = month;
+	}
+	public String getVehiclecategoryid() {
+		return vehiclecategoryid;
+	}
+	public void setVehiclecategoryid(String vehiclecategoryid) {
+		this.vehiclecategoryid = vehiclecategoryid;
+	}
+
 	private String vin_number;
 	private String vendor_id;
 	private String employee_name;
 	private String phone_no;
+	private String year;
+	private String month;
+	private String vehiclecategoryid;
 	
 	private String ownership;
 	private String transmission_type;
