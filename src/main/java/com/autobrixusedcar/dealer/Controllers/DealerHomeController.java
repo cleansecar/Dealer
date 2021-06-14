@@ -481,6 +481,20 @@ public class DealerHomeController {
 
 	}
 	
+	@GetMapping("/getvehicletypelist")
+	public ResponseEntity<Object> getfilteredvehiclelist() {		
+		Map<String,Object> details = dealerhomeservice.getvehicletypelist();
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	
+	}
+	
+	@PostMapping("/getdashboardsalesoverview")
+	public ResponseEntity<Object> getdashboardsalesoverview(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException {		
+		Map<String,Object> details = dealerhomeservice.getdashboardsalesoverview(dto);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+
+	}
+	
 	
 }
 

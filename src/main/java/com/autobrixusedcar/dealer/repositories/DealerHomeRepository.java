@@ -1165,6 +1165,19 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
  			 @Param("data_point_id")Integer data_point_id,
  			 @Param("is_access")String is_access,
  			 @Param("image")String image); 
+     
+     @Query(value = "call uci_dashboard_vehicle_types_list()", nativeQuery = true)
+     List<Map<String,Object>> dashboardvehicletypelist();
+     
+     
+       @Query(value = "call uci_dashboard_dealer_today_tasks(:dealer_id);", nativeQuery = true)
+     Map<String,Object> todays_task(@Param("dealer_id")Integer dealer_id);
+     
+     
+
+     @Query(value = "call uci_dashboard_dealer_today_tasks(:dealer_id,:vehicle_category_type_id,:month,:year);\n" + 
+	     		"", nativeQuery = true)
+     Map<String,Object> dashboard_salesoverview(@Param("dealer_id")Integer dealer_id,@Param("vehicle_category_type_id")Integer vehicle_category_type_id,@Param("month")String month,@Param("year")String year);
       
      
 }

@@ -101,5 +101,11 @@ public interface DealerHomeService {
 	void updatesharePageImagesdetails(DealerShareRequestDTO dto) throws JPAException;
 
 	Map<String,Object> generatelinkNew(DealerShareRequestDTO dto);
+	
+	Map<String, Object> getvehicletypelist();
+	
+	Map<String,Object> getdashboardsalesoverview(DealerAddVehicleRequestDTO dto);
+
+		
 
 }
