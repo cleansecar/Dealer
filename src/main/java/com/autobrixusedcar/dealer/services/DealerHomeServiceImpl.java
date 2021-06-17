@@ -862,7 +862,7 @@ public void cancelstatusupdate(DealerAddVehicleRequestDTO dto) throws JPAExcepti
 
 	@Override
 	public Map<String, Object> getdashboardsalesoverview(DealerAddVehicleRequestDTO dto) {
-		 Map<String,Object> salesoverview = dealerhomerepository.dashboard_salesoverview(Integer.valueOf(dto.getDealer_id()), Integer.valueOf(dto.getVehiclecategoryid()), dto.getMonth(), dto.getYear());
+		 Map<String,Object> salesoverview = dealerhomerepository.dashboard_salesoverview(Integer.valueOf(dto.getDealer_id()), Integer.valueOf(dto.getVehiclecategoryid()), Integer.valueOf(dto.getMonth()), Integer.valueOf(dto.getYear()));
 		 Map<String,Object> todaystask = dealerhomerepository.todays_task(Integer.valueOf(dto.getDealer_id()));
 
 
@@ -872,10 +872,62 @@ public void cancelstatusupdate(DealerAddVehicleRequestDTO dto) throws JPAExcepti
 
 			
 			return map;
-	}	
-	
-	
-	
-	
+	}
+
+
+
+	@Override
+	public Map<String, Object> getdashboardbrandlist(String dealer_id, String is_trends) {
+		List<Map<String,Object>> datalist = dealerhomerepository.dashboardbrandlist(Integer.valueOf(dealer_id), is_trends);
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("dashboardbrandlist", datalist);
+	    return map;
+	}
+
+
+
+	@Override
+	public Map<String, Object> getdashboardmanufacturinglist(String brand_id, String dealer_id,
+			String vehicle_category_type_id, String month, String year, String is_trends, String model_id,
+			String fuel_type) {
+		List<Map<String,Object>> datalist = dealerhomerepository.dashboardmanufacturingyearlist(Integer.valueOf(brand_id), Integer.valueOf(dealer_id), Integer.valueOf(vehicle_category_type_id), Integer.valueOf(month), Integer.valueOf(year), is_trends, Integer.valueOf(model_id), fuel_type);
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("dashboardmanufacturinglist", datalist);
+	    return map;
+	}
+
+
+
+	@Override
+	public Map<String, Object> getdashboardmodellist(String brand_id, String dealer_id, String is_trends) {
+		List<Map<String,Object>> datalist = dealerhomerepository.dashboarmodellist(Integer.valueOf(dealer_id), Integer.valueOf(brand_id), is_trends);
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("dashboarmodellist", datalist);
+	    return map;
+	}
+
+
+
+	@Override
+	public Map<String, Object> getdashboardbrandanalysis(DealerAddVehicleRequestDTO dto) {
+		Map<String, Object> map = new HashMap<>();
+		 Map<String,Object> brandanalysis = dealerhomerepository.dashboardbrandanalysis(dto.getBrand_id() == null || dto.getBrand_id() .isEmpty() ? null : Integer.valueOf(dto.getBrand_id()), Integer.valueOf(dto.getDealer_id()), Integer.valueOf(dto.getVehicle_category_type_id()), Integer.valueOf(dto.getMonth()), Integer.valueOf(dto.getYear()), dto.getIs_trends());
+		 Integer Values = (Integer)brandanalysis.get("brand_id");
+		 if(dto.getBrand_id().equalsIgnoreCase("")) {
+			 Map<String,Object> modelanalysis = dealerhomerepository.dashboardmodelanalysis(Values, Integer.valueOf(dto.getDealer_id()), Integer.valueOf(dto.getVehicle_category_type_id()), Integer.valueOf(dto.getMonth()), Integer.valueOf(dto.getYear()), dto.getIs_trends(), dto.getModel_id() == null || dto.getModel_id() .isEmpty() ? null : Integer.valueOf(dto.getModel_id()), dto.getFuel_type(),dto.getManfufacturing_year() == null || dto.getManfufacturing_year() .isEmpty() ? null : Integer.valueOf(dto.getManfufacturing_year()));
+				map.put("dashboardbrandanalysis", brandanalysis);
+				map.put("dashboardmodelanalysis", modelanalysis);
+			 
+		 }else {
+			 
+			 Map<String,Object> modelanalysis = dealerhomerepository.dashboardmodelanalysis(dto.getBrand_id() == null || dto.getBrand_id() .isEmpty() ? null : Integer.valueOf(dto.getBrand_id()), Integer.valueOf(dto.getDealer_id()), Integer.valueOf(dto.getVehicle_category_type_id()), Integer.valueOf(dto.getMonth()), Integer.valueOf(dto.getYear()), dto.getIs_trends(), dto.getModel_id() == null || dto.getModel_id() .isEmpty() ? null : Integer.valueOf(dto.getModel_id()), dto.getFuel_type(),dto.getManfufacturing_year() == null || dto.getManfufacturing_year()  .isEmpty() ? null : Integer.valueOf(dto.getManfufacturing_year()));
+				map.put("dashboardbrandanalysis", brandanalysis);
+				map.put("dashboardmodelanalysis", modelanalysis);
+
+		 }
+		
+			return map;
+	}
+
 	
 }

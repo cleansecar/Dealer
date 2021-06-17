@@ -1175,9 +1175,31 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
      
      
 
-     @Query(value = "call uci_dashboard_dealer_today_tasks(:dealer_id,:vehicle_category_type_id,:month,:year);\n" + 
+     @Query(value = "call uci_dashboard_dealer_sales_overview(:dealer_id,:vehicle_category_type_id,:month,:year);\n" + 
 	     		"", nativeQuery = true)
-     Map<String,Object> dashboard_salesoverview(@Param("dealer_id")Integer dealer_id,@Param("vehicle_category_type_id")Integer vehicle_category_type_id,@Param("month")String month,@Param("year")String year);
-      
+     Map<String,Object> dashboard_salesoverview(@Param("dealer_id")Integer dealer_id,@Param("vehicle_category_type_id")Integer vehicle_category_type_id,@Param("month")Integer month,@Param("year")Integer year);
+     //brand analysis apis
      
+     @Query(value = "call uci_dashboard_vehicle_brands(:dealer_id,:is_trends);", nativeQuery = true)
+     List<Map<String,Object>> dashboardbrandlist(@Param("dealer_id")Integer dealer_id,@Param("is_trends")String is_trends);
+     
+     
+         @Query(value = "call uci_dashboard_manufacturing_year_list(:brand_id,:dealer_id,:vehicle_category_type_id,:month,:year,:is_trends,:model_id,:fuel_type);", nativeQuery = true)
+          List<Map<String,Object>> dashboardmanufacturingyearlist(@Param("brand_id")Integer brand_id,@Param("dealer_id")Integer dealer_id,@Param("vehicle_category_type_id")Integer vehicle_category_type_id,@Param("month")Integer month,@Param("year")Integer year,
+    		 @Param("is_trends")String is_trends,@Param("model_id")Integer model_id, @Param("fuel_type")String fuel_type);
+     
+     
+     
+       @Query(value = "call uci_dashboard_model_list(:brand_id,:dealer_id,:is_trends);", nativeQuery = true)
+       List<Map<String,Object>> dashboarmodellist(@Param("brand_id")Integer brand_id,@Param("dealer_id")Integer dealer_id,@Param("is_trends")String is_trends);
+     
+     
+       @Query(value = "call uci_dashboard_brand_analysis(:brand_id,:dealer_id,:vehicle_category_type_id,:month,:year,:is_trends);", nativeQuery = true)
+       Map<String,Object> dashboardbrandanalysis(@Param("brand_id")Integer brand_id,@Param("dealer_id")Integer dealer_id,@Param("vehicle_category_type_id")Integer vehicle_category_type_id,@Param("month")Integer month,@Param("year")Integer year,@Param("is_trends")String is_trends);
+   
+     
+       
+       @Query(value = "call uci_dashboard_model_analysis(:brand_id,:dealer_id,:vehicle_category_type_id,:month,:year,:is_trends,:model_id,:fuel_type,:manufacturing_year);", nativeQuery = true)
+       Map<String,Object> dashboardmodelanalysis(@Param("brand_id")Integer brand_id,@Param("dealer_id")Integer dealer_id,@Param("vehicle_category_type_id")Integer vehicle_category_type_id,@Param("month")Integer month,@Param("year")Integer year,@Param("is_trends")String is_trends,@Param("model_id")Integer model_id,@Param("fuel_type")String fuel_type,@Param("manufacturing_year")Integer manufacturing_year);
+       
 }

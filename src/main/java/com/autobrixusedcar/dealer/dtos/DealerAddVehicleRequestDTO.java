@@ -24,7 +24,40 @@ public class DealerAddVehicleRequestDTO {
 	private String customername;
 	private String customerno;
 	private String model_id;
+	private String fueltype;
+	private String manufactureyear;
 	private String couponid;
+	public String getBrand_id() {
+		return brand_id;
+	}
+	public String getFueltype() {
+		return fueltype;
+	}
+	public void setFueltype(String fueltype) {
+		this.fueltype = fueltype;
+	}
+	public String getManufactureyear() {
+		return manufactureyear;
+	}
+	public void setManufactureyear(String manufactureyear) {
+		this.manufactureyear = manufactureyear;
+	}
+	public void setBrand_id(String brand_id) {
+		this.brand_id = brand_id;
+	}
+	public String getIs_trends() {
+		return is_trends;
+	}
+	public void setIs_trends(String is_trends) {
+		this.is_trends = is_trends;
+	}
+	public String getVehicle_category_type_id() {
+		return vehicle_category_type_id;
+	}
+	public void setVehicle_category_type_id(String vehicle_category_type_id) {
+		this.vehicle_category_type_id = vehicle_category_type_id;
+	}
+
 	private String couponcode;
     private String ownership_id;
 	private String insurance_validity;
@@ -32,6 +65,9 @@ public class DealerAddVehicleRequestDTO {
 	private String status_id;
 	private String insurance_type;
 	private String searchtext;
+	private String brand_id;
+	private String is_trends;
+	private String vehicle_category_type_id;
 	private String odometer;
 	public String getYear() {
 		return year;

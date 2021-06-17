@@ -495,6 +495,41 @@ public class DealerHomeController {
 
 	}
 	
+	@GetMapping("/getdashboardbrandlist")
+	public ResponseEntity<Object> getdashboardbrandlist(@RequestParam("dealer_id") String dealer_id,@RequestParam("is_trends") String is_trends) {		
+		Map<String,Object> details = dealerhomeservice.getdashboardbrandlist(dealer_id, is_trends);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	
+	}
+	
+	@GetMapping("/getdashboardmodellist")
+	public ResponseEntity<Object> getdashboardmodellist(@RequestParam("brand_id") String brand_id,@RequestParam("dealer_id") String dealer_id,@RequestParam("is_trends") String is_trends) {		
+		Map<String,Object> details = dealerhomeservice.getdashboardmodellist(brand_id, dealer_id, is_trends);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	
+	}
+	
+	@GetMapping("/getdashboardmanufactureyearlist")
+	public ResponseEntity<Object> getdashboardmanufactureyearlist(@RequestParam("brand_id") String brand_id,@RequestParam("dealer_id") String dealer_id,@RequestParam("vehicle_category_type_id") String vehicle_category_type_id,@RequestParam("month") String month,@RequestParam("year") String year,@RequestParam("is_trends") String is_trends,@RequestParam("model_id") String model_id,@RequestParam("fuel_type") String fuel_type) {		
+		Map<String,Object> details = dealerhomeservice.getdashboardmanufacturinglist(brand_id, dealer_id, vehicle_category_type_id, month, year, is_trends, model_id, fuel_type);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	
+	}
+	
+	@PostMapping("/getdashboardbrandanalysis")
+	public ResponseEntity<Object> getdashboardbrandanalysis(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException {		
+		Map<String,Object> details = dealerhomeservice.getdashboardbrandanalysis(dto);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+
+	}
+	
+// @PostMapping("/getdashboardmodelanalysis")
+//    public ResponseEntity<Object> getdashboardmodelanalysis(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException {		
+//    Map<String,Object> details = dealerhomeservice.getdashboardmodelanalysis(dto);
+//    return com.autobrixusedcar.dealer.utils.Response.success(details);
+//
+//	}
+	
 	
 }
 
