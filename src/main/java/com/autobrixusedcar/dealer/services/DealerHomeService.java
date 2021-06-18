@@ -111,7 +111,7 @@ public interface DealerHomeService {
 	
     Map<String,Object> getdashboardmanufacturinglist(String brand_id,String dealer_id,String vehicle_category_type_id,String month,String year,String is_trends,String model_id,String fuel_type);
 	
-	Map<String,Object> getdashboardmodellist(String brand_id,String dealer_id,String is_trends);
+	Map<String,Object> getdashboardmodellist(String brand_id,String dealer_id,String is_trends,String searchtxt);
 	
 	Map<String,Object> getdashboardbrandanalysis(DealerAddVehicleRequestDTO dto);
 	
