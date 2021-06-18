@@ -1190,8 +1190,8 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
      
      
      
-       @Query(value = "call uci_dashboard_model_list(:brand_id,:dealer_id,:is_trends);", nativeQuery = true)
-       List<Map<String,Object>> dashboarmodellist(@Param("brand_id")Integer brand_id,@Param("dealer_id")Integer dealer_id,@Param("is_trends")String is_trends);
+       @Query(value = "call uci_dashboard_model_list(:brand_id,:dealer_id,:is_trends,:searchtxt);", nativeQuery = true)
+       List<Map<String,Object>> dashboarmodellist(@Param("brand_id")Integer brand_id,@Param("dealer_id")Integer dealer_id,@Param("is_trends")String is_trends,@Param("searchtxt")String searchtxt);
      
      
        @Query(value = "call uci_dashboard_brand_analysis(:brand_id,:dealer_id,:vehicle_category_type_id,:month,:year,:is_trends);", nativeQuery = true)

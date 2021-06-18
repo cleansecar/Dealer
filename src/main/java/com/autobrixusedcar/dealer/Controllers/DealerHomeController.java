@@ -503,8 +503,8 @@ public class DealerHomeController {
 	}
 	
 	@GetMapping("/getdashboardmodellist")
-	public ResponseEntity<Object> getdashboardmodellist(@RequestParam("brand_id") String brand_id,@RequestParam("dealer_id") String dealer_id,@RequestParam("is_trends") String is_trends) {		
-		Map<String,Object> details = dealerhomeservice.getdashboardmodellist(brand_id, dealer_id, is_trends);
+	public ResponseEntity<Object> getdashboardmodellist(@RequestParam("brand_id") String brand_id,@RequestParam("dealer_id") String dealer_id,@RequestParam("is_trends") String is_trends,@RequestParam("searchtxt")String searchtxt) {		
+		Map<String,Object> details = dealerhomeservice.getdashboardmodellist(brand_id, dealer_id, is_trends,searchtxt);
 		return com.autobrixusedcar.dealer.utils.Response.success(details);
 	
 	}
