@@ -523,6 +523,13 @@ public class DealerHomeController {
 
 	}
 	
+	@GetMapping("/getdashboardleadsdata")
+	public ResponseEntity<Object> getdashboardleadsdata(@RequestParam("dealer_id") String dealer_id,@RequestParam("date") String date) {		
+		Map<String,Object> details = dealerhomeservice.getdashboardleadsdata(dealer_id, date);
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	
+	}
+	
 // @PostMapping("/getdashboardmodelanalysis")
 //    public ResponseEntity<Object> getdashboardmodelanalysis(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException {		
 //    Map<String,Object> details = dealerhomeservice.getdashboardmodelanalysis(dto);

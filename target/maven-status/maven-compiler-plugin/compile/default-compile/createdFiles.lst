@@ -1,10 +1,10 @@
-com/autobrixusedcar/dealer/utils/Util.class
 com/autobrixusedcar/dealer/services/DealerHomeServiceImpl.class
+com/autobrixusedcar/dealer/utils/Util.class
 com/autobrixusedcar/dealer/entities/BaseEntity.class
 com/autobrixusedcar/dealer/services/JPAException.class
 com/autobrixusedcar/dealer/repositories/SalesHomeRepository.class
-com/autobrixusedcar/dealer/utils/SMS.class
 com/autobrixusedcar/dealer/services/DealerHomeService.class
+com/autobrixusedcar/dealer/utils/SMS.class
 com/autobrixusedcar/dealer/Controllers/DealerHomeController.class
 com/autobrixusedcar/dealer/DealerApplication.class
 com/autobrixusedcar/dealer/dtos/DealerHomeRequestDTO.class
@@ -13,8 +13,8 @@ com/autobrixusedcar/dealer/services/SalesHomeService.class
 com/autobrixusedcar/dealer/services/SalesHomeServiceImpl.class
 com/autobrixusedcar/dealer/repositories/DealerHomeRepository.class
 com/autobrixusedcar/dealer/dtos/DealerAddVehicleRequestDTO.class
-com/autobrixusedcar/dealer/repositories/OtpRepository.class
 com/autobrixusedcar/dealer/dtos/DealerShareRequestDTO.class
+com/autobrixusedcar/dealer/repositories/OtpRepository.class
 com/autobrixusedcar/dealer/ServletInitializer.class
 com/autobrixusedcar/dealer/repositories/LoginRepository.class
 com/autobrixusedcar/dealer/dtos/soldData.class
