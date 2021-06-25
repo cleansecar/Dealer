@@ -928,6 +928,14 @@ public void cancelstatusupdate(DealerAddVehicleRequestDTO dto) throws JPAExcepti
 		
 			return map;
 	}
+	
+	@Override
+	public Map<String, Object> getdashboardleadsdata(String dealer_id, String date) {
+		List<Map<String,Object>> datalist = dealerhomerepository.dashboardleadsdata( Integer.valueOf(dealer_id),date);
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("dashboardleadsdata", datalist);
+	    return map;
+	}
 
 	
 }
