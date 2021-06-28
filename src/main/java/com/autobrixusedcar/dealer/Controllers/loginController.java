@@ -58,7 +58,7 @@ public class loginController {
 		
 		Map<String, Object> details = lr.getEmployeeDetails(phoneNo);
 		
-		if (details == null) {
+		if (details == null || details.isEmpty()) {
 			
 			Map<String, Object> mapObj = new HashMap<String, Object>();
 			mapObj.put("message", "Employee Not Available");
@@ -84,7 +84,7 @@ public class loginController {
 
 	otpr.save(otp);
 		
-	String msg = "Your OTP is "+Otp+". OTP is confidential for security reasons. Please don't share this OTP with anyone.";
+	String msg = "Your OTP is "+Otp+". OTP is confidential for security reasons. Please don't share this OTP with anyone. Team AutoBrix";
 	
 	System.out.print(msg);
 
@@ -94,8 +94,7 @@ public class loginController {
 	Map<String, Object> mapObj = new HashMap<String, Object>();
 	mapObj.put("message", "Otp Sent Successfully");
 
-
-		return Response.success(mapObj);
+     return Response.success(mapObj);
 
 	}
 	
