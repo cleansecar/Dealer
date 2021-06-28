@@ -806,8 +806,8 @@ public void cancelstatusupdate(DealerAddVehicleRequestDTO dto) throws JPAExcepti
     @Override
 	public Map<String, Object> getfilteredvehiclelist(String dealer_id, String category_ids, String brand_ids,
 			String ownership_ids, String colors, String min_price, String max_price, String min_odometer,
-			String max_odometer) {
-	    	List<Map<String,Object>> datalist = dealerhomerepository.getfiltered_vehicles(Integer.valueOf(dealer_id), category_ids == null || category_ids.isEmpty() ? null : category_ids, brand_ids == null || brand_ids.isEmpty() ? null : brand_ids, ownership_ids == null || ownership_ids.isEmpty() ? null : ownership_ids, colors, min_price, max_price, min_odometer, max_odometer);
+			String max_odometer,String search) {
+	    	List<Map<String,Object>> datalist = dealerhomerepository.getfiltered_vehicles(Integer.valueOf(dealer_id), category_ids == null || category_ids.isEmpty() ? null : category_ids, brand_ids == null || brand_ids.isEmpty() ? null : brand_ids, ownership_ids == null || ownership_ids.isEmpty() ? null : ownership_ids, colors, min_price, max_price, min_odometer, max_odometer,search == null || search.isEmpty() ? "" : search);
 		    Map<String, Object> map = new HashMap<>();
 		    map.put("getfilteredvehiclelist", datalist);
 		    return map;

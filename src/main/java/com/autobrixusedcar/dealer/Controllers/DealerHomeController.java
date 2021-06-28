@@ -442,8 +442,8 @@ public class DealerHomeController {
 	}
 	
 	@GetMapping("/getfilteredvehiclelist")
-	public ResponseEntity<Object> getfilteredvehiclelist(@RequestParam("dealer_id") String dealer_id,@RequestParam("category_ids") String category_ids,@RequestParam("brand_ids") String brand_ids,@RequestParam("ownership_ids") String ownership_ids,@RequestParam("colors") String colors,@RequestParam("min_price") String min_price,@RequestParam("max_price") String max_price,@RequestParam("min_odometer") String min_odometer,@RequestParam("max_odometer") String max_odometer) {		
-		Map<String,Object> details = dealerhomeservice.getfilteredvehiclelist(dealer_id, category_ids, brand_ids, ownership_ids, colors, min_price, max_price, min_odometer, max_odometer);
+	public ResponseEntity<Object> getfilteredvehiclelist(@RequestParam("dealer_id") String dealer_id,@RequestParam("category_ids") String category_ids,@RequestParam("brand_ids") String brand_ids,@RequestParam("ownership_ids") String ownership_ids,@RequestParam("colors") String colors,@RequestParam("min_price") String min_price,@RequestParam("max_price") String max_price,@RequestParam("min_odometer") String min_odometer,@RequestParam("max_odometer") String max_odometer,@RequestParam("searchtext") String searchtext) {		
+		Map<String,Object> details = dealerhomeservice.getfilteredvehiclelist(dealer_id, category_ids, brand_ids, ownership_ids, colors, min_price, max_price, min_odometer, max_odometer,searchtext);
 		return com.autobrixusedcar.dealer.utils.Response.success(details);
 	
 	}
