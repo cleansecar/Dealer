@@ -48,12 +48,15 @@ public class SalesHomeController {
 	
 	@PostMapping("/insertsoldDetails")
 	public ResponseEntity<Object> insertsoldDetails(@RequestBody SalesHomeRequestDTO dto)  throws JPAException{
-		saleshomeservice.insertflowupDetails(dto);		
-		 Map<String, String> map = new HashMap<>();
-	        map.put("message", "Created successfully.");
+	Map<String,Object> datavalues = saleshomeservice.insertsoldDetails(dto);	
+	
+//		 Map<String, Object> map = new HashMap<>();
+//	        map.put("message", "Created successfully.");
+//	        map.put("saleid", datavalues);
+
 			System.out.print("yes");
 
-		return com.autobrixusedcar.dealer.utils.Response.success(map);
+		return com.autobrixusedcar.dealer.utils.Response.success(datavalues);
 		}
 	
 	

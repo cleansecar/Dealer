@@ -19,9 +19,9 @@ public class SalesHomeRequestDTO {
 	
 	
 	
-	private String ServicepackageId;
+	private String servicepackageId;
 	
-	private String Comment;
+	private String comment;
 	
 	
 	private String servicedate;
@@ -31,6 +31,22 @@ public class SalesHomeRequestDTO {
 	private String final_price;
 	
 
+
+	public String getServicepackageId() {
+		return servicepackageId;
+	}
+
+	public void setServicepackageId(String servicepackageId) {
+		this.servicepackageId = servicepackageId;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 
 	public String getServicedate() {
 		return servicedate;
@@ -64,21 +80,8 @@ public class SalesHomeRequestDTO {
 		this.final_price = final_price;
 	}
 
-	public String getComment() {
-		return Comment;
-	}
-
-	public void setComment(String comment) {
-		Comment = comment;
-	}
-
-	public String getServicepackageId() {
-		return ServicepackageId;
-	}
-
-	public void setServicepackageId(String servicepackageId) {
-		ServicepackageId = servicepackageId;
-	}
+	
+	
 
 	public String getCustomerName() {
 		return customerName;
