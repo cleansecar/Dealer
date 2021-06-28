@@ -1118,8 +1118,8 @@ public interface DealerHomeRepository extends JpaRepository<BaseEntity, Long>{
      
      @Modifying(flushAutomatically = true)
  	 @Transactional
-	 @Query(value ="call uci_vehicles_list(:dealer_id, :category_ids, :brand_ids,:ownership_ids,:colors,:min_price,:max_price,:min_odometer,:max_odometer); ",nativeQuery =true)
-     List<Map<String,Object>> getfiltered_vehicles(@Param("dealer_id")Integer dealer_id,@Param("category_ids")String category_ids,@Param("brand_ids")String brand_ids,@Param("ownership_ids")String ownership_ids,@Param("colors")String colors,@Param("min_price")String min_price,@Param("max_price")String max_price,@Param("min_odometer")String min_odometer,@Param("max_odometer")String max_odometer);
+	 @Query(value ="call uci_vehicles_list(:dealer_id, :category_ids, :brand_ids,:ownership_ids,:colors,:min_price,:max_price,:min_odometer,:max_odometer,:searchtext); ",nativeQuery =true)
+     List<Map<String,Object>> getfiltered_vehicles(@Param("dealer_id")Integer dealer_id,@Param("category_ids")String category_ids,@Param("brand_ids")String brand_ids,@Param("ownership_ids")String ownership_ids,@Param("colors")String colors,@Param("min_price")double min_price,@Param("max_price")double max_price,@Param("min_odometer")String min_odometer,@Param("max_odometer")String max_odometer,@Param("searchtext")String searchtext);
 
   
    
