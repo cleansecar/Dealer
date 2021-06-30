@@ -530,12 +530,21 @@ public class DealerHomeController {
 	
 	}
 	
-// @PostMapping("/getdashboardmodelanalysis")
-//    public ResponseEntity<Object> getdashboardmodelanalysis(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException {		
-//    Map<String,Object> details = dealerhomeservice.getdashboardmodelanalysis(dto);
-//    return com.autobrixusedcar.dealer.utils.Response.success(details);
-//
-//	}
+	@GetMapping("/getappversionlist")
+	public ResponseEntity<Object> getappversionlist() {		
+		Map<String,Object> details = dealerhomeservice.getappversionlist();
+		return com.autobrixusedcar.dealer.utils.Response.success(details);
+	
+	}
+	
+	   @PostMapping("/dealersignup")
+		public ResponseEntity<Object>dealersignup(@RequestBody DealerAddVehicleRequestDTO dto) throws JPAException{
+			dealerhomeservice.dealersignup(dto);	
+			 Map<String, String> map = new HashMap<>();
+		        map.put("message", "Signup successfull.");		
+			return com.autobrixusedcar.dealer.utils.Response.success(map);
+			
+		}
 	
 	
 }

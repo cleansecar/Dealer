@@ -116,6 +116,10 @@ public interface DealerHomeService {
 	Map<String,Object> getdashboardbrandanalysis(DealerAddVehicleRequestDTO dto);
 	
 	Map<String,Object> getdashboardleadsdata(String dealer_id,String date);
+	
+	Map<String, Object> getappversionlist();
+	
+	void dealersignup(DealerAddVehicleRequestDTO dto) throws JPAException;
 
 	
 //	Map<String,Object> getdashboardmodelanalysis(DealerAddVehicleRequestDTO dto);

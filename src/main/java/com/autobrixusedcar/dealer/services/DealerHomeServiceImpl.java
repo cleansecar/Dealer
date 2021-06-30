@@ -937,5 +937,24 @@ public void cancelstatusupdate(DealerAddVehicleRequestDTO dto) throws JPAExcepti
 	    return map;
 	}
 
+
+
+	@Override
+	public Map<String, Object> getappversionlist() {
+		List<Map<String,Object>> datalist = dealerhomerepository.appversionlist();
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("appversionlist", datalist);
+	    return map;
+	}
+
+
+
+	@Override
+	public void dealersignup(DealerAddVehicleRequestDTO dto) throws JPAException {
+      dealerhomerepository.update_signup_ios(dto.getEmployee_name(), Integer.valueOf(dto.getPhone_no()), dto.getDealer_email());
+		return;	
+		
+	}
+
 	
 }

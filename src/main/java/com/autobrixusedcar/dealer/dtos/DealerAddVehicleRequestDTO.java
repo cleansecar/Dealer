@@ -91,6 +91,7 @@ public class DealerAddVehicleRequestDTO {
 	private String vin_number;
 	private String vendor_id;
 	private String employee_name;
+	private String dealer_email;
 	private String phone_no;
 	private String year;
 	private String month;
@@ -100,6 +101,13 @@ public class DealerAddVehicleRequestDTO {
 	private String transmission_type;
 	private String color;
 	private String engine_no;
+	public String getDealer_email() {
+		return dealer_email;
+	}
+	public void setDealer_email(String dealer_email) {
+		this.dealer_email = dealer_email;
+	}
+
 	private String chassis_no;
 	private String insurance_provider;
 	private String insurance_copy;
