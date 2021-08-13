@@ -66,7 +66,38 @@ public class DealerAddVehicleRequestDTO {
 	private String insurance_type;
 	private String searchtext;
 	private String brand_id;
+	public String getLeads_target() {
+		return leads_target;
+	}
+	public void setLeads_target(String leads_target) {
+		this.leads_target = leads_target;
+	}
+	public String getLeads_bytarget() {
+		return leads_bytarget;
+	}
+	public void setLeads_bytarget(String leads_bytarget) {
+		this.leads_bytarget = leads_bytarget;
+	}
+
 	private String is_trends;
+	private String leads_target;
+	private String leads_bytarget;
+	private String from_date;
+	private String to_date;
+	
+	public String getFrom_date() {
+		return from_date;
+	}
+	public void setFrom_date(String from_date) {
+		this.from_date = from_date;
+	}
+	public String getTo_date() {
+		return to_date;
+	}
+	public void setTo_date(String to_date) {
+		this.to_date = to_date;
+	}
+
 	private String vehicle_category_type_id;
 	private String odometer;
 	public String getYear() {
@@ -107,7 +138,6 @@ public class DealerAddVehicleRequestDTO {
 	public void setDealer_email(String dealer_email) {
 		this.dealer_email = dealer_email;
 	}
-
 	private String chassis_no;
 	private String insurance_provider;
 	private String insurance_copy;
@@ -120,6 +150,7 @@ public class DealerAddVehicleRequestDTO {
 	private String maintenance_url;
 	private String test_drive;
 	private String test_drive_type;
+	private List<Map<String, Object>> refurbishmentarr;
 	
 private List<Map<String, Object>> canceloptionsarr;
 private List<Map<String, Object>> vehiclearr;
@@ -128,6 +159,12 @@ public List<Map<String, Object>> getCategoryarr() {
 }
 public void setCategoryarr(List<Map<String, Object>> categoryarr) {
 	this.categoryarr = categoryarr;
+}
+public List<Map<String, Object>> getRefurbishmentarr() {
+	return refurbishmentarr;
+}
+public void setRefurbishmentarr(List<Map<String, Object>> refurbishmentarr) {
+	this.refurbishmentarr = refurbishmentarr;
 }
 public List<Map<String, Object>> getBrandarr() {
 	return brandarr;
@@ -199,14 +236,134 @@ public void setVehiclearr(List<Map<String, Object>> vehiclearr) {
 	private String am_fm_radio;
 	private String usb_compability;
 	private String date;
+	public String getCustomer_expected_amount() {
+		return customer_expected_amount;
+	}
+	public void setCustomer_expected_amount(String customer_expected_amount) {
+		this.customer_expected_amount = customer_expected_amount;
+	}
+	public String getFinal_quoted_amount() {
+		return final_quoted_amount;
+	}
+	public void setFinal_quoted_amount(String final_quoted_amount) {
+		this.final_quoted_amount = final_quoted_amount;
+	}
+	public String getDealer_closed_amount() {
+		return dealer_closed_amount;
+	}
+	public void setDealer_closed_amount(String dealer_closed_amount) {
+		this.dealer_closed_amount = dealer_closed_amount;
+	}
+
 	private String time;
 	private String address;
 	private String leadid;
 	private String questionid;
+
 	private String optionid;
 	private String statusid;
+
+	public String getPackage_cost() {
+		return package_cost;
+	}
+
+	public void setPackage_cost(String package_cost) {
+		this.package_cost = package_cost;
+	}
+
+	public String getInspection_cost() {
+		return inspection_cost;
+	}
+
+	public void setInspection_cost(String inspection_cost) {
+		this.inspection_cost = inspection_cost;
+	}
+
+	public String getRepair_cost() {
+		return repair_cost;
+	}
+
+	public void setRepair_cost(String repair_cost) {
+		this.repair_cost = repair_cost;
+	}
+
+	public String getRto_expense() {
+		return rto_expense;
+	}
+
+	public void setRto_expense(String rto_expense) {
+		this.rto_expense = rto_expense;
+	}
+
+	public String getTest_drive_expense() {
+		return test_drive_expense;
+	}
+
+	public void setTest_drive_expense(String test_drive_expense) {
+		this.test_drive_expense = test_drive_expense;
+	}
+
+	public String getFuel_expense() {
+		return fuel_expense;
+	}
+
+	public void setFuel_expense(String fuel_expense) {
+		this.fuel_expense = fuel_expense;
+	}
+
+	public String getInsurance_expense() {
+		return insurance_expense;
+	}
+
+	public void setInsurance_expense(String insurance_expense) {
+		this.insurance_expense = insurance_expense;
+	}
+
+	public String getNoc_expense() {
+		return noc_expense;
+	}
+
+	public void setNoc_expense(String noc_expense) {
+		this.noc_expense = noc_expense;
+	}
+
+	public String getOther_expense() {
+		return other_expense;
+	}
+
+	public void setOther_expense(String other_expense) {
+		this.other_expense = other_expense;
+	}
+
 	private String substatusid;
 	private String comments;
+	private String sourceid;
+	private String customer_expected_amount;
+	private String final_quoted_amount;
+	private String dealer_closed_amount;
+	private String package_cost;
+	private String inspection_cost;
+	private String repair_cost;
+	private String rto_expense;
+	private String test_drive_expense;
+	private String fuel_expense;
+	private String insurance_expense;
+	private String noc_expense;
+	private String other_expense;
+	
+	private String purchase_amount;
+	public String getPurchase_amount() {
+		return purchase_amount;
+	}
+	public void setPurchase_amount(String purchase_amount) {
+		this.purchase_amount = purchase_amount;
+	}
+	public String getSourceid() {
+		return sourceid;
+	}
+	public void setSourceid(String sourceid) {
+		this.sourceid = sourceid;
+	}
 	public String getLeadid() {
 		return leadid;
 	}

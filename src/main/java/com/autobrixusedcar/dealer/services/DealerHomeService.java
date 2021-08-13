@@ -34,7 +34,7 @@ public interface DealerHomeService {
 	Map<String, Object> getdealersCheckoutPage(String saleId);
 	Map<String, Object> getdealerallsaleslist(String employeeid);
 	
-	Map<String, Object> getenquirylist(String dealerid, String vehicleid);
+	Map<String, Object> getenquirylist(String dealerid, String vehicleid,String statusids,String substatusids);
 	
 	Map<String, Object> getofferlist(String dealerid);
 	
@@ -75,7 +75,7 @@ public interface DealerHomeService {
 
 	Map<String, Object> getinspectionreportdata(String vehicle_id);
 	
-	Map<String, Object> gettestdrivereqlist(String vehicle_id,String lead_id);
+	Map<String, Object> gettestdrivereqlist(String vehicle_id,String lead_id,String statusids,String substatusids);
 	
 	Map<String, Object> getvehiclelinklist(String vehicle_id);
 	
@@ -99,9 +99,7 @@ public interface DealerHomeService {
 	
 	Map<String, Object> getimagesinsharepage(String dealer_id,String vehicle_id);
 	void updatesharePageImagesdetails(DealerShareRequestDTO dto) throws JPAException;
-
 	Map<String,Object> generatelinkNew(DealerShareRequestDTO dto);
-	
 	Map<String, Object> getvehicletypelist();
 	
 	Map<String,Object> getdashboardsalesoverview(DealerAddVehicleRequestDTO dto);
@@ -111,20 +109,41 @@ public interface DealerHomeService {
 	
     Map<String,Object> getdashboardmanufacturinglist(String brand_id,String dealer_id,String vehicle_category_type_id,String month,String year,String is_trends,String model_id,String fuel_type);
 	
-	Map<String,Object> getdashboardmodellist(String brand_id,String dealer_id,String is_trends,String searchtxt);
+	Map<String,Object> getdashboardmodellist(String brand_id,String dealer_id,String searchtxt);
 	
 	Map<String,Object> getdashboardbrandanalysis(DealerAddVehicleRequestDTO dto);
 	
-	Map<String,Object> getdashboardleadsdata(String dealer_id,String date);
+	Map<String,Object> getdashboardleadsdata(String dealer_id,String date,String vehicle_category_type_id,String brand_id,String model_id,String manufacturing_year,String fuel_type,String lead_status);
 	
 	Map<String, Object> getappversionlist();
 	
-	void dealersignup(DealerAddVehicleRequestDTO dto) throws JPAException;
+	
+	Map<String, Object> dealersignup(String dealer_name,String phone_no,String email);
+	
 
 	
-//	Map<String,Object> getdashboardmodelanalysis(DealerAddVehicleRequestDTO dto);
+	Map<String,Object> getdashboardmodelanalysis(DealerAddVehicleRequestDTO dto);
 	
+	Map<String,Object> getrefurbishmentlist(String vehicle_id);
+	Map<String,Object> getdashboardleadssummary(DealerAddVehicleRequestDTO dto);
 	
+	Map<String, Object> getleadsourcelist();
+	Map<String,Object> getfiltermanufacturingyearlist(String dealer_id,String date,String vehicle_category_type_id,String brand_id,String model_id);
+	
+	Map<String,Object> getfilterstatuslist(String dealer_id,String date,String vehicle_category_type_id,String brand_id,String model_id,String manufacturing_year,String fuel_type);
+	Map<String,Object> getfiltervehicletypelist(String dealer_id,String date);
+
+	Map<String,Object> getfilterbrandlist(String dealer_id,String date,String vehicle_category_type_id);
+
+	Map<String,Object> getfiltemodellist(String dealer_id,String date,String vehicle_category_type_id,String brand_id);
+	Map<String, Object> getleadstatuslist();
+	Map<String, Object> getleadsubstatuslist(String mainstatusid);
+	Map<String, Object> getleadtotalstatuslist();
+	Map<String, Object> getpurchasesourcelist();
+	Map<String,Object> getvehicleexpenselist(String vehicle_id);
+	void addvehicleexpense(DealerAddVehicleRequestDTO dto) throws JPAException;
+	
+	//void updaterefurbishmentlist(DealerShareRequestDTO dto) throws JPAException;
 		
 
 }
